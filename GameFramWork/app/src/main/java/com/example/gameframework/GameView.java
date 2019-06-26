@@ -12,6 +12,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameViewThread m_thread;
     private IStat m_state;
+    private SpriteAnimation m_spr;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -33,9 +34,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         changeGameState(new IntroState());
         getHolder().addCallback(this);
         m_thread = new GameViewThread(getHolder(),this);
+        m_spr = new SpriteAnimation(AppManager.getInstance().getBitMap(R.drawable.item1));
+        m_spr.initSpriteData(125,167,5,4);
+
     }
     public void Update(){
-        m_state.Update();
+//        m_state.Update();
+        long gameTime = System.currentTimeMillis();
+        m_spr.Update(gameTime);
     }
     public void changeGameState(IStat _state)
     {
@@ -48,8 +54,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.BLACK);
-        m_state.Render(canvas);
+//        canvas.drawColor(Color.BLACK);
+//        m_state.Render(canvas);
+        m_spr.Draw(canvas);
     }
 
     @Override
