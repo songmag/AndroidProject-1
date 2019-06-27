@@ -2,10 +2,13 @@ package com.example.gameframework.org.FrameWork;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import com.example.gameframework.R;
 
@@ -15,7 +18,24 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private GameViewThread m_thread;
     private IStat m_state;
+    private int fullWidth,fullHeight;
 
+    public int getFullWidth() {
+        return fullWidth;
+    }
+
+    public int getFullHeight() {
+        return fullHeight;
+    }
+
+    public void setSize()
+    {
+        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics metrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(metrics);
+        fullWidth = metrics.widthPixels;
+        fullHeight = metrics.heightPixels;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         m_state.onTouchEvent(event);
@@ -30,6 +50,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     public GameView(Context context) {
         super(context);
+        setSize();
         setFocusable(true);
         AppManager.getInstance().setM_view(this);
         AppManager.getInstance().setM_res(getResources());

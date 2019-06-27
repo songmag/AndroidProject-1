@@ -36,4 +36,9 @@ public class AppManager {
         }
         return instance;
     }
+    public Bitmap reSizing(Bitmap map,int width,int height)
+    {
+        map = Bitmap.createScaledBitmap(map,width,height,true);
+        return map;
+    }
 }
