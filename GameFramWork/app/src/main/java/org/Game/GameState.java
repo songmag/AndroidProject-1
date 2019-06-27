@@ -8,15 +8,24 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.IStat;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
 public class GameState implements IStat {
     private Player m_player;
     private BackGround m_background;
-    private Enermy_1 enermy1;
+    private List<Enermy> enermys;
+    private long LastRegenEnemy;
+    private Random rand = new Random();
+    private List<Missail> missails;
     @Override
     public void init() {
+        LastRegenEnemy = System.currentTimeMillis();
         m_player = new Player(AppManager.getInstance().getBitMap(R.drawable.player));
         m_background = new BackGround();
-        enermy1 = new Enermy_1();
+        enermys = new LinkedList<Enermy>();
+        missails = new LinkedList<Missail>();
     }
 
     @Override
@@ -29,14 +38,34 @@ public class GameState implements IStat {
         long gameTime = System.currentTimeMillis();
         m_player.Update(gameTime);
         m_background.Update(gameTime);
-        enermy1.Update(gameTime);
+        for(int i=0 ; i < enermys.size();i++)
+        {
+            enermys.get(i).Update(gameTime);
+           if (enermys.get(i).getM_state() == Enermy.STATE_OUT) {
+               enermys.remove(enermys.get(i));
+           }
+        }
+        for(int i=0 ; i < missails.size();i++)
+        {
+            missails.get(i).Update();
+            if (missails.get(i).getM_state()== Missail.STATE_OUT) {
+                missails.remove(missails.get(i));
+            }
+        }
+        makeEnermy();
     }
-
     @Override
     public void Render(Canvas canvas) {
         m_background.Draw(canvas);
         m_player.Draw(canvas);
-        enermy1.Draw(canvas);
+        for(int i=0 ; i < enermys.size();i++)
+        {
+            enermys.get(i).Draw(canvas);
+        }
+        for(int i =0 ; i< missails.size();i++)
+        {
+            missails.get(i).Draw(canvas);
+        }
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -60,9 +89,33 @@ public class GameState implements IStat {
         }
         return true;
     }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        Missail missail = new PlayerMissail(this.m_player.getM_x(),this.m_player.getM_y());
+        missail.set_State(3.0f,10);
+        missails.add(missail);
         return true;
+    }
+    public void makeEnermy()
+    {
+        if(System.currentTimeMillis()-LastRegenEnemy >= 1000) {
+            LastRegenEnemy = System.currentTimeMillis();
+            Enermy enermy;
+            switch(rand.nextInt(3))
+            {
+                case 0:
+                    enermy = new Enermy_1();
+                    break;
+                case 1:
+                    enermy = new Enermy_2();
+                    break;
+                default:
+                    enermy = new Enermy_3();
+                    break;
+            }
+            enermy.set_State(10,2.5f,rand.nextInt(3));
+            enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_view().getFullWidth()), -60);
+            this.enermys.add(enermy);
+        }
     }
 }
