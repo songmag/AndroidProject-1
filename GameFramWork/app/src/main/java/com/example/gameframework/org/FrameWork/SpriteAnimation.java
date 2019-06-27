@@ -1,4 +1,4 @@
-package com.example.gameframework;
+package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -6,13 +6,12 @@ import android.graphics.Rect;
 
 public class SpriteAnimation extends GraphicObject {
     private Rect m_rect;
-    private int m_fps;
-    private int m_iFrames;
-    private int m_frameTimer;
-    private int m_currentFrame;
-    private int m_spriteWidth;
-    private int m_spriteHeight;
-    private long m_frameTime;
+    private int m_fps;//초당 몇 프레임
+    private int m_iFrames;//총 프레임 개수
+    private long m_frameTimer; //프레임 타이머 현재 시간을 가져온다.
+    private int m_currentFrame;//현재 프레임
+    private int m_spriteWidth; //보여줄 width
+    private int m_spriteHeight; //보여줄 hight
     public SpriteAnimation(Bitmap m_bitmap) {
         super(m_bitmap);
         m_rect = new Rect(0,0,0,0);
@@ -28,24 +27,23 @@ public class SpriteAnimation extends GraphicObject {
         m_fps = 1000/_fps;
         m_iFrames = _iFrame;
     }
-
     @Override
     public void Draw(Canvas canvas) {
-        Rect dest = new Rect(getM_x(),getM_y(),getM_x()+m_spriteWidth,getM_y()+m_spriteHeight);
+        Rect dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
         canvas.drawBitmap(m_bitmap,m_rect,dest,null);
     }
     public void Update(long gameTime)
     {
         if(gameTime > m_frameTimer + m_fps)
         {
-            m_frameTime = gameTime;
+            m_frameTimer = gameTime;
             m_currentFrame += 1;
             if(m_currentFrame >= m_iFrames)
             {
                 m_currentFrame = 0;
             }//프레임의 순환
         }
-        m_rect.left = m_currentFrame*m_spriteHeight;
+        m_rect.left = m_currentFrame*m_spriteWidth;
         m_rect.right = m_rect.left+m_spriteWidth;
     }
 }

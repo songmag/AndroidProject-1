@@ -1,9 +1,11 @@
-package com.example.gameframework;
+package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+
+import com.example.gameframework.R;
 
 public class IntroState implements IStat {
     Bitmap icon;
@@ -36,7 +38,7 @@ public class IntroState implements IStat {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        AppManager.getInstance().getM_view().changeGameState(new CreditState());
+       // AppManager.getInstance().getM_view().changeGameState(new CreditState());
         return true;
     }
 }

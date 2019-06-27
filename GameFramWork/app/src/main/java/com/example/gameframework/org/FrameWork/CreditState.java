@@ -1,9 +1,11 @@
-package com.example.gameframework;
+package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+
+import com.example.gameframework.R;
 
 public class CreditState implements IStat {
     Bitmap android;

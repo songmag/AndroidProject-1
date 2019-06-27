@@ -1,4 +1,4 @@
-package com.example.gameframework;
+package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
