@@ -91,10 +91,27 @@ public class GameState implements IStat {
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Missail missail = new PlayerMissail(this.m_player.getM_x(),this.m_player.getM_y());
-        missail.set_State(3.0f,10);
-        missails.add(missail);
-        return true;
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            Missail missail = new PlayerMissail(this.m_player.getM_x(), this.m_player.getM_y());
+            missail.set_State(3.0f, 10);
+            missails.add(missail);
+        }
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            if(m_player.getM_rect().contains((int)event.getX(),(int)event.getY()))
+            {
+                m_player.setMove_flag(true);
+            }
+            else
+            {
+                m_player.setMove_flag(false);
+            }
+        }
+        if(event.getAction() == MotionEvent.ACTION_MOVE && m_player.isMove_flag())
+        {
+            m_player.setPosition((int)event.getX()-(m_player.getM_rect().width()/2),(int)event.getY()-(m_player.getM_rect().height()/2));
+        }
+        return false;
     }
     public void makeEnermy()
     {
@@ -118,4 +135,5 @@ public class GameState implements IStat {
             this.enermys.add(enermy);
         }
     }
+
 }

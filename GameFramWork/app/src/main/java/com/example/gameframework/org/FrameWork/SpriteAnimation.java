@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 public class SpriteAnimation extends GraphicObject {
+
+
     private Rect m_rect;
     private int m_fps;//초당 몇 프레임
     private int m_iFrames;//총 프레임 개수
@@ -12,11 +14,15 @@ public class SpriteAnimation extends GraphicObject {
     private int m_currentFrame;//현재 프레임
     private int m_spriteWidth; //보여줄 width
     private int m_spriteHeight; //보여줄 hight
+    private Rect dest;
     public SpriteAnimation(Bitmap m_bitmap) {
         super(m_bitmap);
         m_rect = new Rect(0,0,0,0);
         m_frameTimer = 0;
         m_currentFrame=0;
+    }
+    public Rect getM_rect() {
+        return dest;
     }
     public void initSpriteData(int _width,int _height,int _fps,int _iFrame)
     {
@@ -29,7 +35,7 @@ public class SpriteAnimation extends GraphicObject {
     }
     @Override
     public void Draw(Canvas canvas) {
-        Rect dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
+        dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
         canvas.drawBitmap(m_bitmap,m_rect,dest,null);
     }
     public void Update(long gameTime)
