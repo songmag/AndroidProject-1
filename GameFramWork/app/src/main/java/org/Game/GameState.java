@@ -32,8 +32,8 @@ public class GameState implements IStat {
 
     @Override
     public void Render(Canvas canvas) {
-        m_player.Draw(canvas);
         m_background.Draw(canvas);
+        m_player.Draw(canvas);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
