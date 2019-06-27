@@ -11,11 +11,12 @@ import com.example.gameframework.org.FrameWork.IStat;
 public class GameState implements IStat {
     private Player m_player;
     private BackGround m_background;
-
+    private Enermy_1 enermy1;
     @Override
     public void init() {
         m_player = new Player(AppManager.getInstance().getBitMap(R.drawable.player));
         m_background = new BackGround();
+        enermy1 = new Enermy_1();
     }
 
     @Override
@@ -28,12 +29,14 @@ public class GameState implements IStat {
         long gameTime = System.currentTimeMillis();
         m_player.Update(gameTime);
         m_background.Update(gameTime);
+        enermy1.Update(gameTime);
     }
 
     @Override
     public void Render(Canvas canvas) {
         m_background.Draw(canvas);
         m_player.Draw(canvas);
+        enermy1.Draw(canvas);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
