@@ -4,9 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public class GraphicObject {
-    public Bitmap getM_bitmap() {
-        return m_bitmap;
-    }
 
     protected Bitmap m_bitmap;
     protected int m_x;
@@ -22,10 +19,18 @@ public class GraphicObject {
         m_x = x;
         m_y = y;
     }
+    public Bitmap getM_bitmap() {
+        return m_bitmap;
+    }
+
+    public void setM_bitmap(Bitmap m_bitmap) {
+        this.m_bitmap = m_bitmap;
+    }
 
     public void Draw(Canvas canvas){
         canvas.drawBitmap(m_bitmap,m_x,m_y,null);
     }
+
     public int getM_x() {
         return m_x;
     }

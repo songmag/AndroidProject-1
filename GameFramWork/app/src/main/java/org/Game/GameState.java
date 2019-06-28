@@ -1,6 +1,7 @@
 package org.Game;
 
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -15,17 +16,18 @@ import java.util.Random;
 public class GameState implements IStat {
     private Player m_player;
     private BackGround m_background;
-    private List<Enermy> enermys;
+    private LinkedList<Enermy> enermys;
     private long LastRegenEnemy;
     private Random rand = new Random();
-    private List<Missail> missails;
+    private long m_BossTime;
+    private boolean m_BossFlag = false;
     @Override
     public void init() {
         LastRegenEnemy = System.currentTimeMillis();
+        m_BossTime = LastRegenEnemy + 100000;
         m_player = new Player(AppManager.getInstance().getBitMap(R.drawable.player));
         m_background = new BackGround();
         enermys = new LinkedList<Enermy>();
-        missails = new LinkedList<Missail>();
     }
 
     @Override
@@ -41,15 +43,19 @@ public class GameState implements IStat {
         for(int i=0 ; i < enermys.size();i++)
         {
             enermys.get(i).Update(gameTime);
-           if (enermys.get(i).getM_state() == Enermy.STATE_OUT) {
-               enermys.remove(enermys.get(i));
-           }
+            if(enermys.get(i).getM_state() == Enermy.STATE_OUT && enermys.get(i).destroy_count==0)
+            {
+                enermys.get(i).destroy();
+            }
+            if (enermys.get(i).getM_state() == Enermy.STATE_OUT && enermys.get(i).destroy_count >= 20){
+                enermys.remove(i);
+            }
         }
-        for(int i=0 ; i < missails.size();i++)
+        for(int i=0 ; i < m_player.getMissails().size();i++)
         {
-            missails.get(i).Update();
-            if (missails.get(i).getM_state()== Missail.STATE_OUT) {
-                missails.remove(missails.get(i));
+            m_player.getMissails().get(i).Update();
+            if (m_player.getMissails().get(i).getM_state()== Missail.STATE_OUT) {
+                m_player.getMissails().remove(i);
             }
         }
         makeEnermy();
@@ -62,9 +68,9 @@ public class GameState implements IStat {
         {
             enermys.get(i).Draw(canvas);
         }
-        for(int i =0 ; i< missails.size();i++)
+        for(int i =0 ; i< m_player.getMissails().size();i++)
         {
-            missails.get(i).Draw(canvas);
+            m_player.getMissails().get(i).Draw(canvas);
         }
     }
     @Override
@@ -91,31 +97,11 @@ public class GameState implements IStat {
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_UP) {
-            Missail missail = new PlayerMissail(this.m_player.getM_x(), this.m_player.getM_y());
-            missail.set_State(3.0f, 10);
-            missails.add(missail);
-        }
-        if(event.getAction() == MotionEvent.ACTION_DOWN)
-        {
-            if(m_player.getM_rect().contains((int)event.getX(),(int)event.getY()))
-            {
-                m_player.setMove_flag(true);
-            }
-            else
-            {
-                m_player.setMove_flag(false);
-            }
-        }
-        if(event.getAction() == MotionEvent.ACTION_MOVE && m_player.isMove_flag())
-        {
-            m_player.setPosition((int)event.getX()-(m_player.getM_rect().width()/2),(int)event.getY()-(m_player.getM_rect().height()/2));
-        }
-        return false;
+        return AppManager.getInstance().getM_controller().onTouchEvent(event);
     }
     public void makeEnermy()
     {
-        if(System.currentTimeMillis()-LastRegenEnemy >= 1000) {
+        if(System.currentTimeMillis()-LastRegenEnemy >= 1000 && !m_BossFlag) {
             LastRegenEnemy = System.currentTimeMillis();
             Enermy enermy;
             switch(rand.nextInt(3))
@@ -134,6 +120,35 @@ public class GameState implements IStat {
             enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_view().getFullWidth()), -60);
             this.enermys.add(enermy);
         }
+        if(System.currentTimeMillis()-m_BossTime >= 0 && !m_BossFlag)
+        {
+            for(int i = 0 ; i < enermys.size();i++)
+            {
+                enermys.get(i).destroy();
+                enermys.get(i).setM_state(Enermy.STATE_OUT);
+            }
+            Enermy boss = new Boss();
+            boss.set_State(50,2.5f,Enermy.MOVE_BOSS_PATTERN);
+            boss.setPosition(AppManager.getInstance().getM_view().getFullWidth()/2,-100);
+            this.enermys.add(boss);
+            m_BossFlag = true;
+        }
+    }
+
+    public Player getM_player() {
+        return m_player;
+    }
+
+    public void setM_player(Player m_player) {
+        this.m_player = m_player;
+    }
+
+    public List<Enermy> getEnermys() {
+        return enermys;
+    }
+
+    public void setEnermys(LinkedList<Enermy> enermys) {
+        this.enermys = enermys;
     }
 
 }

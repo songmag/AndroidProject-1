@@ -9,25 +9,28 @@ public abstract class Enermy extends SpriteAnimation {
     public static final int MOVE_PATTERN_1 = 0;
     public static final int MOVE_PATTERN_2 = 1;
     public static final int MOVE_PATTERN_3 = 2;
-
+    public static final int MOVE_BOSS_PATTERN = 3;
+    public int destroy_count=0;
     public static final int STATE_NORMAL = 0;
     public static final int STATE_OUT = 1;
     private int m_state;
     protected int hp;
     protected float speed;
     protected int movetype;
-    protected Missail missail;
+    protected Bitmap m_DestroyBitmap = null;
 
     public int getM_state() {
         return m_state;
     }
+
     public void setM_state(int m_state) {
         this.m_state = m_state;
     }
 
-    public Enermy(Bitmap m_bitmap) {
-        super(m_bitmap);
+    public Enermy(Bitmap _bitmap) {
+        super(_bitmap);
         this.initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
+        this.m_state = Enermy.STATE_NORMAL;
     }
     public void move() {
         if (movetype == MOVE_PATTERN_1) {
@@ -51,17 +54,33 @@ public abstract class Enermy extends SpriteAnimation {
                 m_y += speed;
             }
         }
+        else
+        {
+            if(m_y <= 100)
+                m_y += speed;
+            else
+            {
+
+            }
+        }
     }
     @Override
     public void Update(long gameTime) {
         super.Update(gameTime);
-        move();
-        if(getM_x()>= AppManager.getInstance().getM_view().getFullWidth() || getM_x() < 0 - m_bitmap.getWidth() ||
-        getM_y() > AppManager.getInstance().getM_view().getFullHeight())
+        if(m_state == Enermy.STATE_OUT)
+            this.destroy_count += 1;
+        if(getM_x()>= AppManager.getInstance().getM_view().getFullWidth() || getM_x() < 0  ||
+                getM_y() > AppManager.getInstance().getM_view().getFullHeight() && m_state != Enermy.STATE_OUT)
         {
-            m_state = Enermy.STATE_OUT;
+            this.setM_state(Enermy.STATE_OUT);
         }
+        move();
     }
     public void attack(){}
+    public void destroy(){
+        setM_bitmap(this.m_DestroyBitmap);
+        initSpriteData(m_DestroyBitmap.getWidth()/4,m_DestroyBitmap.getHeight(),20,4);
+    }
+    abstract public void setM_DestroyBitmap(Bitmap bitmap);
     abstract public void set_State(int hp,float speed,int type);
 }
