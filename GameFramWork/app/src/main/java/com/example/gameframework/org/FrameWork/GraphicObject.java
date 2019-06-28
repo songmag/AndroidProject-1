@@ -2,6 +2,7 @@ package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 public class GraphicObject {
 
@@ -29,6 +30,7 @@ public class GraphicObject {
 
     public void Draw(Canvas canvas){
         canvas.drawBitmap(m_bitmap,m_x,m_y,null);
+        canvas.drawRect(new Rect(m_x,m_y,m_x+m_bitmap.getWidth(),m_y+m_bitmap.getHeight()),AppManager.getInstance().getPaint());
     }
 
     public int getM_x() {

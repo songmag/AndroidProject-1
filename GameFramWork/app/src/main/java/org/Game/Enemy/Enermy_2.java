@@ -1,4 +1,4 @@
-package org.Game;
+package org.Game.Enemy;
 
 import android.graphics.Bitmap;
 
@@ -24,7 +24,8 @@ public class Enermy_2 extends Enermy {
     }
 
     public Enermy_2() {
-        super(AppManager.getInstance().getBitMap(R.drawable.enemy2));
+        super(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.goomba),600,200));
+        initSpriteData(100,200,20,5);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
 }

@@ -17,10 +17,10 @@ public class BackGround extends GraphicObject {
     public BackGround() {
         super(AppManager.getInstance().getBitMap(R.drawable.background2));
         m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
-        m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_view().getFullWidth(),
-                AppManager.getInstance().getM_view().getFullHeight()*4);
-        m_layer2 = AppManager.getInstance().reSizing(m_layer2, AppManager.getInstance().getM_view().getFullWidth(),
-                AppManager.getInstance().getM_view().getFullHeight()*4);
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_GameView().getFullWidth(),
+                AppManager.getInstance().getM_GameView().getFullHeight()*4);
+        m_layer2 = AppManager.getInstance().reSizing(m_layer2, AppManager.getInstance().getM_GameView().getFullWidth(),
+                AppManager.getInstance().getM_GameView().getFullHeight()*4);
         this.setPosition(0, (int) m_scroll);
     }
    public BackGround(int type)
@@ -35,10 +35,10 @@ public class BackGround extends GraphicObject {
            m_bitmap = AppManager.getInstance().getBitMap(R.drawable.background2);
        }
        m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
-       m_bitmap = AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_view().getFullWidth(),
-               AppManager.getInstance().getM_view().getFullHeight()*4);
-       m_layer2 = AppManager.getInstance().reSizing(m_layer2,AppManager.getInstance().getM_view().getFullWidth(),
-               AppManager.getInstance().getM_view().getFullHeight()*4);
+       m_bitmap = AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth(),
+               AppManager.getInstance().getM_GameView().getFullHeight()*4);
+       m_layer2 = AppManager.getInstance().reSizing(m_layer2,AppManager.getInstance().getM_GameView().getFullWidth(),
+               AppManager.getInstance().getM_GameView().getFullHeight()*4);
        this.setPosition(0,(int)m_scroll);
    }
    public void Update(long GameTime){

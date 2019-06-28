@@ -3,29 +3,39 @@ package com.example.gameframework.org.FrameWork;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import org.Controller.I_Controller;
 import org.Controller.MoveKeyPad;
 import org.Controller.MoveTouch;
 import org.Game.GameState;
+import org.Game.Player;
+import org.GameView.GameView;
+import org.GameView.I_GameView;
 import org.GameView.MerchantView;
 
 public class AppManager {
-    private GameView m_view;
-    private MerchantView m_MerchantView;
+    //테스트를 위한 페인트
+    Paint paint;
+
+    private I_GameView m_view;
     private Resources m_res;
+    private Player player;
     private I_Controller m_controller= null;
     private static AppManager instance=null;
-
     private AppManager()
     {
+        paint = new Paint();
+        paint.setColor(Color.BLACK);
+
         this.m_res = null;
         this.m_view = null;
     }
-    public GameView getM_view() {
+    public I_GameView getM_view() {
         return m_view;
     }
-    public void setM_view(GameView m_view) {
+    public void setM_view(I_GameView m_view) {
         this.m_view = m_view;
     }
     public Resources getM_res() {
@@ -41,14 +51,12 @@ public class AppManager {
     public void setM_controller(I_Controller m_controller) {
         this.m_controller = m_controller;
     }
-    public void setM_controller(GameState state)
-    {
-        m_controller = new MoveTouch(state);
-    }
+
     public I_Controller getM_controller() {
         if(m_controller == null)
         {
-            setM_controller(m_view.getM_state());
+            GameView gameView = (GameView)m_view;
+            m_controller = new MoveTouch(getM_GameView().getM_state());
         }
         return m_controller;
     }
@@ -64,12 +72,22 @@ public class AppManager {
         map = Bitmap.createScaledBitmap(map,width,height,true);
         return map;
     }
-
-    public MerchantView getM_MerchantView() {
-        return m_MerchantView;
+    public GameView getM_GameView()
+    {
+        return (GameView)m_view;
+    }
+    public MerchantView getM_MerchantView(){
+        return (MerchantView)m_view;
     }
 
-    public void setM_MerchantView(MerchantView m_MerchantView) {
-        this.m_MerchantView = m_MerchantView;
+    public Player getPlayer() {
+        return player;
+    }
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    public Paint getPaint()
+    {
+        return this.paint;
     }
 }

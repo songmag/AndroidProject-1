@@ -1,4 +1,4 @@
-package com.example.gameframework.org.FrameWork;
+package org.GameView;
 
 import android.graphics.Canvas;
 import android.view.KeyEvent;

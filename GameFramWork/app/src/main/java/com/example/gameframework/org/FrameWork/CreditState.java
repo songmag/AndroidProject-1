@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 
+import org.GameView.IStat;
+
 public class CreditState implements IStat {
     Bitmap android;
     int x,y;

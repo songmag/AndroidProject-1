@@ -1,4 +1,4 @@
-package org.Game;
+package org.Game.Enemy;
 
 import android.graphics.Bitmap;
 

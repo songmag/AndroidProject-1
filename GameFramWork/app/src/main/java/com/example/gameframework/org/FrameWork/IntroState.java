@@ -7,6 +7,8 @@ import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 
+import org.GameView.IStat;
+
 public class IntroState implements IStat {
     Bitmap icon;
     int x,y;

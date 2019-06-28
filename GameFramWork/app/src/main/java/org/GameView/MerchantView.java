@@ -1,6 +1,7 @@
 package org.GameView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -10,13 +11,10 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 
 import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.GameViewThread;
-import com.example.gameframework.org.FrameWork.IStat;
 
-import org.Controller.I_Controller;
 import org.Game.GameState;
 
-public class MerchantView extends SurfaceView implements SurfaceHolder.Callback {
+public class MerchantView extends SurfaceView implements SurfaceHolder.Callback,I_GameView {
 
     private MerchantThread m_thread;
     private IStat m_state;
@@ -29,17 +27,16 @@ public class MerchantView extends SurfaceView implements SurfaceHolder.Callback 
         setSize();
         setFocusable(true);
         getHolder().addCallback(this);
+        AppManager.getInstance().setM_view(this);
+        AppManager.getInstance().setM_res(getResources());
         m_thread = new MerchantThread(getHolder(),this);
     }
-
     public int getFullWidth() {
         return fullWidth;
     }
-
     public int getFullHeight() {
         return fullHeight;
     }
-
     public void setSize()
     {
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -53,7 +50,6 @@ public class MerchantView extends SurfaceView implements SurfaceHolder.Callback 
         m_state.onTouchEvent(event);
         return true;
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         m_state.onKeyDown(keyCode,event);
@@ -98,11 +94,9 @@ public class MerchantView extends SurfaceView implements SurfaceHolder.Callback 
             }
         }
     }
-
     public IStat getM_state() {
         return m_state;
     }
-
     public void setM_state(IStat m_state) {
         this.m_state = m_state;
     }

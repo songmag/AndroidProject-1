@@ -1,6 +1,7 @@
-package org.Game;
+package org.MissailPackage;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
@@ -10,28 +11,32 @@ public class Missail extends GraphicObject {
     protected float missail_speed;
     protected int damage;
     private int m_state;
-
+    protected Rect m_nowRect;
     public final static int STATE_NORMAL = 0;
     public final static int STATE_OUT = 1;
-
     public int getM_state() {
         return m_state;
     }
     public void setM_state(int m_state) {
         this.m_state = m_state;
     }
-
     public Missail(Bitmap m_bitmap) {
         super(m_bitmap);
         m_state = STATE_NORMAL;
     }
-
     public void Update(){
-
+        m_nowRect = new Rect(m_x,m_y,m_x+m_bitmap.getWidth(),m_y+m_bitmap.getHeight());
     }
-
     public void set_State(float missail_speed,int damage){
         this.missail_speed = missail_speed;
         this.damage = damage;
+    }
+    public Rect getM_nowRect()
+    {
+        return m_nowRect;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 }

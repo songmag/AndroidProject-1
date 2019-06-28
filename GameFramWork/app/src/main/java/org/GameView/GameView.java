@@ -1,21 +1,23 @@
-package com.example.gameframework.org.FrameWork;
+package org.GameView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
 
-import com.example.gameframework.R;
+import com.example.gameframework.org.FrameWork.AppManager;
 
 import org.Controller.I_Controller;
 import org.Game.GameState;
+import org.GameStage.GameStage_1;
 
-public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_GameView {
 
     private GameViewThread m_thread;
     private GameState m_state;
@@ -28,15 +30,20 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
         AppManager.getInstance().setM_view(this);
         AppManager.getInstance().setM_res(getResources());
-        changeGameState(new GameState());
+        changeGameState(new GameStage_1());
+        //get GameStage를 통해 생성해서 가져온다.
         this.controller = AppManager.getInstance().getM_controller();
+        //컨트롤러를 AppManager을 통해서 가져온다.
         getHolder().addCallback(this);
         m_thread = new GameViewThread(getHolder(),this);
+    }
+    public void setFocus()
+    {
+        setFocusable(true);
     }
     public int getFullWidth() {
         return fullWidth;
     }
-
     public int getFullHeight() {
         return fullHeight;
     }
@@ -54,13 +61,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         controller.onTouchEvent(event);
         return true;
     }
-
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         m_state.onKeyDown(keyCode,event);
         return true;
     }
-
     public void Update(){
         m_state.Update();
     }
@@ -69,6 +74,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if(m_state != null)
         {
             m_state.Destroy();
+            controller.setState(_state);
         }
         _state.init();
         m_state = _state;
@@ -77,7 +83,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected void onDraw(Canvas canvas) {
         m_state.Render(canvas);
     }
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         m_thread.setRunning(true);
@@ -85,7 +90,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
     }
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
@@ -105,7 +109,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public GameState getM_state() {
         return m_state;
     }
-
     public void setM_state(GameState m_state) {
         this.m_state = m_state;
     }

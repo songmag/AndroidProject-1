@@ -1,13 +1,20 @@
 package org.Game;
 
 import android.graphics.Canvas;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.IStat;
+import com.example.gameframework.org.FrameWork.CollisionManager;
+
+import org.Game.Enemy.Boss;
+import org.Game.Enemy.Enermy;
+import org.Game.Enemy.Enermy_1;
+import org.Game.Enemy.Enermy_2;
+import org.Game.Enemy.Enermy_3;
+import org.GameView.IStat;
+import org.MissailPackage.Missail;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,16 +25,22 @@ public class GameState implements IStat {
     private BackGround m_background;
     private LinkedList<Enermy> enermys;
     private long LastRegenEnemy;
-    private Random rand = new Random();
+    public Random rand = new Random();
     private long m_BossTime;
     private boolean m_BossFlag = false;
+    protected boolean m_StageClear = false;
+    protected int distroy_enem = 0;
+
     @Override
     public void init() {
         LastRegenEnemy = System.currentTimeMillis();
-        m_BossTime = LastRegenEnemy + 100000;
+        m_BossTime = LastRegenEnemy + 10000;
         m_player = new Player(AppManager.getInstance().getBitMap(R.drawable.player));
         m_background = new BackGround();
         enermys = new LinkedList<Enermy>();
+        m_BossFlag = false;
+        m_StageClear = false;
+        distroy_enem =0;
     }
 
     @Override
@@ -49,6 +62,7 @@ public class GameState implements IStat {
             }
             if (enermys.get(i).getM_state() == Enermy.STATE_OUT && enermys.get(i).destroy_count >= 20){
                 enermys.remove(i);
+                distroy_enem += 1;
             }
         }
         for(int i=0 ; i < m_player.getMissails().size();i++)
@@ -59,6 +73,11 @@ public class GameState implements IStat {
             }
         }
         makeEnermy();
+        checkCollision();
+        if(enermys.size() == 0 && m_BossFlag)
+        {
+            this.m_StageClear = true;
+        }
     }
     @Override
     public void Render(Canvas canvas) {
@@ -117,7 +136,7 @@ public class GameState implements IStat {
                     break;
             }
             enermy.set_State(10,2.5f,rand.nextInt(3));
-            enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_view().getFullWidth()), -60);
+            enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -60);
             this.enermys.add(enermy);
         }
         if(System.currentTimeMillis()-m_BossTime >= 0 && !m_BossFlag)
@@ -128,13 +147,26 @@ public class GameState implements IStat {
                 enermys.get(i).setM_state(Enermy.STATE_OUT);
             }
             Enermy boss = new Boss();
-            boss.set_State(50,2.5f,Enermy.MOVE_BOSS_PATTERN);
-            boss.setPosition(AppManager.getInstance().getM_view().getFullWidth()/2,-100);
+            boss.set_State(50,1.0f,Enermy.MOVE_BOSS_PATTERN);
+            boss.setPosition(0,200);
             this.enermys.add(boss);
             m_BossFlag = true;
         }
     }
-
+    public void checkCollision(){
+        for(Missail missail: m_player.getMissails()) {
+            for(Enermy enem: enermys) {
+                if(enem.getM_state() != Enermy.STATE_OUT)
+                if( CollisionManager.checkBoxToBox(missail.getM_nowRect(), enem.getM_rect())){
+                    missail.setM_state(Missail.STATE_OUT);
+                    enem.hert(missail.getDamage());
+                    if(enem.getHp() <= 0) {
+                        enem.setM_state(Enermy.STATE_OUT);
+                    }
+                }
+            }
+        }
+    }
     public Player getM_player() {
         return m_player;
     }

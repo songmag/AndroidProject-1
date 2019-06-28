@@ -1,4 +1,4 @@
-package org.Game;
+package org.Game.Enemy;
 
 import android.graphics.Bitmap;
 
@@ -18,6 +18,10 @@ public abstract class Enermy extends SpriteAnimation {
     protected float speed;
     protected int movetype;
     protected Bitmap m_DestroyBitmap = null;
+
+    public void hert(int damage) {
+        this.hp -=damage;
+    }
 
     public int getM_state() {
         return m_state;
@@ -56,21 +60,33 @@ public abstract class Enermy extends SpriteAnimation {
         }
         else
         {
-            if(m_y <= 100)
-                m_y += speed;
+            if(m_x <= ((AppManager.getInstance().getM_GameView().getFullWidth()/2)-(m_bitmap.getWidth()/4))) {
+                m_x += speed;
+                m_y += (int)(Math.sin(AppManager.getInstance().getM_GameView().getM_state().rand.nextDouble()-0.5)*20);
+            }
             else
             {
 
             }
         }
     }
+
+    public int getHp() {
+        return hp;
+    }
+
     @Override
     public void Update(long gameTime) {
         super.Update(gameTime);
-        if(m_state == Enermy.STATE_OUT)
+        if(m_state == Enermy.STATE_OUT && this.destroy_count != 0)
             this.destroy_count += 1;
-        if(getM_x()>= AppManager.getInstance().getM_view().getFullWidth() || getM_x() < 0  ||
-                getM_y() > AppManager.getInstance().getM_view().getFullHeight() && m_state != Enermy.STATE_OUT)
+        else if(m_state == Enermy.STATE_OUT){
+            destroy();
+            this.destroy_count+=1;
+        }
+
+        if(getM_x()>= AppManager.getInstance().getM_GameView().getFullWidth() || getM_x() < 0  ||
+                getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() && m_state != Enermy.STATE_OUT && movetype != Enermy.MOVE_BOSS_PATTERN)
         {
             this.setM_state(Enermy.STATE_OUT);
         }

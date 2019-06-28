@@ -3,8 +3,6 @@ package org.GameView;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import com.example.gameframework.org.FrameWork.GameView;
-
 public class MerchantThread extends Thread {
     private MerchantView m_view;
     private SurfaceHolder m_holder;

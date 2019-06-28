@@ -2,11 +2,12 @@ package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 public class SpriteAnimation extends GraphicObject {
-
-
+    //테스트용 페인트
+    Paint paint;
     private Rect m_rect;
     private int m_fps;//초당 몇 프레임
     private int m_iFrames;//총 프레임 개수
@@ -20,9 +21,10 @@ public class SpriteAnimation extends GraphicObject {
         m_rect = new Rect(0,0,0,0);
         m_frameTimer = 0;
         m_currentFrame=0;
+        paint = AppManager.getInstance().getPaint();
     }
     public Rect getM_rect() {
-        return dest;
+       return dest;
     }
     public void initSpriteData(int _width,int _height,int _fps,int _iFrame)
     {
@@ -35,8 +37,9 @@ public class SpriteAnimation extends GraphicObject {
     }
     @Override
     public void Draw(Canvas canvas) {
-        dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
+        this.dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
         canvas.drawBitmap(m_bitmap,m_rect,dest,null);
+        canvas.drawRect(dest,paint);
     }
     public void Update(long gameTime)
     {
