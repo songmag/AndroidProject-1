@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.FontRes;
+import android.util.Log;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
@@ -12,14 +13,6 @@ import org.Game.GameState;
 import org.GameStateCollect.GameClear;
 
 public class GameStage_1 extends GameState {
-    Paint paint = new Paint();
-
-    @Override
-    public void init() {
-        super.init();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(10.0f);
-    }
 
     @Override
     public void Update() {
@@ -32,6 +25,6 @@ public class GameStage_1 extends GameState {
     @Override
     public void Render(Canvas canvas) {
         super.Render(canvas);
-        canvas.drawText(String.valueOf(distroy_enem),0,10, paint);
+        canvas.drawText("Destroy :"+Integer.toString(destroy_enem),0,30, AppManager.getInstance().getPaint());
     }
 }

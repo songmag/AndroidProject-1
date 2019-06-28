@@ -23,7 +23,6 @@ public class Enermy_3 extends Enermy {
         this.speed = speed;
         this.movetype = type;
     }
-
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {
         m_DestroyBitmap = bitmap;

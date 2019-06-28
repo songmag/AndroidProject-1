@@ -29,7 +29,7 @@ public class GameState implements IStat {
     private long m_BossTime;
     private boolean m_BossFlag = false;
     protected boolean m_StageClear = false;
-    protected int distroy_enem = 0;
+    protected int destroy_enem = 0;
 
     @Override
     public void init() {
@@ -40,7 +40,7 @@ public class GameState implements IStat {
         enermys = new LinkedList<Enermy>();
         m_BossFlag = false;
         m_StageClear = false;
-        distroy_enem =0;
+        destroy_enem =0;
     }
 
     @Override
@@ -61,8 +61,8 @@ public class GameState implements IStat {
                 enermys.get(i).destroy();
             }
             if (enermys.get(i).getM_state() == Enermy.STATE_OUT && enermys.get(i).destroy_count >= 20){
+                if(enermys.get(i).getHp() <= 0) destroy_enem+=1;
                 enermys.remove(i);
-                distroy_enem += 1;
             }
         }
         for(int i=0 ; i < m_player.getMissails().size();i++)

@@ -28,6 +28,7 @@ public class AppManager {
     {
         paint = new Paint();
         paint.setColor(Color.BLACK);
+        paint.setTextSize(30);
 
         this.m_res = null;
         this.m_view = null;
