@@ -5,7 +5,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 public interface IStat {
-    public void init();
+    public void init(int background);
     public void Destroy();
     public void Update();
     public void Render(Canvas canvas);

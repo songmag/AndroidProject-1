@@ -23,11 +23,18 @@ public class SpriteAnimation extends GraphicObject {
         m_currentFrame=0;
         paint = AppManager.getInstance().getPaint();
     }
+    public SpriteAnimation(SpriteAnimation animation)
+    {
+        super(animation.m_bitmap);
+        initSpriteData(animation.m_spriteWidth,animation.m_spriteHeight,animation.m_fps,animation.m_iFrames);
+    }
     public Rect getM_rect() {
        return dest;
     }
     public void initSpriteData(int _width,int _height,int _fps,int _iFrame)
     {
+        m_frameTimer = 0;
+        m_currentFrame = 0;
         m_spriteHeight = _height;
         m_spriteWidth = _width;
         m_rect.top = 0; m_rect.bottom = m_spriteHeight;

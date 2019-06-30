@@ -10,16 +10,17 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 import org.Game.GameState;
+import org.Game.Player;
 import org.GameStateCollect.GameClear;
 
 public class GameStage_1 extends GameState {
     @Override
-    public void init() {
-        setM_player(AppManager.getInstance().getPlayer());
+    public void init(int background) {
+        setM_player(new Player(AppManager.getInstance().getPlayer()));
         this.m_BossContain = false;
         this.m_EnemyLimit = 25;
         this.m_BossTime= 10000;
-        super.init();
+        super.init(0);
     }
 
     @Override
@@ -29,7 +30,6 @@ public class GameStage_1 extends GameState {
             AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.gameStates[1]);
         }
     }
-
     @Override
     public void Render(Canvas canvas) {
         super.Render(canvas);

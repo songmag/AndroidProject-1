@@ -10,10 +10,14 @@ public abstract class Enermy extends SpriteAnimation {
     public static final int MOVE_PATTERN_2 = 1;
     public static final int MOVE_PATTERN_3 = 2;
     public static final int MOVE_BOSS_PATTERN = 3;
+
     public int destroy_count=0;
+
     public static final int STATE_NORMAL = 0;
     public static final int STATE_OUT = 1;
+
     private int m_state;
+
     protected int hp;
     protected float speed;
     protected int movetype;
@@ -84,7 +88,6 @@ public abstract class Enermy extends SpriteAnimation {
             destroy();
             this.destroy_count+=1;
         }
-
         if(getM_x()>= AppManager.getInstance().getM_GameView().getFullWidth() || getM_x() < 0  ||
                 getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() && m_state != Enermy.STATE_OUT && movetype != Enermy.MOVE_BOSS_PATTERN)
         {

@@ -24,7 +24,6 @@ public class MoveTouch implements I_Controller {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
         if(event.getAction() == MotionEvent.ACTION_UP) {
             Missail missail = MissailFactory.missailMaker(state.getM_player());
             state.getM_player().shootingMissail(missail);

@@ -75,7 +75,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
             m_state.Destroy();
             controller.setState(_state);
         }
-        _state.init();
+        _state.init(0);
         m_state = _state;
     }
     @Override

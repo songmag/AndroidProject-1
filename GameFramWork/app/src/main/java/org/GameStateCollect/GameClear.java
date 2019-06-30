@@ -5,8 +5,7 @@ import org.Game.GameState;
 
 public class GameClear extends GameState {
     @Override
-    public void init() {
-        this.m_background = new BackGround();
-        super.init();
+    public void init(int background) {
+        super.init(1);
     }
 }

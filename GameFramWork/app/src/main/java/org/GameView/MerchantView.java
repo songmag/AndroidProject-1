@@ -64,7 +64,7 @@ public class MerchantView extends SurfaceView implements SurfaceHolder.Callback,
         {
             m_state.Destroy();
         }
-        _state.init();
+        _state.init(2);
         m_state = _state;
     }
     @Override
