@@ -1,6 +1,7 @@
 package org.Game;
 
 import android.graphics.Canvas;
+import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
@@ -118,6 +119,7 @@ public class GameState implements IStat {
     {
         if(m_player.isM_death() && System.currentTimeMillis() - waitTime >= 0)
         {
+            AppManager.getInstance().getM_GameView().vibratorStop();
             AppManager.getInstance().getM_GameView().changeGameState(
                     AppManager.getInstance().m_stage.deathStage
             );
@@ -215,7 +217,6 @@ public class GameState implements IStat {
                 if( CollisionManager.checkBoxToBox(missails.get(j).getM_nowRect(), enermys.get(i).getM_rect())){
                     if(missails.get(j).getClass() != m_player.getCharging_missail() || enermys.get(i) instanceof Boss)
                         missails.get(j).setM_state(Missail.STATE_OUT);
-
                     enermys.get(i).hert(missails.get(j).getDamage());
                     if(enermys.get(i).getHp() <= 0) {
                         enermys.get(i).setM_state(Enermy.STATE_OUT);
@@ -230,6 +231,7 @@ public class GameState implements IStat {
                 if(!m_player.isM_death())
                 {
                     m_player.destroy();
+                    AppManager.getInstance().getM_GameView().vibratorStart();
                     waitTime += System.currentTimeMillis();
                     return;
                 }

@@ -2,6 +2,7 @@ package org.GameView;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -20,10 +21,12 @@ import org.GameStateCollect.GameClear;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_GameView {
     private GameViewThread m_thread;
     private GameState m_state;
+    private Vibrator vi;
     private int fullWidth,fullHeight;
     public GameView(Context context) {
         super(context);
         setSize();
+        vi = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         setFocusable(true);
         AppManager.getInstance().setM_view(this);
         AppManager.getInstance().setM_res(getResources());
@@ -103,7 +106,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
             }
         }
     }
-
+    public void vibratorStart(){
+            vi.vibrate(1000);
+    }
+    public void vibratorStop()
+    {
+        vi.cancel();
+    }
     public GameState getM_state() {
         return m_state;
     }
