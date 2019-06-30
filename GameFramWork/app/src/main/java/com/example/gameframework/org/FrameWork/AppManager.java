@@ -7,10 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import org.Controller.I_Controller;
-import org.Controller.MoveKeyPad;
 import org.Controller.MoveTouch;
-import org.Game.GameState;
 import org.Game.Player;
+import org.GameStateCollect.GameStageState;
 import org.GameView.GameView;
 import org.GameView.I_GameView;
 import org.GameView.MerchantView;
@@ -24,15 +23,17 @@ public class AppManager {
     private Player player;
     private I_Controller m_controller= null;
     private static AppManager instance=null;
+    public GameStageState m_stage;
     private AppManager()
     {
         paint = new Paint();
         paint.setColor(Color.BLACK);
         paint.setTextSize(30);
-
+        m_stage = new GameStageState();
         this.m_res = null;
         this.m_view = null;
     }
+
     public I_GameView getM_view() {
         return m_view;
     }

@@ -8,7 +8,7 @@ public class MissailFactory {
     {
         if(player.getDefault_missail() == BlackMissail.class)
         {
-            return new BlackMissail(BlackMissail.BITMAP,player.getM_x(),player.getM_y(), BlackMissail.SPEED, BlackMissail.DAMAGE);
+            return new BlackMissail(BlackMissail.BITMAP,player.getM_x()+BlackMissail.BITMAP.getWidth()/2,player.getM_y(), BlackMissail.SPEED, BlackMissail.DAMAGE);
         }
         else
         {

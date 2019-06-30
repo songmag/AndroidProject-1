@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
+import com.example.gameframework.org.FrameWork.BackGround;
 import com.example.gameframework.org.FrameWork.CollisionManager;
 
 import org.Game.Enemy.Boss;
@@ -22,25 +23,38 @@ import java.util.Random;
 
 public class GameState implements IStat {
     private Player m_player;
-    private BackGround m_background;
     private LinkedList<Enermy> enermys;
     private long LastRegenEnemy;
     public Random rand = new Random();
-    private long m_BossTime;
     private boolean m_BossFlag = false;
-    protected boolean m_StageClear = false;
-    protected int destroy_enem = 0;
 
+    protected long m_BossTime=0;//millie second
+    protected BackGround m_background;
+    protected long m_StageRegenTime;//millie second
+    protected boolean m_StageClear = false;
+    protected int m_EnemyLimit=0;
+    protected boolean m_BossContain;
+    protected int destroy_enem = 0;
+    /*
+    stage 생성시 변경할 수 있는 변수
+    m_background, m_BossTime, m_BossContain, m_enemylimit
+    */
     @Override
     public void init() {
         LastRegenEnemy = System.currentTimeMillis();
-        m_BossTime = LastRegenEnemy + 10000;
-        m_player = new Player(AppManager.getInstance().getBitMap(R.drawable.player));
+        if(m_BossTime == 0) {
+            m_BossTime = 30000;
+        }
+        m_BossTime = LastRegenEnemy + m_BossTime;
         m_background = new BackGround();
         enermys = new LinkedList<Enermy>();
         m_BossFlag = false;
         m_StageClear = false;
         destroy_enem =0;
+        if(m_EnemyLimit == 0) {
+            m_EnemyLimit = 10;
+        }
+        m_StageRegenTime = 1000;
     }
 
     @Override
@@ -120,7 +134,7 @@ public class GameState implements IStat {
     }
     public void makeEnermy()
     {
-        if(System.currentTimeMillis()-LastRegenEnemy >= 1000 && !m_BossFlag) {
+        if(System.currentTimeMillis()-LastRegenEnemy >= m_StageRegenTime && !m_BossFlag && m_EnemyLimit > 0 ) {
             LastRegenEnemy = System.currentTimeMillis();
             Enermy enermy;
             switch(rand.nextInt(3))
@@ -138,19 +152,26 @@ public class GameState implements IStat {
             enermy.set_State(10,2.5f,rand.nextInt(3));
             enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -60);
             this.enermys.add(enermy);
+            m_EnemyLimit -= 1;
         }
-        if(System.currentTimeMillis()-m_BossTime >= 0 && !m_BossFlag)
-        {
-            for(int i = 0 ; i < enermys.size();i++)
-            {
-                enermys.get(i).destroy();
-                enermys.get(i).setM_state(Enermy.STATE_OUT);
+        else if(m_BossContain) {
+            if (System.currentTimeMillis() - m_BossTime >= 0 && !m_BossFlag) {
+                for (int i = 0; i < enermys.size(); i++) {
+                    enermys.get(i).destroy();
+                    enermys.get(i).setM_state(Enermy.STATE_OUT);
+                }
+                Enermy boss = new Boss();
+                boss.set_State(50, 1.0f, Enermy.MOVE_BOSS_PATTERN);
+                boss.setPosition(0, 200);
+                this.enermys.add(boss);
+                m_BossFlag = true;
             }
-            Enermy boss = new Boss();
-            boss.set_State(50,1.0f,Enermy.MOVE_BOSS_PATTERN);
-            boss.setPosition(0,200);
-            this.enermys.add(boss);
-            m_BossFlag = true;
+        }
+        else if(!m_BossContain){
+            if(System.currentTimeMillis() - m_BossTime >= 0 && !m_BossFlag) {
+                enermys.add(new Enermy_1());
+                m_BossFlag = true;
+            }
         }
     }
     public void checkCollision(){

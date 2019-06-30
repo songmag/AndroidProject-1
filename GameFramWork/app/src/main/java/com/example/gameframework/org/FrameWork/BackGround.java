@@ -1,4 +1,4 @@
-package org.Game;
+package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -15,6 +15,16 @@ public class BackGround extends GraphicObject {
     private float m_scroll_2 = -2000+480;
 
     public BackGround() {
+        super(AppManager.getInstance().getBitMap(R.drawable.background2));
+        m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_GameView().getFullWidth(),
+                AppManager.getInstance().getM_GameView().getFullHeight()*4);
+        m_layer2 = AppManager.getInstance().reSizing(m_layer2, AppManager.getInstance().getM_GameView().getFullWidth(),
+                AppManager.getInstance().getM_GameView().getFullHeight()*4);
+        this.setPosition(0, (int) m_scroll);
+    }
+    public BackGround(Bitmap add_bitmap)
+    {
         super(AppManager.getInstance().getBitMap(R.drawable.background2));
         m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
         m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_GameView().getFullWidth(),
