@@ -9,13 +9,16 @@ import org.GameStateCollect.GameClear;
 
 public class GameStageState {
     public GameState[] gameStates;
+    public GameState clearStage;
+    public GameDeath deathStage;
     public GameStageState()
     {
+        deathStage = new GameDeath();
+        clearStage = new GameClear();
         gameStates = new GameState[10];
         gameStates[0] = new GameStage_1();
         gameStates[1] = new GameStage_2();
         gameStates[2] = new GameStage_3();
         gameStates[3] = new GameStage_4();
-        gameStates[4] = new GameClear();
     }
 }

@@ -9,28 +9,32 @@ import com.example.gameframework.org.FrameWork.GraphicObject;
 
 public class BackGround extends GraphicObject {
    static final float SCROLL_SPEED = 7.0f;
-   private float m_scroll = -AppManager.getInstance().getM_GameView().getFullHeight()*10+AppManager.getInstance().getM_GameView().getFullHeight();
+   private float m_scroll = -AppManager.getInstance().getM_GameView().getFullHeight()*5+AppManager.getInstance().getM_GameView().getFullHeight();
     private Bitmap m_layer2;
     static final float SCROLL_SPEED_2 = 7.0f;
-    private float m_scroll_2 = -2000+480;
+    private float m_scroll_2 = -AppManager.getInstance().getM_GameView().getFullHeight()*5+AppManager.getInstance().getM_GameView().getFullHeight();
 
     public BackGround() {
         super(AppManager.getInstance().getBitMap(R.drawable.background2));
         m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
         m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight()*10);
+                AppManager.getInstance().getM_GameView().getFullHeight()*5);
         m_layer2 = AppManager.getInstance().reSizing(m_layer2, AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight()*10);
+                AppManager.getInstance().getM_GameView().getFullHeight()*5);
         this.setPosition(0, (int) m_scroll);
     }
     public BackGround(Bitmap add_bitmap)
     {
         super(AppManager.getInstance().getBitMap(R.drawable.background2));
+
         m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
+
         m_bitmap = AppManager.getInstance().reSizing(m_bitmap, AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight()*10);
+                AppManager.getInstance().getM_GameView().getFullHeight()*5);
+
         m_layer2 = AppManager.getInstance().reSizing(m_layer2, AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight()*10);
+                AppManager.getInstance().getM_GameView().getFullHeight()*5);
+
         this.setPosition(0, (int) m_scroll);
     }
    public BackGround(int type)
@@ -46,9 +50,9 @@ public class BackGround extends GraphicObject {
        }
        m_layer2 = AppManager.getInstance().getBitMap(R.drawable.background_2);
        m_bitmap = AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth(),
-               AppManager.getInstance().getM_GameView().getFullHeight()*10);
+               AppManager.getInstance().getM_GameView().getFullHeight()*5);
        m_layer2 = AppManager.getInstance().reSizing(m_layer2,AppManager.getInstance().getM_GameView().getFullWidth(),
-               AppManager.getInstance().getM_GameView().getFullHeight()*10);
+               AppManager.getInstance().getM_GameView().getFullHeight()*5);
        this.setPosition(0,(int)m_scroll);
    }
    public void Update(long GameTime){

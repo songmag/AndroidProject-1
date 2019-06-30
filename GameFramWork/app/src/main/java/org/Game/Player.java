@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
+
+import org.Game.CoinPackage.Money;
 import org.MissailPackage.BlackMissail;
 import org.MissailPackage.Missail;
 import java.util.LinkedList;
@@ -12,12 +14,19 @@ public class Player extends SpriteAnimation {
     private Class default_missail;
     private LinkedList<Missail> missails;
     private boolean m_death;
-    private int m_Money;
+    private Money m_Money;
+    private int m_stage;
 
-    public int getM_Money() {
+    public int getM_stage() {
+        return m_stage;
+    }
+    public void clearStage() {
+        this.m_stage += 1;
+    }
+    public Money getM_Money() {
         return m_Money;
     }
-    public void setM_Money(int m_Money) {
+    public void setM_Money(Money m_Money) {
         this.m_Money = m_Money;
     }
     public LinkedList<Missail> getMissails() {
@@ -45,18 +54,20 @@ public class Player extends SpriteAnimation {
         this.setPosition(AppManager.getInstance().getM_GameView().getFullWidth()/2-(m_bitmap.getWidth()/12),AppManager.getInstance().getM_GameView().getFullHeight()-300);
         this.missails = new LinkedList<Missail>();
         m_death = false;
-        m_Money = 0;
+        m_Money = new Money();
+        this.m_stage = 0;
     }
     public Player(Player clone)
     {
         super(clone.m_bitmap);
-        m_death = false;
+        this.m_death = false;
         this.default_missail = clone.getDefault_missail();
         this.move_flag =false;
         this.missails = new LinkedList<Missail>();
         this.initSpriteData(m_bitmap.getWidth()/5,m_bitmap.getHeight(),20,5);
         this.setPosition(AppManager.getInstance().getM_GameView().getFullWidth()/2-(m_bitmap.getWidth()/12),AppManager.getInstance().getM_GameView().getFullHeight()-300);
         this.m_Money = clone.m_Money;
+        this.m_stage = clone.m_stage;
     }
     public Class getDefault_missail() {
         return default_missail;
@@ -80,5 +91,9 @@ public class Player extends SpriteAnimation {
                     AppManager.getInstance().getM_GameView().getFullHeight() / 10);
             initSpriteData(this.m_bitmap.getWidth() / 6, this.m_bitmap.getHeight(), 20, 6);
             m_death = true;
+    }
+
+    public void setM_stage(int m_stage) {
+        this.m_stage = m_stage;
     }
 }

@@ -1,8 +1,10 @@
 package org.Game.CoinPackage;
 
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.util.Log;
 
+import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
@@ -14,6 +16,9 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     public static final int STATE_NOMAL= 0;
     public static final int STATE_OUT = 1;
 
+    public Money(){
+        super(AppManager.getInstance().getBitMap(R.drawable.coin));
+    }
     public Money(SpriteAnimation animation) {
         super(animation);
         m_state = Money.STATE_NOMAL;
@@ -49,6 +54,11 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     }
 
     @Override
+    public Money getMoneyClass() {
+        return this;
+    }
+
+    @Override
     public int getState() {
         return m_state;
     }
@@ -70,6 +80,7 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     public void spendMoney(int value) {
 
     }
+
     @Override
     public int getMoney() {
         return this.m_Money;
@@ -85,5 +96,20 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     @Override
     public void setIngameMoney(Money money) {
         m_InGameMoney = money.m_InGameMoney;
+    }
+
+    @Override
+    public void addInGameMoney(Money money) {
+        m_InGameMoney += money.m_InGameMoney;
+    }
+
+    @Override
+    public void addMoney(int money) {
+        this.m_Money += money;
+    }
+    @Override
+    public void addInGameMoney(int money) {
+        this.m_InGameMoney += money;
+
     }
 }

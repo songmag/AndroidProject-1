@@ -15,12 +15,12 @@ import com.example.gameframework.org.FrameWork.AppManager;
 import org.Controller.I_Controller;
 import org.Game.GameState;
 import org.Game.Player;
+import org.GameStateCollect.GameClear;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_GameView {
     private GameViewThread m_thread;
     private GameState m_state;
     private int fullWidth,fullHeight;
-    private I_Controller controller;
     public GameView(Context context) {
         super(context);
         setSize();
@@ -28,11 +28,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
         AppManager.getInstance().setM_view(this);
         AppManager.getInstance().setM_res(getResources());
         AppManager.getInstance().setPlayer(new Player(AppManager.getInstance().getBitMap(R.drawable.super_mario)));
-        changeGameState(AppManager.getInstance().m_stage.gameStates[0]);
+        changeGameState(AppManager.getInstance().m_stage.gameStates[AppManager.getInstance().getPlayer().getM_stage()]);
         //get GameStage를 통해 생성해서 가져온다.
-        this.controller = AppManager.getInstance().getM_controller();
         //컨트롤러를 AppManager을 통해서 가져온다.
-
         getHolder().addCallback(this);
         m_thread = new GameViewThread(getHolder(),this);
     }
@@ -57,7 +55,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        controller.onTouchEvent(event);
+        m_state.onTouchEvent(event);
         return true;
     }
     @Override
@@ -68,14 +66,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
     public void Update(){
         m_state.Update();
     }
+
     public void changeGameState(GameState _state)
     {
         if(m_state != null)
         {
             m_state.Destroy();
-            controller.setState(_state);
-        }
+         }
         _state.init(0);
+        AppManager.getInstance().getM_controller().setState(_state);
         m_state = _state;
     }
     @Override
