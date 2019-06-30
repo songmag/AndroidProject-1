@@ -32,7 +32,7 @@ public class GameState implements IStat {
     private long LastRegenEnemy;
     public Random rand = new Random();
     private boolean m_BossFlag = false;
-    private LinkedList<I_MoneyMove> moneys;
+    private LinkedList<Money> moneys;
     protected long m_BossTime=0;//millie second
     protected BackGround m_background = null;
     protected long m_StageRegenTime;//millie second
@@ -67,7 +67,7 @@ public class GameState implements IStat {
             this.m_EnemyLimit = 10;
         }
         m_StageRegenTime = 1000;
-        moneys = new LinkedList<I_MoneyMove>();
+        moneys = new LinkedList<Money>();
     }
     @Override
     public void Destroy() {
@@ -213,7 +213,9 @@ public class GameState implements IStat {
             for(int j = 0 ; j<missails.size();j++) {
                 if(enermys.get(i).getM_state() != Enermy.STATE_OUT)
                 if( CollisionManager.checkBoxToBox(missails.get(j).getM_nowRect(), enermys.get(i).getM_rect())){
-                    missails.get(j).setM_state(Missail.STATE_OUT);
+                    if(missails.get(j).getClass() != m_player.getCharging_missail() || enermys.get(i) instanceof Boss)
+                        missails.get(j).setM_state(Missail.STATE_OUT);
+
                     enermys.get(i).hert(missails.get(j).getDamage());
                     if(enermys.get(i).getHp() <= 0) {
                         enermys.get(i).setM_state(Enermy.STATE_OUT);

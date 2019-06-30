@@ -8,8 +8,8 @@ import com.example.gameframework.org.FrameWork.AppManager;
 public class GoldMissail extends Missail {
     public final static int DAMAGE = 10;
     public final static int SPEED = 5;
-    public final static Bitmap BITMAP = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.gold_missile)
-            ,100,100);
+    public final static int LIMIT = 20;
+
     public GoldMissail(Bitmap m_bitmap) {
         super(m_bitmap);
     }
