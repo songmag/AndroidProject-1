@@ -15,15 +15,19 @@ public class SpriteAddBackground extends BackGround {
     public SpriteAddBackground(Bitmap add_bitmap) {
         super(add_bitmap);
     }
+    public SpriteAddBackground(Bitmap background,SpriteAnimation m_spriteforeground)
+    {
+        super(background);
+        this.m_spriteforeground = m_spriteforeground;
+    }
     public SpriteAddBackground(int type) {
         super(type);
     }
     @Override
     public void Update(long GameTime) {
-        m_spriteforeground.Update(GameTime);
         super.Update(GameTime);
+        m_spriteforeground.Update(GameTime);
     }
-
     @Override
     public void Draw(Canvas canvas) {
         super.Draw(canvas);

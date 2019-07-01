@@ -80,6 +80,7 @@ public class GameState implements IStat {
     }
     @Override
     public void Update() {
+        if(m_player == null) return;
         long gameTime = System.currentTimeMillis();
         m_player.Update(gameTime);
         m_background.Update(gameTime);
@@ -107,7 +108,7 @@ public class GameState implements IStat {
         }
         makeEnermy();
         checkCollision();
-        if(enermys.size() == 0 && m_BossFlag)
+        if(enermys.size() == 0 && m_BossFlag && moneys.size() == 0)
         {
             this.m_StageClear = true;
             AppManager.getInstance().getPlayer().getM_Money().addMoney(m_player.getM_Money().getIngameMoney());
@@ -127,6 +128,7 @@ public class GameState implements IStat {
     }
     @Override
     public void Render(Canvas canvas) {
+        if(m_background == null) return;
         m_background.Draw(canvas);
         m_player.Draw(canvas);
         for(int i = 0 ; i <moneys.size();i++)

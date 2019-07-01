@@ -46,7 +46,7 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     public void Update(long gameTime) {
         super.Update(gameTime);
         if(getM_x()>= AppManager.getInstance().getM_GameView().getFullWidth() || getM_x() < 0  ||
-                getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() && m_state != 0)
+                getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() && m_state == 0)
         {
             this.m_state = Money.STATE_OUT;
         }

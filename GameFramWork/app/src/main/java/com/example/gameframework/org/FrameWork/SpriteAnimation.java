@@ -15,7 +15,7 @@ public class SpriteAnimation extends GraphicObject {
     private int m_currentFrame;//현재 프레임
     private int m_spriteWidth; //보여줄 width
     private int m_spriteHeight; //보여줄 hight
-    private Rect dest;
+    private Rect dest= null;
     public SpriteAnimation(Bitmap m_bitmap) {
         super(m_bitmap);
         m_rect = new Rect(0,0,0,0);
@@ -44,7 +44,9 @@ public class SpriteAnimation extends GraphicObject {
     }
     @Override
     public void Draw(Canvas canvas) {
+        if(dest == null)
         this.dest = new Rect(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
+        dest.set(m_x,m_y,m_x+m_spriteWidth,m_y+m_spriteHeight);
         canvas.drawBitmap(m_bitmap,m_rect,dest,null);
     }
     public void Update(long gameTime)
