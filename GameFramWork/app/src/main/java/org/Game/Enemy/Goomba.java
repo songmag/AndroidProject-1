@@ -16,12 +16,10 @@ public class Goomba extends Enermy {
         super(m_bitmap);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
-
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {
         m_DestroyBitmap= bitmap;
     }
-
     public Goomba() {
         super(AppManager.getInstance().getBitMap(R.drawable.goomba));
         initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);

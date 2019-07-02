@@ -5,6 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
+
+import com.example.gameframework.R;
 
 import org.Controller.I_Controller;
 import org.Controller.MoveTouch;
@@ -15,7 +19,7 @@ import org.GameView.I_GameView;
 
 public class AppManager {
     //테스트를 위한 페인트
-    Paint paint;
+    private Paint paint;
 
     private I_GameView m_view;
     private Resources m_res;
@@ -23,11 +27,9 @@ public class AppManager {
     private I_Controller m_controller= null;
     private static AppManager instance=null;
     public GameStageState m_stage;
+
     private AppManager()
     {
-        paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setTextSize(30);
         m_stage = new GameStageState();
         this.m_res = null;
         this.m_view = null;
@@ -85,6 +87,13 @@ public class AppManager {
     }
     public Paint getPaint()
     {
+        if(paint == null){
+            paint = new Paint();
+            Typeface type = ResourcesCompat.getFont(AppManager.getInstance().getM_GameView().getContext(),R.font.barriecito_regular);
+            paint.setTypeface(type);
+            paint.setTextSize(30);
+            paint.setColor(Color.BLACK);
+        }
         return this.paint;
     }
 }

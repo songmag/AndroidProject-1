@@ -14,15 +14,15 @@ import java.util.LinkedList;
 
 public class Boss extends Enermy {
 
-    private Class big_missail;
-    private long missail_term;
+    protected Class big_missail;
+    protected long missail_term,m_time;
     private LinkedList<Missail> missails;
     public Boss(Bitmap m_bitmap) {
         super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,
                 AppManager.getInstance().getM_GameView().getFullHeight()/5));
         big_missail = BossMissail.class;
         missails = new LinkedList<Missail>();
-        missail_term = System.currentTimeMillis() + 5000;
+        m_time = System.currentTimeMillis() + missail_term;
         this.initSpriteData(this.m_bitmap.getWidth()/2,this.m_bitmap.getHeight(),20,2);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
@@ -35,12 +35,10 @@ public class Boss extends Enermy {
     public void shootingMissail(Missail missail) {
         missails.add(missail);
     }
-
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {
         m_DestroyBitmap = bitmap;
     }
-
     @Override
     public void Update(long gameTime) {
         super.Update(gameTime);
@@ -49,7 +47,6 @@ public class Boss extends Enermy {
             missails.get(i).Update();
         }
     }
-
     @Override
     public void set_State(int hp, float speed, int type) {
         this.hp = hp;
@@ -77,16 +74,12 @@ public class Boss extends Enermy {
 
     @Override
     public void attack() {
-        if(System.currentTimeMillis() - missail_term >= 0 )
+        if(System.currentTimeMillis() - m_time >= 0 )
         {
             Missail missail;
-            missail = MissailFactory.missailMaker(this.big_missail,m_x+m_bitmap.getWidth()/2/2,m_y+m_bitmap.getHeight(),0,25);
-/*
-            = new BossMissail(AppManager.getInstance().getBitMap(R.drawable.flower),m_x+m_bitmap.getWidth()/2,m_y+m_bitmap.getHeight(),
-                    2.0f,2);
-*/
+            missail = MissailFactory.missailMaker(this.big_missail,m_x+m_bitmap.getWidth()/2/2,m_y+m_bitmap.getHeight(),10,25);
             shootingMissail(missail);
-            missail_term = System.currentTimeMillis()+3000;
+            m_time = System.currentTimeMillis()+missail_term;
         }
     }
 }
