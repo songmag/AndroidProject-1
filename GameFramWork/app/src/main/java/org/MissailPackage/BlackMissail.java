@@ -28,16 +28,7 @@ public class BlackMissail extends Missail {
         m_bitmap = AppManager.getInstance().reSizing(m_bitmap,100,100);
         set_State(m_Speed,m_Damage);
     }
-    @Override
-    public void Update()
-    {
-        m_y -= missail_speed;
-        super.Update();
-        if(this.m_y < 0)
-        {
-            this.setM_state(Missail.STATE_OUT);
-        }
-    }
+
     @Override
     public int getLimit() {
         return m_Limit;

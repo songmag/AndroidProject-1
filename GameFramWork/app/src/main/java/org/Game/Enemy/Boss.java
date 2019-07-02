@@ -13,9 +13,8 @@ import org.MissailPackage.Missail;
 import java.util.LinkedList;
 
 public class Boss extends Enermy {
-
     protected Class big_missail;
-    protected long missail_term=3000,m_time;
+    protected long missail_term=2000,m_time;
     private LinkedList<Missail> missails;
     public Boss(Bitmap m_bitmap) {
         super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,
@@ -77,8 +76,10 @@ public class Boss extends Enermy {
         if(System.currentTimeMillis() - m_time >= 0 )
         {
             Missail missail;
-            missail = MissailFactory.missailMaker(this.big_missail,m_x+m_bitmap.getWidth()/2/2,m_y+m_bitmap.getHeight(),10,25);
-            shootingMissail(missail);
+            for(int i = 0 ; i <5;i++) {
+                missail = MissailFactory.createBossMissailMaker(this.big_missail, getM_rect().centerX(), getM_rect().bottom);
+                shootingMissail(missail);
+            }
             m_time = System.currentTimeMillis()+missail_term;
         }
     }

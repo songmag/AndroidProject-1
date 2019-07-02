@@ -8,14 +8,17 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
-public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
+import org.MovePackage.I_MovePattern;
+import org.MovePackage.ThrowObject;
+
+public class Money extends SpriteAnimation implements ThrowObject,I_Money,I_MoneyMove{
     private int m_Money;
     private int m_InGameMoney;
     protected float m_speed;
     private int m_state;
     public static final int STATE_NOMAL= 0;
     public static final int STATE_OUT = 1;
-
+    protected I_MovePattern movePattern;
     public Money(){
         super(AppManager.getInstance().getBitMap(R.drawable.coin));
     }
@@ -45,12 +48,7 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     @Override
     public void Update(long gameTime) {
         super.Update(gameTime);
-        if(getM_x()>= AppManager.getInstance().getM_GameView().getFullWidth() || getM_x() < 0  ||
-                getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() && m_state == 0)
-        {
-            this.m_state = Money.STATE_OUT;
-        }
-        move();
+        movePattern.Update(this);
     }
 
     @Override
@@ -110,6 +108,31 @@ public class Money extends SpriteAnimation implements I_Money,I_MoneyMove{
     @Override
     public void addInGameMoney(int money) {
         this.m_InGameMoney += money;
+    }
 
+    @Override
+    public void set_State(I_MovePattern move) {
+        this.movePattern = move;
+    }
+
+    @Override
+    public boolean checkUpdate() {
+        if(getM_x()>= AppManager.getInstance().getM_GameView().getFullWidth() || getM_x() < 0  ||
+                getM_y() > AppManager.getInstance().getM_GameView().getFullHeight() || getM_y() <0&& m_state == 0)
+        {
+            this.m_state = Money.STATE_OUT;
+        }
+        return false;
+    }
+
+    @Override
+    public float getSpeed() {
+        return this.m_speed;
+    }
+
+    @Override
+    public void set_xy(float _x, float _y) {
+        m_x += (int)_x;
+        m_y += (int)_y;
     }
 }

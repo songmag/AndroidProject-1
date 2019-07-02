@@ -10,6 +10,7 @@ import com.example.gameframework.org.FrameWork.SoundManager;
 
 import org.Controller.I_Controller;
 import org.Factory.EnemyFactory;
+import org.Factory.MovePatternFactory;
 import org.Game.CoinPackage.BronzeMoney;
 import org.Game.CoinPackage.Money;
 import org.Game.CoinPackage.StarMoney;
@@ -20,6 +21,7 @@ import org.Game.Enemy.Goomba;
 import org.Game.Enemy.Turtle;
 import org.GameView.IStat;
 import org.MissailPackage.Missail;
+import org.MovePackage.DownMovePattern;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -121,6 +123,7 @@ public class GameState implements IStat {
             for(int i = 0 ; i <4;i++)
             {
                 Money money = new StarMoney();
+                money.set_State(MovePatternFactory.createRandomMovePattern());
                 money.setPosition(enemy.getM_x()+i*20,enemy.getM_y()+enemy.getM_bitmap().getHeight());
                 moneys.add(money);
             }
@@ -128,6 +131,7 @@ public class GameState implements IStat {
         else
         {
             Money money = new BronzeMoney();
+            money.set_State(MovePatternFactory.createMovePattern(DownMovePattern.class));
             money.setPosition(enemy.getM_x(),enemy.getM_y());
             moneys.add(money);
         }

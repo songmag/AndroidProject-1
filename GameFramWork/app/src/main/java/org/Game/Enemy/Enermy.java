@@ -5,17 +5,17 @@ import android.graphics.Bitmap;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
-public abstract class Enermy extends SpriteAnimation {
+import org.MovePackage.I_MovePattern;
+import org.MovePackage.ThrowObject;
+
+public abstract class Enermy extends SpriteAnimation implements ThrowObject {
     public static final int MOVE_PATTERN_1 = 0;
     public static final int MOVE_PATTERN_2 = 1;
     public static final int MOVE_PATTERN_3 = 2;
     public static final int MOVE_BOSS_PATTERN = 3;
-    public static final Class[] Enemys_name = {Flower.class,Goomba.class,Turtle.class};
     public int destroy_count=0;
-
     public static final int STATE_NORMAL = 0;
     public static final int STATE_OUT = 1;
-
     private int m_state;
 
     protected int hp;
@@ -23,6 +23,7 @@ public abstract class Enermy extends SpriteAnimation {
     protected int movetype;
     protected Bitmap m_DestroyBitmap = null;
 
+    private I_MovePattern pattern;
     public void hert(int damage) {
         this.hp -=damage;
     }
@@ -105,4 +106,25 @@ public abstract class Enermy extends SpriteAnimation {
     }
     abstract public void setM_DestroyBitmap(Bitmap bitmap);
     abstract public void set_State(int hp,float speed,int type);
+
+    @Override
+    public void set_State(I_MovePattern move) {
+        pattern = move;
+    }
+
+    @Override
+    public boolean checkUpdate() {
+
+        return true;
+    }
+
+    @Override
+    public float getSpeed() {
+        return 0;
+    }
+
+    @Override
+    public void set_xy(float _x, float _y) {
+
+    }
 }
