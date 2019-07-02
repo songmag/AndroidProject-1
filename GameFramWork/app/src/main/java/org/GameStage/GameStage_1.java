@@ -10,6 +10,8 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 import org.Game.Enemy.Goomba;
+import org.Game.Enemy.OhBoss;
+import org.Game.Enemy.WingBoss;
 import org.Game.GameState;
 import org.Game.Player;
 import org.GameStateCollect.GameClear;
@@ -20,7 +22,8 @@ public class GameStage_1 extends GameState {
     public void init(int background) {
         super.init(0);
         setM_player(new Player(AppManager.getInstance().getPlayer()));
-        this.m_BossContain = false;
+        this.m_BossContain = true;
+        this.boss_class = OhBoss.class;
         this.m_StageRegenTime = 1000;
         this.m_EnemyLimit = 30;
         this.m_BossTime= 10000;

@@ -102,7 +102,7 @@ public class Player extends SpriteAnimation {
     }
     public void chargingattack()
     {
-        Missail missail = MissailFactory.ChargingmissailMaker(this.charging_missail,this.m_x,this.m_y,20,3);
+        Missail missail = MissailFactory.ChargingmissailMaker(this.charging_missail,this.m_x,this.m_y,20,25);
         shootingMissail(missail);
     }
 

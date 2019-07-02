@@ -6,8 +6,8 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 public class BlackMissail extends Missail {
-    public final int m_Damage = 5;
-    public final int m_Speed = 5;
+    public final int m_Damage = 10;
+    public final int m_Speed = 15;
     public final  int m_Limit = 10;
     public BlackMissail(Bitmap bitmap, int x, int y, float speed, int damage)
     {

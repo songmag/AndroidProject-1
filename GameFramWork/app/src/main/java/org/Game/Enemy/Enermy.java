@@ -36,7 +36,7 @@ public abstract class Enermy extends SpriteAnimation {
     }
 
     public Enermy(Bitmap _bitmap) {
-        super(AppManager.getInstance().reSizing(_bitmap,600,200));
+        super(AppManager.getInstance().reSizing(_bitmap,AppManager.getInstance().getM_GameView().getFullWidth(),200));
         this.initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
         this.m_state = Enermy.STATE_NORMAL;
     }

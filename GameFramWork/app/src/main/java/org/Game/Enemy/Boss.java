@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
+import org.Factory.MissailFactory;
 import org.MissailPackage.BossMissail;
 import org.MissailPackage.Missail;
 
@@ -17,7 +18,8 @@ public class Boss extends Enermy {
     private long missail_term;
     private LinkedList<Missail> missails;
     public Boss(Bitmap m_bitmap) {
-        super( AppManager.getInstance().reSizing(m_bitmap,800,200));
+        super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,
+                AppManager.getInstance().getM_GameView().getFullHeight()/5));
         big_missail = BossMissail.class;
         missails = new LinkedList<Missail>();
         missail_term = System.currentTimeMillis() + 5000;
@@ -77,8 +79,12 @@ public class Boss extends Enermy {
     public void attack() {
         if(System.currentTimeMillis() - missail_term >= 0 )
         {
-            Missail missail = new BossMissail(AppManager.getInstance().getBitMap(R.drawable.flower),m_x+m_bitmap.getWidth()/2,m_y+m_bitmap.getHeight(),
+            Missail missail;
+            missail = MissailFactory.missailMaker(this.big_missail,m_x+m_bitmap.getWidth()/2/2,m_y+m_bitmap.getHeight(),0,25);
+/*
+            = new BossMissail(AppManager.getInstance().getBitMap(R.drawable.flower),m_x+m_bitmap.getWidth()/2,m_y+m_bitmap.getHeight(),
                     2.0f,2);
+*/
             shootingMissail(missail);
             missail_term = System.currentTimeMillis()+3000;
         }

@@ -6,8 +6,8 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 public class GoldMissail extends Missail {
-    public final int m_Damage = 10;
-    public final int m_Speed = 5;
+    public final int m_Damage = 25;
+    public final int m_Speed = 25;
     public final int m_Limit = 20;
     public GoldMissail(Bitmap m_bitmap) {
         super(m_bitmap);
