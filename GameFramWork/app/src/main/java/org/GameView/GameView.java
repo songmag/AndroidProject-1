@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
+import com.example.gameframework.org.FrameWork.SoundManager;
 
 import org.Controller.I_Controller;
 import org.Game.GameState;
@@ -26,6 +27,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
     public GameView(Context context) {
         super(context);
         setSize();
+        SoundManager.getInstance().init(context);
+        SoundManager.getInstance().addSound("clearmusic",0,R.raw.clearmusic);
+        SoundManager.getInstance().addSound("coinmusic",1,R.raw.coinmusic);
+        SoundManager.getInstance().addSound("diemusic",2,R.raw.diemusic);
+        SoundManager.getInstance().addSound("gameovermusic",3,R.raw.gameover);
+        SoundManager.getInstance().addSound("starcoinmusic",4,R.raw.starcoin);
+
         vi = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         setFocusable(true);
         AppManager.getInstance().setM_view(this);
@@ -61,11 +69,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
         m_state.onTouchEvent(event);
         return true;
     }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        m_state.onKeyDown(keyCode,event);
-        return true;
-    }
     public void Update(){
         m_state.Update();
     }
@@ -73,13 +76,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
     public void changeGameState(GameState _state)
     {
         if(m_state != null)
-        {
-            m_state.Destroy();
-         }
+    {
+        m_state.Destroy();
+    }
         _state.init(0);
         AppManager.getInstance().getM_controller().setState(_state);
-        m_state = _state;
-    }
+    m_state = _state;
+}
     @Override
     protected void onDraw(Canvas canvas) {
         m_state.Render(canvas);

@@ -1,18 +1,51 @@
 package org.Game.Enemy;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
+import org.MissailPackage.BossMissail;
+import org.MissailPackage.Missail;
+
+import java.util.LinkedList;
+
 public class Boss extends Enermy {
+
+    private Class big_missail;
+    private long missail_term;
+    private LinkedList<Missail> missails;
     public Boss(Bitmap m_bitmap) {
-        super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()/2
-                ,AppManager.getInstance().getM_GameView().getFullHeight()/5));
+        super( AppManager.getInstance().reSizing(m_bitmap,800,200));
+        big_missail = BossMissail.class;
+        missails = new LinkedList<Missail>();
+        missail_term = System.currentTimeMillis() + 5000;
+        this.initSpriteData(this.m_bitmap.getWidth()/2,this.m_bitmap.getHeight(),20,2);
+        setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
+    public LinkedList<Missail> getMissails() {
+        return missails;
+    }
+    public void setMissails(LinkedList<Missail> missails) {
+        this.missails = missails;
+    }
+    public void shootingMissail(Missail missail) {
+        missails.add(missail);
+    }
+
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {
         m_DestroyBitmap = bitmap;
+    }
+
+    @Override
+    public void Update(long gameTime) {
+        super.Update(gameTime);
+        for(int i = 0 ; i<missails.size();i++)
+        {
+            missails.get(i).Update();
+        }
     }
 
     @Override
@@ -21,7 +54,6 @@ public class Boss extends Enermy {
         this.speed = speed;
         this.movetype = type;
     }
-
     public Boss()
     {
         super(
@@ -30,5 +62,25 @@ public class Boss extends Enermy {
         );
         this.initSpriteData(m_bitmap.getWidth()/2,m_bitmap.getHeight(),20,2);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
+    }
+
+    @Override
+    public void Draw(Canvas canvas) {
+        super.Draw(canvas);
+        for(int i = 0 ; i<missails.size();i++)
+        {
+            missails.get(i).Draw(canvas);
+        }
+    }
+
+    @Override
+    public void attack() {
+        if(System.currentTimeMillis() - missail_term >= 0 )
+        {
+            Missail missail = new BossMissail(AppManager.getInstance().getBitMap(R.drawable.flower),m_x+m_bitmap.getWidth()/2,m_y+m_bitmap.getHeight(),
+                    2.0f,2);
+            shootingMissail(missail);
+            missail_term = System.currentTimeMillis()+3000;
+        }
     }
 }

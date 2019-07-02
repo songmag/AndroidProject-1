@@ -6,9 +6,6 @@ import android.view.MotionEvent;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 import org.Game.GameState;
-import org.MissailPackage.Missail;
-import org.MissailPackage.BlackMissail;
-import org.MissailPackage.MissailFactory;
 
 public class MoveTouch implements I_Controller {
     private GameState state;

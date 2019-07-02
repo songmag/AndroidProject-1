@@ -12,7 +12,6 @@ import org.Game.Player;
 import org.GameStateCollect.GameStageState;
 import org.GameView.GameView;
 import org.GameView.I_GameView;
-import org.GameView.MerchantView;
 
 public class AppManager {
     //테스트를 위한 페인트
@@ -78,10 +77,6 @@ public class AppManager {
     {
         return (GameView)m_view;
     }
-    public MerchantView getM_MerchantView(){
-        return (MerchantView)m_view;
-    }
-
     public Player getPlayer() {
         return player;
     }

@@ -10,7 +10,6 @@
         android:roundIcon="@drawable/supermario"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="org.GameView.MainActivity"></activity>
         <activity android:name="org.GameView.IntroActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

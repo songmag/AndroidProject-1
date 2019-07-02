@@ -8,8 +8,8 @@ import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.GraphicObject;
 
 public class BackGround extends GraphicObject {
-   static final float SCROLL_SPEED = 7.0f;
-   private float m_scroll = -AppManager.getInstance().getM_GameView().getFullHeight()*5+AppManager.getInstance().getM_GameView().getFullHeight();
+    static final float SCROLL_SPEED = 7.0f;
+    private float m_scroll = -AppManager.getInstance().getM_GameView().getFullHeight()*5+AppManager.getInstance().getM_GameView().getFullHeight();
     private Bitmap m_layer2 = null;
     static final float SCROLL_SPEED_2 = 7.0f;
     private float m_scroll_2 = -AppManager.getInstance().getM_GameView().getFullHeight()*5+AppManager.getInstance().getM_GameView().getFullHeight();
@@ -54,6 +54,14 @@ public class BackGround extends GraphicObject {
         m_scroll_2 += SCROLL_SPEED_2;
         if(m_scroll_2 >= 0) m_scroll_2=0;
    }
+
+    @Override
+    public void setM_bitmap(Bitmap m_bitmap) {
+        super.setM_bitmap(m_bitmap);
+        this.m_bitmap = AppManager.getInstance().reSizing(this.m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth(),
+                AppManager.getInstance().getM_GameView().getFullHeight()*5);
+        this.setPosition(0,(int)m_scroll);        
+    }
 
     @Override
     public void Draw(Canvas canvas) {

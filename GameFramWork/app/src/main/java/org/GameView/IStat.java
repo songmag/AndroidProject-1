@@ -9,6 +9,5 @@ public interface IStat {
     public void Destroy();
     public void Update();
     public void Render(Canvas canvas);
-    public boolean onKeyDown(int keyCode, KeyEvent event);
     public boolean onTouchEvent(MotionEvent event);
 }

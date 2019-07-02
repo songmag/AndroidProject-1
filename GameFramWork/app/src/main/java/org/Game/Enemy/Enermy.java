@@ -10,7 +10,7 @@ public abstract class Enermy extends SpriteAnimation {
     public static final int MOVE_PATTERN_2 = 1;
     public static final int MOVE_PATTERN_3 = 2;
     public static final int MOVE_BOSS_PATTERN = 3;
-
+    public static final Class[] Enemys_name = {Flower.class,Goomba.class,Turtle.class};
     public int destroy_count=0;
 
     public static final int STATE_NORMAL = 0;
@@ -36,7 +36,7 @@ public abstract class Enermy extends SpriteAnimation {
     }
 
     public Enermy(Bitmap _bitmap) {
-        super(_bitmap);
+        super(AppManager.getInstance().reSizing(_bitmap,600,200));
         this.initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
         this.m_state = Enermy.STATE_NORMAL;
     }
@@ -85,6 +85,8 @@ public abstract class Enermy extends SpriteAnimation {
         if(m_state == Enermy.STATE_OUT && this.destroy_count != 0)
             this.destroy_count += 1;
         else if(m_state == Enermy.STATE_OUT){
+            if(this.hp <= 0)
+            AppManager.getInstance().getM_GameView().getM_state().makeMoney(this);
             destroy();
             this.destroy_count+=1;
         }

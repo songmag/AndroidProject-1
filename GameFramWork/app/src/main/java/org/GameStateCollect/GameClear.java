@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.BackGround;
+import com.example.gameframework.org.FrameWork.SoundManager;
 import com.example.gameframework.org.FrameWork.SpriteAddBackground;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
@@ -21,6 +22,8 @@ public class GameClear extends GameState {
         m_background = new SpriteAddBackground(m_animation,(AppManager.getInstance().getM_GameView().getFullWidth()/2)-m_animation.getM_bitmap().getWidth()/3/2,
                 AppManager.getInstance().getM_GameView().getHeight()/3);
         stay_time = System.currentTimeMillis()+ 2000;
+
+        SoundManager.getInstance().play_by_name("clearmusic");
     }
     @Override
     public void Update() {
@@ -29,8 +32,10 @@ public class GameClear extends GameState {
     }
     @Override
     public void Render(Canvas canvas) {
-        if(m_background != null)
-        m_background.Draw(canvas);
+        if(m_background != null) {
+            m_background.Draw(canvas);
+            canvas.drawText(Integer.toString(AppManager.getInstance().getPlayer().getM_Money().getM_Money()),AppManager.getInstance().getM_GameView().getFullWidth()-500,40,AppManager.getInstance().getPaint());
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {

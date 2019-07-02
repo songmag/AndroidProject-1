@@ -1,10 +1,12 @@
 package org.GameStateCollect;
 
 import android.graphics.Canvas;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
+import com.example.gameframework.org.FrameWork.SoundManager;
 import com.example.gameframework.org.FrameWork.SpriteAddBackground;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
@@ -19,6 +21,7 @@ public class GameDeath extends GameState {
         m_background = new SpriteAddBackground(m_animation,(AppManager.getInstance().getM_GameView().getFullWidth()/2)-m_animation.getM_bitmap().getWidth()/3/2,
                 AppManager.getInstance().getM_GameView().getHeight()/3);
         stay_Time = System.currentTimeMillis()+1000;
+        SoundManager.getInstance().play_by_name("gameovermusic");
     }
     @Override
     public void Update() {
@@ -27,8 +30,10 @@ public class GameDeath extends GameState {
     }
     @Override
     public void Render(Canvas canvas) {
-        if(m_background != null)
-        m_background.Draw(canvas);
+        if(m_background != null) {
+            m_background.Draw(canvas);
+            canvas.drawText(Integer.toString(AppManager.getInstance().getPlayer().getM_Money().getM_Money()),AppManager.getInstance().getM_GameView().getFullWidth()-500,40,AppManager.getInstance().getPaint());
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {

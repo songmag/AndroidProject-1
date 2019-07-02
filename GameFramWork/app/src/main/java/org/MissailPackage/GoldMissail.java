@@ -6,10 +6,9 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
 public class GoldMissail extends Missail {
-    public final static int DAMAGE = 10;
-    public final static int SPEED = 5;
-    public final static int LIMIT = 20;
-
+    public final int m_Damage = 10;
+    public final int m_Speed = 5;
+    public final int m_Limit = 20;
     public GoldMissail(Bitmap m_bitmap) {
         super(m_bitmap);
     }
@@ -18,11 +17,19 @@ public class GoldMissail extends Missail {
         super(_bitmap);
         set_State(speed,damage);
         setPosition(x,y);
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap,100,100);
     }
     public GoldMissail(GoldMissail missail) {
         super(missail.m_bitmap);
         set_State(missail.missail_speed,missail.damage);
         setPosition(m_x,m_y);
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap,100,100);
+    }
+
+    public GoldMissail() {
+        super(AppManager.getInstance().getBitMap(R.drawable.gold_missile));
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap,100,100);
+        set_State(m_Speed,m_Damage);
     }
 
     @Override
@@ -33,5 +40,10 @@ public class GoldMissail extends Missail {
         {
             this.setM_state(Missail.STATE_OUT);
         }
+    }
+
+    @Override
+    public int getLimit() {
+        return m_Limit;
     }
 }

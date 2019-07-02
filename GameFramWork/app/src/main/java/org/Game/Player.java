@@ -3,13 +3,14 @@ import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
+import com.example.gameframework.org.FrameWork.SoundManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
 import org.Game.CoinPackage.Money;
 import org.MissailPackage.BlackMissail;
 import org.MissailPackage.GoldMissail;
 import org.MissailPackage.Missail;
-import org.MissailPackage.MissailFactory;
+import org.Factory.MissailFactory;
 
 import java.util.LinkedList;
 public class Player extends SpriteAnimation {
@@ -94,19 +95,20 @@ public class Player extends SpriteAnimation {
                 AppManager.getInstance().getM_GameView().getFullHeight() / 10);
         initSpriteData(this.m_bitmap.getWidth() / 6, this.m_bitmap.getHeight(), 20, 6);
         m_death = true;
+        SoundManager.getInstance().play_by_name("diemusic");
     }
     public void setM_stage(int m_stage) {
         this.m_stage = m_stage;
     }
     public void chargingattack()
     {
-        Missail missail = MissailFactory.ChargingmissailMaker(this);
+        Missail missail = MissailFactory.ChargingmissailMaker(this.charging_missail,this.m_x,this.m_y,20,3);
         shootingMissail(missail);
     }
 
     public void attack(){
-        Missail missail = MissailFactory.missailMaker(this);
-        if(missail == null)
+        Missail missail = MissailFactory.missailMaker(this.default_missail,this.m_x,this.m_y);
+        if(missails.size() >= missail.getLimit())
         {
             return;
         }
