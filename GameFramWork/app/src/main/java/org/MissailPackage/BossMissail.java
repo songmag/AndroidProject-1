@@ -21,6 +21,7 @@ public class BossMissail extends Missail {
     public BossMissail()
     {
         super(AppManager.getInstance().getBitMap(R.drawable.boss_missile1));
+        m_bitmap = AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()/6,AppManager.getInstance().getM_GameView().getFullHeight()/8);
         set_State(speed,damage);
     }
     @Override

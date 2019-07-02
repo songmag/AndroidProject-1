@@ -7,11 +7,13 @@ public class GameViewThread extends Thread {
     private GameView m_view;
     private SurfaceHolder m_holder;
     private boolean m_run;
+    private boolean m_pause;
     public GameViewThread(SurfaceHolder holder, GameView gameView)
     {
         m_view = gameView;
         m_holder = holder;
         m_run = false;
+        m_pause = false;
     }
     public void setRunning(boolean run)
     {
@@ -23,6 +25,7 @@ public class GameViewThread extends Thread {
         Canvas _canvas;
         while(m_run)
         {
+            while(m_pause){}
             _canvas = null;
             try {
                 m_view.Update();
@@ -39,5 +42,9 @@ public class GameViewThread extends Thread {
                 }
             }
         }
+    }
+    public void pause(boolean flag)
+    {
+        m_pause = flag;
     }
 }

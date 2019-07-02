@@ -38,7 +38,7 @@ public class GameDeath extends GameState {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(System.currentTimeMillis() - stay_Time >=0)
-        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.gameStates[AppManager.getInstance().getPlayer().getM_stage()]);
+        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
         return false;
     }
 }

@@ -91,9 +91,13 @@ public class AppManager {
             paint = new Paint();
             Typeface type = ResourcesCompat.getFont(AppManager.getInstance().getM_GameView().getContext(),R.font.barriecito_regular);
             paint.setTypeface(type);
-            paint.setTextSize(30);
             paint.setColor(Color.BLACK);
         }
+        return this.paint;
+    }
+    public Paint setPaintSize(float size)
+    {
+        paint.setTextSize(size);
         return this.paint;
     }
 }

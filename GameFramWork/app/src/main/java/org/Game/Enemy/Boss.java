@@ -15,7 +15,7 @@ import java.util.LinkedList;
 public class Boss extends Enermy {
 
     protected Class big_missail;
-    protected long missail_term,m_time;
+    protected long missail_term=3000,m_time;
     private LinkedList<Missail> missails;
     public Boss(Bitmap m_bitmap) {
         super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,

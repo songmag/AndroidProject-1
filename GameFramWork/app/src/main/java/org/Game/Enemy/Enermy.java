@@ -96,6 +96,7 @@ public abstract class Enermy extends SpriteAnimation {
             this.setM_state(Enermy.STATE_OUT);
         }
         move();
+        attack();
     }
     public void attack(){}
     public void destroy(){

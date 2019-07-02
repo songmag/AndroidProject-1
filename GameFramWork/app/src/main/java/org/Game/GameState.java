@@ -217,6 +217,21 @@ public class GameState implements IStat {
                     return;
                 }
             }
+            if(enermys.get(i) instanceof Boss)
+            {
+                Boss enemy = (Boss)enermys.get(i);
+                for(int j = 0 ; j<enemy.getMissails().size();j++)
+                if( CollisionManager.checkBoxToBox(enemy.getMissails().get(j).getM_nowRect(), m_player.getM_rect())){
+                        enemy.getMissails().get(j).setM_state(Missail.STATE_OUT);
+                        if(!m_player.isM_death())
+                        {
+                          m_player.destroy();
+                          AppManager.getInstance().getM_GameView().vibratorStart();
+                          waitTime += System.currentTimeMillis();
+                         return;
+                        }
+                    }
+            }
         }
         for(int i = 0 ; i <moneys.size();i++)
         {

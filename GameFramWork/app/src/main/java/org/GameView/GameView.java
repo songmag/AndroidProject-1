@@ -39,7 +39,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
         AppManager.getInstance().setM_view(this);
         AppManager.getInstance().setM_res(getResources());
         AppManager.getInstance().setPlayer(new Player(AppManager.getInstance().getBitMap(R.drawable.super_mario)));
-        changeGameState(AppManager.getInstance().m_stage.menuState);
+        changeGameState(AppManager.getInstance().m_stage.introState);
         //get GameStage를 통해 생성해서 가져온다.
         //컨트롤러를 AppManager을 통해서 가져온다.
         getHolder().addCallback(this);
@@ -77,11 +77,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
     {
         if(m_state != null)
     {
+        m_thread.pause(true);
         m_state.Destroy();
     }
         _state.init(0);
         AppManager.getInstance().getM_controller().setState(_state);
     m_state = _state;
+    if(m_thread != null)
+    m_thread.pause(false);
 }
     @Override
     protected void onDraw(Canvas canvas) {

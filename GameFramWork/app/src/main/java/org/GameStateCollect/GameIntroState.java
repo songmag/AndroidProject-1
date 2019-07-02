@@ -34,7 +34,7 @@ public class GameIntroState extends GameState {
         if (m_background != null) {
             m_background.Update(System.currentTimeMillis());
             if (System.currentTimeMillis() - m_ChangeState >= 0)
-                AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.gameStates[0]);
+                AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
         }
     }
     @Override

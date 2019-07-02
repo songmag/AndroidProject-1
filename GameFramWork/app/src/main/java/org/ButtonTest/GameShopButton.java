@@ -1,8 +1,11 @@
 package org.ButtonTest;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.GraphicObject;
 
 public class GameShopButton extends GraphicObject implements I_Button{
@@ -13,7 +16,15 @@ public class GameShopButton extends GraphicObject implements I_Button{
     }
     @Override
     public void method() {
+        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.shopIntro);
+    }
 
+    @Override
+    public void Draw(Canvas canvas) {
+        super.Draw(canvas);
+        Paint paint = AppManager.getInstance().getPaint();
+        paint.setTextSize(70);
+        canvas.drawText("Shop",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
     }
 
     @Override

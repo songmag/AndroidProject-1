@@ -12,8 +12,10 @@ public class GameStageState {
     public GameState deathStage;
     public GameState introState;
     public GameState menuState;
+    public GameState shopIntro;
     public GameStageState()
     {
+        shopIntro = new ShopIntro();
         menuState = new GameMenu();
         introState = new GameIntroState();
         deathStage = new GameDeath();

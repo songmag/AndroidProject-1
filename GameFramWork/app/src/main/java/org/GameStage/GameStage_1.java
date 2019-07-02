@@ -25,7 +25,7 @@ public class GameStage_1 extends GameState {
         this.m_BossContain = true;
         this.boss_class = OhBoss.class;
         this.m_StageRegenTime = 1000;
-        this.m_EnemyLimit = 30;
+        this.m_EnemyLimit = 10;
         this.m_BossTime= 10000;
         m_background.setM_bitmap(AppManager.getInstance().getBitMap(R.drawable.mario_background));
         this.enemys_name.put(0, Goomba.class);

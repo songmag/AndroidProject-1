@@ -43,12 +43,29 @@ public class GameMenu extends GameState {
         if(m_background != null) {
             m_background.Draw(canvas);
             for(int i = 0 ; i < button.length;i++) {
+                if(button[i] == null) break;
                 button[i].Draw(canvas);
             }
         }
     }
     @Override
+    public void Destroy() {
+        m_background = null;
+        synchronized (button) {
+            for (int i = 0; i < button.length; i++)
+                button[i] = null;
+        }
+    }
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
+        for(int i = 0 ; i< 4;i++)
+        {
+            if(button[i].check_contain_point((int)event.getX(),(int)event.getY()))
+            {
+                button[i].method();
+                break;
+            }
+        }
         return false;
     }
 }
