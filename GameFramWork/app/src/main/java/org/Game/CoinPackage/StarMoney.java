@@ -3,9 +3,9 @@ package org.Game.CoinPackage;
 import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
-public class StarMoney extends Money implements I_Money,I_MoneyMove {
+public class StarMoney extends Money {
 
     public StarMoney()
     {

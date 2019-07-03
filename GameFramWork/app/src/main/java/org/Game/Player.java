@@ -3,15 +3,15 @@ package org.Game;
 import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.SoundManager;
-import com.example.gameframework.org.FrameWork.SpriteAnimation;
+import org.FrameWork.AppManager;
+import org.FrameWork.SoundManager;
+import org.FrameWork.SpriteAnimation;
 
 import org.Factory.MissailFactory;
 import org.Game.CoinPackage.Money;
-import org.MissailPackage.BlackMissail;
-import org.MissailPackage.GoldMissail;
-import org.MissailPackage.Missail;
+import org.Game.MissailPackage.BlackMissail;
+import org.Game.MissailPackage.GoldMissail;
+import org.Game.MissailPackage.Missail;
 
 import java.util.LinkedList;
 public class Player extends SpriteAnimation {

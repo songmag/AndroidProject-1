@@ -1,7 +1,7 @@
 package org.Game.Enemy;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
 public class OhBoss extends Boss {
     public OhBoss() {

@@ -3,7 +3,7 @@ package org.Controller;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
 import org.Game.GameState;
 

@@ -4,11 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
 import org.Factory.MissailFactory;
-import org.MissailPackage.BossMissail;
-import org.MissailPackage.Missail;
+import org.Game.MissailPackage.BossMissail;
+import org.Game.MissailPackage.Missail;
 
 import java.util.LinkedList;
 

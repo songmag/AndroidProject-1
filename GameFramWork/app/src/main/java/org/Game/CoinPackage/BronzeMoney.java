@@ -1,10 +1,10 @@
 package org.Game.CoinPackage;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.SpriteAnimation;
+import org.FrameWork.AppManager;
+import org.FrameWork.SpriteAnimation;
 
-public class BronzeMoney extends Money implements I_Money,I_MoneyMove {
+public class BronzeMoney extends Money  {
     public BronzeMoney() {
         super(AppManager.getInstance().reSizing(
                 AppManager.getInstance().getBitMap(R.drawable.coin),

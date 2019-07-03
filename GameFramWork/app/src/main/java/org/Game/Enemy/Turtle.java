@@ -3,7 +3,7 @@ package org.Game.Enemy;
 import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
 public class Turtle extends Enermy {
     public Turtle(Bitmap m_bitmap) {

@@ -3,10 +3,10 @@ package org.Game;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.BackGround;
-import com.example.gameframework.org.FrameWork.CollisionManager;
-import com.example.gameframework.org.FrameWork.SoundManager;
+import org.FrameWork.AppManager;
+import org.FrameWork.BackGround;
+import org.FrameWork.CollisionManager;
+import org.FrameWork.SoundManager;
 
 import org.Controller.I_Controller;
 import org.Factory.EnemyFactory;
@@ -16,10 +16,10 @@ import org.Game.CoinPackage.Money;
 import org.Game.CoinPackage.StarMoney;
 import org.Game.Enemy.Boss;
 import org.Game.Enemy.Enermy;
-import org.GameView.IStat;
-import org.MissailPackage.Missail;
-import org.MovePackage.DownMovePattern;
-import org.MovePackage.SinMovePattern;
+import org.Game.GameView.IStat;
+import org.Game.MissailPackage.Missail;
+import org.Game.MovePackage.DownMovePattern;
+import org.Game.MovePackage.SinMovePattern;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -85,7 +85,7 @@ public class GameState implements IStat {
         m_background.Update(gameTime);
         for(int i=0;i<moneys.size();i++) {
             moneys.get(i).Update(gameTime);
-            if(moneys.get(i).getState() == Money.STATE_OUT)
+            if(moneys.get(i).getM_state() == Money.STATE_OUT)
             {
                 moneys.remove(i);
             }

@@ -1,7 +1,7 @@
 package org.Factory;
 
-import org.MovePackage.I_MovePattern;
-import org.MovePackage.MovePatternClass;
+import org.Game.MovePackage.I_MovePattern;
+import org.Game.MovePackage.MovePatternClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;

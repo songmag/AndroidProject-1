@@ -1,9 +1,9 @@
 package org.Factory;
 
-import com.example.gameframework.org.FrameWork.AppManager;
+import org.FrameWork.AppManager;
 
-import org.MissailPackage.Missail;
-import org.MovePackage.UpMovePattern;
+import org.Game.MissailPackage.Missail;
+import org.Game.MovePackage.UpMovePattern;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -3,11 +3,11 @@ package org.Game.Enemy;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 
-import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.SpriteAnimation;
+import org.FrameWork.AppManager;
+import org.FrameWork.SpriteAnimation;
 
-import org.MovePackage.I_MovePattern;
-import org.MovePackage.ThrowObject;
+import org.Game.MovePackage.I_MovePattern;
+import org.Game.MovePackage.ThrowObject;
 
 public abstract class Enermy extends SpriteAnimation implements ThrowObject {
 

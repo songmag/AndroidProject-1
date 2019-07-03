@@ -2,7 +2,7 @@ package org.Factory;
 
 import org.Game.Enemy.Boss;
 import org.Game.Enemy.Enermy;
-import org.MovePackage.BossMovePattern;
+import org.Game.MovePackage.BossMovePattern;
 
 import java.lang.reflect.InvocationTargetException;
 
