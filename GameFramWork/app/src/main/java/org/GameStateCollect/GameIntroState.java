@@ -9,7 +9,6 @@ import com.example.gameframework.org.FrameWork.SpriteAddBackground;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
 import org.Game.GameState;
-import org.GameStage.GameStage_1;
 
 public class GameIntroState extends GameState {
     private long m_ChangeState;

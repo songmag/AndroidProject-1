@@ -1,10 +1,13 @@
 package org.MovePackage;
 
-import android.graphics.Point;
+import android.graphics.Rect;
 
 public interface ThrowObject {
-    public void set_State(I_MovePattern move);
-    public boolean checkUpdate();
-    public float getSpeed();
-    public void set_xy(float _x,float _y);
+    void set_State(I_MovePattern move);
+    boolean checkUpdate();
+    float getSpeed();
+    void set_xy(float _x, float _y);
+    float get_x();
+    float get_y();
+    Rect get_rect();
 }

@@ -13,7 +13,7 @@ public abstract class TextWriter implements I_DrawText {
     protected String value;
     public int now_index=0;
     public int finish_check_index=0;
-    protected long time_term = 500;
+    protected long time_term = 200;
     protected long check_time = 0;
     protected int x = AppManager.getInstance().getM_GameView().getFullWidth()/4;
     protected int y = 120;

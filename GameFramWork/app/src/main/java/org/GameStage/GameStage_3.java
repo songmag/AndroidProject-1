@@ -9,7 +9,6 @@ import org.Game.Enemy.Flower;
 import org.Game.Enemy.Goomba;
 import org.Game.Enemy.OhBoss;
 import org.Game.Enemy.Turtle;
-import org.Game.Enemy.WingBoss;
 import org.Game.GameState;
 import org.Game.Player;
 
@@ -20,7 +19,7 @@ public class GameStage_3 extends GameState {
         super.init(0);
         setM_player(new Player(AppManager.getInstance().getPlayer()));
         this.m_BossContain = false;
-        this.m_StageRegenTime = 1000;
+        this.m_StageRegenTime = 500;
         this.m_EnemyLimit = 30;
         this.m_BossTime= 10000;
         m_background.setM_bitmap(AppManager.getInstance().getBitMap(R.drawable.mario_background));
@@ -42,7 +41,7 @@ public class GameStage_3 extends GameState {
     @Override
     public void Render(Canvas canvas) {
         super.Render(canvas);
-        canvas.drawText("Stage :" + Integer.toString(stage),0,50,AppManager.getInstance().getPaint());
-        canvas.drawText("Destroy :"+Integer.toString(destroy_enem),0,30, AppManager.getInstance().getPaint());
+        canvas.drawText("Stage :" + stage,0,50,AppManager.getInstance().getPaint());
+        canvas.drawText("Destroy :"+ destroy_enem,0,30, AppManager.getInstance().getPaint());
     }
 }

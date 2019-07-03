@@ -23,7 +23,7 @@ public class SoundManager {
     public void init(Context _context)
     {
         m_Activity = _context;
-        m_SoundPool = new SoundPool(4,AudioManager.STREAM_MUSIC,0);
+        m_SoundPool = new SoundPool(6,AudioManager.STREAM_MUSIC,0);
         m_SoundPoolMap  = new HashMap();
         m_SoundPoolString = new HashMap();
         m_AudioManager = (AudioManager)_context.getSystemService(Context.AUDIO_SERVICE);
@@ -67,13 +67,13 @@ public class SoundManager {
     {
         float streamVolume = m_AudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         streamVolume = streamVolume/m_AudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        m_SoundPool.play((Integer)m_SoundPoolMap.get(m_SoundPoolString.get(soundName)),streamVolume,streamVolume,1,0,1f);
+        m_SoundPool.play((Integer)m_SoundPoolMap.get(m_SoundPoolString.get(soundName)),streamVolume,streamVolume,1,-1,1f);
     }
     public void play(int _index)
     {
         float streamVolume = m_AudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         streamVolume = streamVolume/m_AudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        m_SoundPool.play((Integer)m_SoundPoolMap.get(_index),streamVolume,streamVolume,1,-1,1f);
+        m_SoundPool.play((Integer)m_SoundPoolMap.get(_index),streamVolume,streamVolume,1,0,1f);
     }
     public void stop(int _index)
     {

@@ -2,7 +2,6 @@ package org.Game.CoinPackage;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
@@ -134,5 +133,20 @@ public class Money extends SpriteAnimation implements ThrowObject,I_Money,I_Mone
     public void set_xy(float _x, float _y) {
         m_x += (int)_x;
         m_y += (int)_y;
+    }
+
+    @Override
+    public float get_x() {
+        return m_x;
+    }
+
+    @Override
+    public float get_y() {
+        return m_y;
+    }
+
+    @Override
+    public Rect get_rect() {
+        return getM_rect();
     }
 }

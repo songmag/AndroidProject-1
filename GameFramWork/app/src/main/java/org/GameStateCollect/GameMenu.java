@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.BackGround;
+import com.example.gameframework.org.FrameWork.SoundManager;
 
 import org.ButtonTest.GameExitButton;
 import org.ButtonTest.GameOptionButton;
@@ -58,10 +59,12 @@ public class GameMenu extends GameState {
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_UP)
         for(int i = 0 ; i< 4;i++)
         {
             if(button[i].check_contain_point((int)event.getX(),(int)event.getY()))
             {
+                SoundManager.getInstance().play(5);
                 button[i].method();
                 break;
             }

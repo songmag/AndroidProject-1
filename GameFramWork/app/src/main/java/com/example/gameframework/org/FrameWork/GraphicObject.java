@@ -2,20 +2,19 @@ package com.example.gameframework.org.FrameWork;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 public class GraphicObject {
 
     protected Bitmap m_bitmap;
-    protected int m_x;
-    protected int m_y;
+    protected float m_x;
+    protected float m_y;
 
     public GraphicObject(Bitmap m_bitmap) {
         this.m_bitmap = m_bitmap;
         m_x = 0;
         m_y = 0;
     }
-    public void setPosition(int x,int y)
+    public void setPosition(float x, float y)
     {
         m_x = x;
         m_y = y;
@@ -32,10 +31,10 @@ public class GraphicObject {
         canvas.drawBitmap(m_bitmap,m_x,m_y,null);
     }
 
-    public int getM_x() {
+    public float getM_x() {
         return m_x;
     }
-    public int getM_y() {
+    public float getM_y() {
         return m_y;
     }
 }

@@ -1,7 +1,5 @@
 package org.Game.CoinPackage;
 
-import android.graphics.Bitmap;
-
 import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;

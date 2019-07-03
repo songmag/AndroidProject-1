@@ -44,13 +44,14 @@ public class Boss extends Enermy {
         for(int i = 0 ; i<missails.size();i++)
         {
             missails.get(i).Update();
+            if(missails.get(i).getM_state() == Missail.STATE_OUT)
+                missails.remove(i);
         }
     }
     @Override
-    public void set_State(int hp, float speed, int type) {
+    public void set_State(int hp, float speed) {
         this.hp = hp;
         this.speed = speed;
-        this.movetype = type;
     }
     public Boss()
     {

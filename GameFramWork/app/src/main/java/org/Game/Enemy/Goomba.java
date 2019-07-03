@@ -7,10 +7,9 @@ import com.example.gameframework.org.FrameWork.AppManager;
 
 public class Goomba extends Enermy {
     @Override
-    public void set_State(int hp, float speed, int type) {
+    public void set_State(int hp, float speed) {
         this.hp = hp;
         this.speed = speed;
-        this.movetype = type;
     }
     public Goomba(Bitmap m_bitmap) {
         super(m_bitmap);

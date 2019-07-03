@@ -2,13 +2,12 @@ package org.Factory;
 
 import org.Game.Enemy.Boss;
 import org.Game.Enemy.Enermy;
-import org.Game.Enemy.Goomba;
-import org.MissailPackage.BlackMissail;
+import org.MovePackage.BossMovePattern;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class EnemyFactory {
-    public static Enermy createEnemy(Class enemyName,int hp,float speed,int type)
+    public static Enermy createEnemy(Class enemyName,int hp,float speed)
     {
         Enermy enermy = null;
         try {
@@ -24,10 +23,11 @@ public class EnemyFactory {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        enermy.set_State(hp,speed,type);
+        enermy.set_State(hp,speed);
+        enermy.set_State(MovePatternFactory.createRandomMovePattern());
         return enermy;
     }
-    public static Boss createBoss(Class enemyName,int hp,float speed,int type)
+    public static Boss createBoss(Class enemyName,int hp,float speed)
     {
         Boss enermy = null;
         try {
@@ -43,7 +43,8 @@ public class EnemyFactory {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        enermy.set_State(hp,speed,Enermy.MOVE_BOSS_PATTERN);
+        enermy.set_State(hp,speed);
+        enermy.set_State(MovePatternFactory.createMovePattern(BossMovePattern.class));
         return enermy;
     }
 }

@@ -1,12 +1,14 @@
 package org.MovePackage;
 
+import org.Factory.MovePatternFactory;
+
 public class DownMovePattern implements I_MovePattern {
 
     @Override
     public void Update(ThrowObject object) {
         if(object.checkUpdate())
         {
-            object.set_State(new DownMovePattern());
+            object.set_State(MovePatternFactory.createRandomMovePattern(0));
         }
         move(object);
     }

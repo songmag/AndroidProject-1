@@ -2,7 +2,8 @@ package org.MovePackage;
 
 import org.Factory.MovePatternFactory;
 
-public class LeftMovePattern implements I_MovePattern {
+public class SinMovePattern implements I_MovePattern {
+    public double sinvalue=0;
     @Override
     public void Update(ThrowObject object) {
         if(object.checkUpdate())
@@ -13,6 +14,7 @@ public class LeftMovePattern implements I_MovePattern {
     }
     @Override
     public void move(ThrowObject object) {
-        object.set_xy(-object.getSpeed(),0);
+        sinvalue += 0.01;
+        object.set_xy((float)(object.get_x()+Math.sin(Math.PI/180)+sinvalue),object.get_y()+object.getSpeed());
     }
 }

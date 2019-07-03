@@ -4,8 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import com.example.gameframework.R;
-import com.example.gameframework.org.FrameWork.AppManager;
-import com.example.gameframework.org.FrameWork.GraphicObject;
 
 public class BackGround extends GraphicObject {
     static final float SCROLL_SPEED = 7.0f;
