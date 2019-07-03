@@ -138,6 +138,7 @@ public class GameState implements IStat {
     {
         if(m_player.isM_death() && System.currentTimeMillis() - waitTime >= 0)
         {
+            AppManager.getInstance().getPlayer().setM_stage(0);
             AppManager.getInstance().getM_GameView().vibratorStop();
             AppManager.getInstance().getM_GameView().changeGameState(
                     AppManager.getInstance().m_stage.deathStage
@@ -170,7 +171,7 @@ public class GameState implements IStat {
         if(System.currentTimeMillis()-LastRegenEnemy >= m_StageRegenTime && !m_BossFlag && m_EnemyLimit > 0 ) {
             LastRegenEnemy = System.currentTimeMillis();
             Enermy enermy;
-            enermy = EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),50,AppManager.getInstance().getM_GameView().getHeight()/240);
+            enermy = EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),50,AppManager.getInstance().getM_GameView().getHeight()/150);
             enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -60);
             enermy.set_State(MovePatternFactory.createMovePattern(SinMovePattern.class));
             this.enermys.add(enermy);
@@ -182,7 +183,7 @@ public class GameState implements IStat {
                     enermys.get(i).destroy();
                     enermys.get(i).setM_state(Enermy.STATE_OUT);
                 }
-                Enermy boss = EnemyFactory.createBoss(boss_class,400,AppManager.getInstance().getM_GameView().getHeight()/240);
+                Enermy boss = EnemyFactory.createBoss(boss_class,400,AppManager.getInstance().getM_GameView().getHeight()/150);
                 boss.setPosition(0, 200);
                 this.enermys.add(boss);
                 m_BossFlag = true;

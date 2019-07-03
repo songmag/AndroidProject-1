@@ -24,7 +24,7 @@ public class EnemyFactory {
             e.printStackTrace();
         }
         enermy.set_State(hp,speed);
-        enermy.set_State(MovePatternFactory.createRandomMovePattern());
+        enermy.set_State(MovePatternFactory.createRandomMovePattern(1));
         return enermy;
     }
     public static Boss createBoss(Class enemyName,int hp,float speed)
