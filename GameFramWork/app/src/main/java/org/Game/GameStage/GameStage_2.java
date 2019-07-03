@@ -38,7 +38,7 @@ public class GameStage_2 extends GameState {
     @Override
     public void Render(Canvas canvas) {
         super.Render(canvas);
-        canvas.drawText("Stage :" + stage,0,50,AppManager.getInstance().getPaint());
-        canvas.drawText("Destroy :"+ destroy_enem,0,30, AppManager.getInstance().getPaint());
+        canvas.drawText("Stage :" + stage,0,AppManager.getInstance().getPaint().getTextSize(),AppManager.getInstance().getPaint());
+        canvas.drawText("Destroy :"+ destroy_enem,0,AppManager.getInstance().getPaint().getTextSize()*2, AppManager.getInstance().getPaint());
     }
 }

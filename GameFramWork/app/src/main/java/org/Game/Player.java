@@ -63,7 +63,6 @@ public class Player extends SpriteAnimation {
         m_Money = new Money();
         this.m_stage = 0;
     }
-
     public Player(Player clone) {
         super(clone.m_bitmap);
         this.m_death = false;

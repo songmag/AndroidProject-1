@@ -21,6 +21,7 @@ public class GameStage_4 extends GameState {
         this.m_BossContain = true;
         this.m_StageRegenTime = 500;
         this.m_EnemyLimit = 35;
+
         this.m_BossTime= 10000;
         m_background.setM_bitmap(AppManager.getInstance().getBitMap(R.drawable.boss_background));
         this.enemys_name.put(0, Goomba.class);
@@ -39,7 +40,7 @@ public class GameStage_4 extends GameState {
     @Override
     public void Render(Canvas canvas) {
         super.Render(canvas);
-        canvas.drawText("Stage :" + stage,0,50,AppManager.getInstance().getPaint());
-        canvas.drawText("Destroy :"+ destroy_enem,0,30, AppManager.getInstance().getPaint());
+        canvas.drawText("Stage :" + stage,0,AppManager.getInstance().getPaint().getTextSize(),AppManager.getInstance().getPaint());
+        canvas.drawText("Destroy :"+ destroy_enem,0,AppManager.getInstance().getPaint().getTextSize()*2, AppManager.getInstance().getPaint());
     }
 }
