@@ -1,7 +1,6 @@
 package org.GameStateCollect;
 
 import android.graphics.Canvas;
-import android.media.SoundPool;
 import android.view.MotionEvent;
 
 import com.example.gameframework.R;
@@ -32,7 +31,9 @@ public class GameDeath extends GameState {
     public void Render(Canvas canvas) {
         if(m_background != null) {
             m_background.Draw(canvas);
-            canvas.drawText(Integer.toString(AppManager.getInstance().getPlayer().getM_Money().getM_Money()),AppManager.getInstance().getM_GameView().getFullWidth()-500,40,AppManager.getInstance().getPaint());
+            canvas.drawText("Now Money = "+ AppManager.getInstance().getPlayer().getM_Money().getM_Money(),
+                    0+ AppManager.getInstance().getM_GameView().getFullWidth()/8,
+                    AppManager.getInstance().getM_GameView().getFullHeight()/9,AppManager.getInstance().getPaint());
         }
     }
     @Override

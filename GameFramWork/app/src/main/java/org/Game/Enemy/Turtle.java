@@ -20,10 +20,9 @@ public class Turtle extends Enermy {
     }
 
     @Override
-    public void set_State(int hp, float speed, int type) {
+    public void set_State(int hp, float speed) {
         this.hp = hp;
         this.speed = speed;
-        this.movetype = type;
     }
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {

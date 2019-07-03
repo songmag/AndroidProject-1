@@ -1,12 +1,7 @@
 package org.Factory;
 
-import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 
-import org.Game.Enemy.Enermy;
-import org.Game.Player;
-import org.MissailPackage.BlackMissail;
-import org.MissailPackage.GoldMissail;
 import org.MissailPackage.Missail;
 import org.MovePackage.UpMovePattern;
 
@@ -54,7 +49,7 @@ public class MissailFactory {
         missail.set_State(MovePatternFactory.createMovePattern(UpMovePattern.class));
         return missail;
     }
-    public static Missail missailMaker(Class missailName,int x,int y)
+    public static Missail missailMaker(Class missailName, float x, float y)
     {
         Missail missail = null;
         try {
@@ -94,7 +89,7 @@ public class MissailFactory {
         missail.set_State(MovePatternFactory.createMovePattern(UpMovePattern.class));
         return missail;
     }
-    public static Missail ChargingmissailMaker(Class missailName,int x,int y,int damage,float speed)
+    public static Missail ChargingmissailMaker(Class missailName, float x, float y, int damage, float speed)
     {
         Missail missail = null;
         try {

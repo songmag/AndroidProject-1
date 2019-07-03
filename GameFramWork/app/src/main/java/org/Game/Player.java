@@ -1,4 +1,5 @@
 package org.Game;
+
 import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
@@ -6,11 +7,11 @@ import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SoundManager;
 import com.example.gameframework.org.FrameWork.SpriteAnimation;
 
+import org.Factory.MissailFactory;
 import org.Game.CoinPackage.Money;
 import org.MissailPackage.BlackMissail;
 import org.MissailPackage.GoldMissail;
 import org.MissailPackage.Missail;
-import org.Factory.MissailFactory;
 
 import java.util.LinkedList;
 public class Player extends SpriteAnimation {
@@ -127,9 +128,6 @@ public class Player extends SpriteAnimation {
     }
     public boolean checkCharging()
     {
-        if(System.currentTimeMillis() - chargingTime >= 0 ) {
-            return true;
-        }
-        return false;
+        return System.currentTimeMillis() - chargingTime >= 0;
     }
 }

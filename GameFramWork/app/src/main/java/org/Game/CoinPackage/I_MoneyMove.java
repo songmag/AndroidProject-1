@@ -3,16 +3,16 @@ package org.Game.CoinPackage;
 import android.graphics.Canvas;
 
 public interface I_MoneyMove extends I_Money {
-    public void Update(long currenttime);
-    public int getState();
-    public void move();
-    public void destroy();
+    void Update(long currenttime);
+    int getState();
+    void move();
+    void destroy();
 
-    public void addMoney(Money money);
-    public void addInGameMoney(Money money);
-    public void addMoney(int money);
-    public void addInGameMoney(int money);
+    void addMoney(Money money);
+    void addInGameMoney(Money money);
+    void addMoney(int money);
+    void addInGameMoney(int money);
 
-    public void spendMoney(int value);
-    public void Draw(Canvas canvas);
+    void spendMoney(int value);
+    void Draw(Canvas canvas);
 }

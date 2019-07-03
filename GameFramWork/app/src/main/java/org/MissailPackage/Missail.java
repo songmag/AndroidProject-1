@@ -3,11 +3,9 @@ package org.MissailPackage;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 
-import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.GraphicObject;
 
-import org.Game.CoinPackage.Money;
 import org.MovePackage.I_MovePattern;
 import org.MovePackage.ThrowObject;
 
@@ -33,7 +31,7 @@ public abstract class Missail extends GraphicObject implements ThrowObject {
         m_state = STATE_NORMAL;
     }
     public void Update(){
-        m_nowRect = new Rect(m_x,m_y,m_x+m_bitmap.getWidth(),m_y+m_bitmap.getHeight());
+        m_nowRect = new Rect((int)m_x,(int)m_y,(int)m_x+ m_bitmap.getWidth(),(int)m_y+ m_bitmap.getHeight());
         pattern.Update(this);
     }
 
@@ -85,5 +83,19 @@ public abstract class Missail extends GraphicObject implements ThrowObject {
     public void set_xy(float _x, float _y) {
         m_x += _x;
         m_y += _y;
+    }
+
+    @Override
+    public float get_x() {
+        return m_x;
+    }
+
+    @Override
+    public float get_y() {
+        return m_y;
+    }
+    @Override
+    public Rect get_rect() {
+        return this.m_nowRect;
     }
 }

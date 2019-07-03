@@ -1,7 +1,5 @@
 package org.TextDrawPackage;
 
-import android.graphics.Canvas;
-
 import com.example.gameframework.org.FrameWork.AppManager;
 
 import org.GameStateCollect.ShopIntro;

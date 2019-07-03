@@ -29,9 +29,7 @@ public class GameShopButton extends GraphicObject implements I_Button{
 
     @Override
     public boolean check_contain_point(int x, int y) {
-        Rect rect = new Rect(this.getM_x(),this.getM_y(),this.getM_x()+this.getM_bitmap().getWidth(),this.getM_y()+this.getM_bitmap().getHeight());
-        if(rect.contains(x,y))
-            return true;
-        return false;
+        Rect rect = new Rect((int)this.getM_x(),(int)this.getM_y(),(int)this.getM_x()+ this.getM_bitmap().getWidth(),(int)this.getM_y()+ this.getM_bitmap().getHeight());
+        return rect.contains(x, y);
     }
 }

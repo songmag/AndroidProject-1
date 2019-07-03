@@ -25,9 +25,8 @@ public class Flower extends Enermy {
     public void attack() {
     }
     @Override
-    public void set_State(int hp,float speed,int type) {
+    public void set_State(int hp,float speed) {
         super.hp = hp;
         super.speed = speed;
-        super.movetype = type;
     }
 }

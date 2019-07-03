@@ -16,12 +16,10 @@ import org.Game.CoinPackage.Money;
 import org.Game.CoinPackage.StarMoney;
 import org.Game.Enemy.Boss;
 import org.Game.Enemy.Enermy;
-import org.Game.Enemy.Flower;
-import org.Game.Enemy.Goomba;
-import org.Game.Enemy.Turtle;
 import org.GameView.IStat;
 import org.MissailPackage.Missail;
 import org.MovePackage.DownMovePattern;
+import org.MovePackage.SinMovePattern;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -172,8 +170,9 @@ public class GameState implements IStat {
         if(System.currentTimeMillis()-LastRegenEnemy >= m_StageRegenTime && !m_BossFlag && m_EnemyLimit > 0 ) {
             LastRegenEnemy = System.currentTimeMillis();
             Enermy enermy;
-            enermy = EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),50,30,rand.nextInt(3));
+            enermy = EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),50,AppManager.getInstance().getM_GameView().getHeight()/240);
             enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -60);
+            enermy.set_State(MovePatternFactory.createMovePattern(SinMovePattern.class));
             this.enermys.add(enermy);
             m_EnemyLimit -= 1;
         }
@@ -183,7 +182,7 @@ public class GameState implements IStat {
                     enermys.get(i).destroy();
                     enermys.get(i).setM_state(Enermy.STATE_OUT);
                 }
-                Enermy boss = EnemyFactory.createBoss(boss_class,400,15.0f,Enermy.MOVE_BOSS_PATTERN);
+                Enermy boss = EnemyFactory.createBoss(boss_class,400,AppManager.getInstance().getM_GameView().getHeight()/240);
                 boss.setPosition(0, 200);
                 this.enermys.add(boss);
                 m_BossFlag = true;
@@ -191,7 +190,7 @@ public class GameState implements IStat {
         }
         else if(!m_BossContain){
             if(System.currentTimeMillis() - m_BossTime >= 0 && !m_BossFlag && m_EnemyLimit == 0) {
-                enermys.add(EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),20,30,Enermy.MOVE_PATTERN_1));
+                enermys.add(EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),20,AppManager.getInstance().getM_GameView().getHeight()/240));
                 m_BossFlag = true;
             }
         }

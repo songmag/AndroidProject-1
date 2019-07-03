@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,10 +13,8 @@ import com.example.gameframework.R;
 import com.example.gameframework.org.FrameWork.AppManager;
 import com.example.gameframework.org.FrameWork.SoundManager;
 
-import org.Controller.I_Controller;
 import org.Game.GameState;
 import org.Game.Player;
-import org.GameStateCollect.GameClear;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_GameView {
     private GameViewThread m_thread;
@@ -33,7 +30,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback,I_Ga
         SoundManager.getInstance().addSound("diemusic",2,R.raw.diemusic);
         SoundManager.getInstance().addSound("gameovermusic",3,R.raw.gameover);
         SoundManager.getInstance().addSound("starcoinmusic",4,R.raw.starcoin);
-
+        SoundManager.getInstance().addSound("buttonmusic",5,R.raw.smw_kick);
         vi = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
         setFocusable(true);
         AppManager.getInstance().setM_view(this);

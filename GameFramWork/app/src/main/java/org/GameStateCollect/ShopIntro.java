@@ -1,6 +1,5 @@
 package org.GameStateCollect;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
