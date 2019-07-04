@@ -7,7 +7,6 @@ import android.graphics.Rect;
 
 public class SpriteAnimation extends GraphicObject {
     //테스트용 페인트
-    Paint paint;
     private Rect m_rect;
     private int m_fps;//초당 몇 프레임
     private int m_iFrames;//총 프레임 개수
@@ -21,7 +20,6 @@ public class SpriteAnimation extends GraphicObject {
         m_rect = new Rect(0,0,0,0);
         m_frameTimer = 0;
         m_currentFrame=0;
-        paint = AppManager.getInstance().getPaint();
     }
     public SpriteAnimation(SpriteAnimation animation)
     {
@@ -63,4 +61,4 @@ public class SpriteAnimation extends GraphicObject {
         m_rect.left = m_currentFrame*m_spriteWidth;
         m_rect.right = m_rect.left+m_spriteWidth;
     }
-}
+}//Grapic Object를 상속받아서 target Rect를 변환시켜, 해당 이미지를 애니메이션 효과를 주는 클래스

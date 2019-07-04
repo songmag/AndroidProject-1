@@ -69,7 +69,7 @@ public class AppManager {
     {
         map = Bitmap.createScaledBitmap(map,width,height,true);
         return map;
-    }
+    }//비트맵을 해당 width,height 로 resizing을 한다.
     public GameView getM_GameView()
     {
         return (GameView)m_view;
@@ -85,6 +85,7 @@ public class AppManager {
         if(paint == null){
             paint = new Paint();
             Typeface type = ResourcesCompat.getFont(AppManager.getInstance().getM_GameView().getContext(),R.font.barriecito_regular);
+            //Typeface 객체로 폰트 변경
             paint.setTypeface(type);
             paint.setColor(Color.BLACK);
         }
@@ -96,3 +97,4 @@ public class AppManager {
         return this.paint;
     }
 }
+//각 객체의 정보를 가져올 수 있게끔 만들어놓은 소통 객체 한개만 존재해야 하므로, 싱글톤으로 구성됨.

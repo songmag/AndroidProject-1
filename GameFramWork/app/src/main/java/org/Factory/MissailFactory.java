@@ -155,3 +155,4 @@ public class MissailFactory {
         return missail;
     }
 }
+//클래스 객체를 받아, 해당 클래스 기본 생성자를 이용해서 만드는 인스턴스 객체를 세팅하여 만들어 반환한다.

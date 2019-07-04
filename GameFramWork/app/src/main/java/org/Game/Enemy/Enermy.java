@@ -65,7 +65,6 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
     }
     abstract public void setM_DestroyBitmap(Bitmap bitmap);
     abstract public void set_State(int hp,float speed);
-
     @Override
     public void set_State(I_MovePattern move) {
         pattern = move;
@@ -95,28 +94,23 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
         }
         return false;
     }
-
     @Override
     public float getSpeed() {
         return speed;
     }
-
     @Override
     public void set_xy(float _x, float _y) {
         this.m_x += _x;
         this.m_y += _y;
     }
-
     @Override
     public float get_x() {
         return m_x;
     }
-
     @Override
     public float get_y() {
         return m_y;
     }
-
     @Override
     public Rect get_rect() {
         return getM_rect();

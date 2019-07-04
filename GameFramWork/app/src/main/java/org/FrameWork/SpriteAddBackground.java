@@ -34,3 +34,5 @@ public class SpriteAddBackground extends BackGround {
         m_spriteforeground.Draw(canvas);
     }
 }
+//Sprite Animation 이 한개의 경우에 사용하는 백그라운드.
+

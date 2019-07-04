@@ -43,6 +43,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         getHolder().addCallback(this);
         m_thread = new GameViewThread(getHolder(),this);
     }
+    //유일한 View , 생성시 필요한 자원들을 초기화하고 Appmanager에 등록한다.
+
     public void setFocus()
     {
         setFocusable(true);
@@ -61,14 +63,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         wm.getDefaultDisplay().getMetrics(metrics);
         fullWidth = metrics.widthPixels;
         fullHeight = metrics.heightPixels;
-
-    }
+    }//보여줄 디바이스 크기를 가져오는 size함수
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         m_state.onTouchEvent(event);
         return true;
-
-    }
+    }//각 스테이트에 맞는 행동을한다.
     public void Update(){
         m_state.Update();
     }
@@ -76,16 +76,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void changeGameState(GameState _state)
     {
         if(m_state != null)
-    {
-        m_thread.pause(true);
-        m_state.Destroy();
-    }
+        {
+            m_thread.pause(true);
+            m_state.Destroy();
+        }
         _state.init(0);
         AppManager.getInstance().getM_controller().setState(_state);
     m_state = _state;
     if(m_thread != null)
     m_thread.pause(false);
-}
+    }// 스테이트를 바꾼다 그동안 SurfaceView가 Update를 수행하지 않도록 Pause 시킨다.
     @Override
     protected void onDraw(Canvas canvas) {
         m_state.Render(canvas);
@@ -119,6 +119,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     {
         vi.cancel();
     }
+    //Vibrator 같은 경우는 한개만 필요하므로, 동작과 스탑을 View에서 실행한다.
     public GameState getM_state() {
         return m_state;
     }

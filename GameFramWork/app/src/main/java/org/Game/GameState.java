@@ -68,6 +68,11 @@ public class GameState implements IStat {
         enemys_name = new HashMap<Integer,Class>();
         contain_enemy = 2;
     }
+    //일반적인 요소 초기화
+    //스테이지 구성하면서 생각한게.. 이거 굳이 여기에 정의를 해서 써야 하는가..
+    //매 스테이지마다 init이 다를탠데 그럼 abstract로 만들어도 되지 않는가..
+    //다하고 생각난다..
+
     @Override
     public void Destroy() {
         SoundManager.getInstance().stopBackground();
@@ -109,11 +114,13 @@ public class GameState implements IStat {
         if(enermys.size() == 0 && m_BossFlag && moneys.size() == 0)
         {
             this.m_StageClear = true;
-            AppManager.getInstance().getPlayer().getM_Money().addMoney(m_player.getM_Money().getIngameMoney());
+            AppManager.getInstance().getPlayer().getM_Money().addMoney(m_player.getM_Money().getM_Money());
             AppManager.getInstance().getPlayer().clearStage();
         }
         deathCheck();
     }
+    //GameState 안에 있는 모든 요소들을 Update한다.
+
     public void makeMoney(Enermy enemy)
     {
         if(enemy instanceof Boss)
@@ -133,7 +140,7 @@ public class GameState implements IStat {
             money.setPosition(enemy.getM_x(),enemy.getM_y());
             moneys.add(money);
         }
-    }
+    }//돈을 만든다, Factory패턴을 적용해서 만들었으면..
     public void deathCheck()
     {
         if(m_player.isM_death() && System.currentTimeMillis() - waitTime >= 0)
@@ -145,6 +152,7 @@ public class GameState implements IStat {
             );
         }
     }
+
     @Override
     public void Render(Canvas canvas) {
         if(m_background == null) return;
@@ -163,6 +171,7 @@ public class GameState implements IStat {
             m_player.getMissails().get(i).Draw(canvas);
         }
     }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return AppManager.getInstance().getM_controller().onTouchEvent(event);
@@ -196,6 +205,9 @@ public class GameState implements IStat {
             }
         }
     }
+    //보스를 만드는 작업을 한다. 보스가 들어있는것,없는것을 구분했고
+    //보스가 생성되는 시간을 체크해서 만든다.
+    //각 스테이지별 적을 생성하는 개수를 만들어서 세팅한다.
     public void checkCollision(){
         LinkedList<Missail> missails = m_player.getMissails();
         for(int i = 0 ; i < enermys.size();i++) {
@@ -241,7 +253,7 @@ public class GameState implements IStat {
         {
             if(CollisionManager.checkBoxToBox(moneys.get(i).getM_rect(),m_player.getM_rect()))
             {
-                m_player.getM_Money().addInGameMoney((moneys.get(i).getM_Money()));
+                m_player.getM_Money().addMoney((moneys.get(i).getM_Money()));
                 if(moneys.get(i) instanceof BronzeMoney) {
                     SoundManager.getInstance().play_by_name("coinmusic");
                 }
@@ -252,20 +264,12 @@ public class GameState implements IStat {
                 moneys.remove(i);
             }
         }
-    }
-    public void clearSetting(){
-        AppManager.getInstance().getPlayer().getM_Money().addMoney(this.m_player.getM_Money().getIngameMoney());
-    }
+    }//모든 요소들에 대한 충돌처리
+
     public Player getM_player() {
         return m_player;
     }
     public void setM_player(Player m_player) {
         this.m_player = m_player;
-    }
-    public List<Enermy> getEnermys() {
-        return enermys;
-    }
-    public void setEnermys(LinkedList<Enermy> enermys) {
-        this.enermys = enermys;
     }
 }

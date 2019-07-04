@@ -13,9 +13,12 @@ import org.Game.MissailPackage.Missail;
 import java.util.LinkedList;
 
 public class Boss extends Enermy {
+
     protected Class big_missail;
     protected long missail_term=2000,m_time;
+    //미사일 발사 텀을 구한다.
     private LinkedList<Missail> missails;
+    //미사일 발사를 하므로, 충돌처리를 위해서 미사일 객체를 리스트로 가지고 있는다.
     public Boss(Bitmap m_bitmap) {
         super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,
                 AppManager.getInstance().getM_GameView().getFullHeight()/5));
@@ -25,19 +28,24 @@ public class Boss extends Enermy {
         this.initSpriteData(this.m_bitmap.getWidth()/2,this.m_bitmap.getHeight(),20,2);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
+
     public LinkedList<Missail> getMissails() {
         return missails;
     }
+
     public void setMissails(LinkedList<Missail> missails) {
         this.missails = missails;
     }
+
     public void shootingMissail(Missail missail) {
         missails.add(missail);
     }
+
     @Override
     public void setM_DestroyBitmap(Bitmap bitmap) {
         m_DestroyBitmap = bitmap;
     }
+
     @Override
     public void Update(long gameTime) {
         super.Update(gameTime);
@@ -48,6 +56,7 @@ public class Boss extends Enermy {
                 missails.remove(i);
         }
     }
+    //보스의 경우 Update 할때 미사일을 발사하는 것 까지 Update한다.
     @Override
     public void set_State(int hp, float speed) {
         this.hp = hp;
@@ -62,7 +71,6 @@ public class Boss extends Enermy {
         this.initSpriteData(m_bitmap.getWidth()/2,m_bitmap.getHeight(),20,2);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }
-
     @Override
     public void Draw(Canvas canvas) {
         super.Draw(canvas);
@@ -71,7 +79,7 @@ public class Boss extends Enermy {
             missails.get(i).Draw(canvas);
         }
     }
-
+    //보스의 경우 Draw 할때 미사일을 발사하는 것 까지 Draw한다.
     @Override
     public void attack() {
         if(System.currentTimeMillis() - m_time >= 0 )
@@ -83,5 +91,5 @@ public class Boss extends Enermy {
             }
             m_time = System.currentTimeMillis()+missail_term;
         }
-    }
+    }//Enemy 클래스에 없는 미사일 발사 공격
 }

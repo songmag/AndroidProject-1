@@ -37,4 +37,4 @@ public class GraphicObject {
     public float getM_y() {
         return m_y;
     }
-}
+}//비트맵을 그리고, 포지션을 설정하는 클래스 ( 모든 그래픽 처리의 기본이 되는 클래스 )

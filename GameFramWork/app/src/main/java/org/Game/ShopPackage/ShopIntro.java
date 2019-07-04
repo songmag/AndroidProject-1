@@ -16,7 +16,6 @@ public class ShopIntro extends GameState {
     private GraphicObject merchant;
     private GraphicObject text_box;
     private I_DrawText text;
-
     public ShopIntro() {
     }
     @Override

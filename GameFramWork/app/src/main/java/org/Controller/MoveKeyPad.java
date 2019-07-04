@@ -24,6 +24,4 @@ public class MoveKeyPad implements I_Controller {
     public boolean onTouchEvent(MotionEvent e) {
         return false;
     }
-
-
-}
+}//키패드로 만들어졌을때 하려고 했던 컨트롤러 클래스

@@ -11,4 +11,4 @@ public interface I_DrawText {
     void Draw(Canvas canvas);
     void Destroy();
     boolean onTouch(MotionEvent event);
-}
+}//택스트를 그리기 위한 메소드들, TextWriter에서 로직을 구현했다.

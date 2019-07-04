@@ -26,11 +26,12 @@ public abstract class TextWriter implements I_DrawText {
                 now_index = value.length()-1;
         return false;
     }
+    //터치작업을 하면 5개 이상 찍었을때, 터치하면 자동으로 모든 글씨를 쓴다.
     @Override
     public void Update(ShopIntro state) {
         if(value == null) return;
         now_index++;
-    }
+    }//한칸씩 인덱스를 늘려가며 텍스트를 표시
 
     @Override
     public void Draw(Canvas canvas) {
@@ -51,12 +52,9 @@ public abstract class TextWriter implements I_DrawText {
        // check_finish(paint);
     }
    /* public void check_finish(Paint paint){
-        if(x + paint.getTextSize()*finish_check_index >= AppManager.getInstance().getM_GameView().getFullWidth()-x)
-        {
-            y+=paint.getTextSize();
-            finish_check_index = 0;
-        }
+
     }*/
+   //하려던 작업 : 텍스트가 칸을 벗어나면 \n 을 친것처럼 옮겨져서 마저 적어지는것.
     @Override
     public void Destroy() {
 

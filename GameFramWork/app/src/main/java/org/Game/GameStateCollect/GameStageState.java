@@ -31,3 +31,6 @@ public class GameStageState {
         gameStates[3] = new GameStage_4();
     }
 }
+//AppManager에 등록되는 각각의 State, View들을 바꾸는 역할을 할때 사용한다.
+//Stage를 생성하는 것을 각 스테이지 마다 만드는것 보다 Factory에 설정해서 만드는게 나을 듯 하다.
+

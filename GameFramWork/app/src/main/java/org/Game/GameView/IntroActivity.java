@@ -17,10 +17,9 @@ public class IntroActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(new GameView(this));
     }
-
     @Override
     protected void onPause() {
         super.onPause();
         SoundManager.getInstance().stopBackground();
     }
-}
+}//처음 실행시 GameView를 보여주는 역할.

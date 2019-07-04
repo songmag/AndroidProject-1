@@ -43,3 +43,4 @@ public class GameDeath extends GameState {
         return false;
     }
 }
+//사망시 나오는 화면

@@ -25,6 +25,7 @@ public class GameStage_1 extends GameState {
         this.enemys_name.put(0, Goomba.class);
         this.contain_enemy = 1;
     }
+
     @Override
     public void Update() {
         super.Update();

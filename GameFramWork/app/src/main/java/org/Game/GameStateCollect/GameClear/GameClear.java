@@ -47,3 +47,4 @@ public class GameClear extends GameState {
          return false;
     }
 }
+//클리어시 나오는 화면
