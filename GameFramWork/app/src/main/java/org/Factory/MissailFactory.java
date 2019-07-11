@@ -127,7 +127,7 @@ public class MissailFactory {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        missail.setBitmap(AppManager.getInstance().reSizing(missail.getM_bitmap(),missail.getM_bitmap().getWidth()*2,100));
+        missail.setChargingImage();
         missail.set_State(missail.getMissail_speed()*3,missail.getDamage()*2);
         missail.setPosition(x,y);
         missail.set_State(MovePatternFactory.createMovePattern(UpMovePattern.class));
@@ -135,7 +135,6 @@ public class MissailFactory {
     }
     public static Missail createBossMissailMaker(Class missailName,int x,int y)
     {
-
         Missail missail = null;
         try {
             missail = (Missail)Class.forName(missailName.getName()).getConstructor().newInstance();

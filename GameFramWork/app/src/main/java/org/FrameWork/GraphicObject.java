@@ -14,6 +14,10 @@ public class GraphicObject {
         m_x = 0;
         m_y = 0;
     }
+    public GraphicObject(){
+        m_x = 0;
+        m_y = 0;
+    }
     public void setPosition(float x, float y)
     {
         m_x = x;

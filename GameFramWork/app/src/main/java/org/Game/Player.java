@@ -144,5 +144,4 @@ public class Player extends SpriteAnimation {
         return System.currentTimeMillis() - chargingTime >= 0;
     }
     //현재 시간이 차징이 되었는지 판단.
-
 }

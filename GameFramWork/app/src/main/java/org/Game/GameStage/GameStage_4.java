@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
 
+import org.FrameWork.GraphicManager;
 import org.Game.Enemy.Flower;
 import org.Game.Enemy.Goomba;
 import org.Game.Enemy.OhBoss;
@@ -21,7 +22,6 @@ public class GameStage_4 extends GameState {
         this.m_BossContain = true;
         this.m_StageRegenTime = 500;
         this.m_EnemyLimit = 35;
-
         this.m_BossTime= 10000;
         m_background.setM_bitmap(AppManager.getInstance().getBitMap(R.drawable.boss_background));
         this.enemys_name.put(0, Goomba.class);
@@ -29,6 +29,24 @@ public class GameStage_4 extends GameState {
         this.enemys_name.put(2, Flower.class);
         this.contain_enemy = 3;
         this.boss_class = OhBoss.class;
+        GraphicManager.getInstance().setEnemy(Goomba.class,AppManager.getInstance().reSizing(
+                AppManager.getInstance().getBitMap(R.drawable.goomba),
+                AppManager.getInstance().getM_GameView().getFullWidth(),
+                200));
+        GraphicManager.getInstance().setEnemy(Turtle.class,
+                AppManager.getInstance().reSizing(
+                        AppManager.getInstance().getBitMap(R.drawable.yellow),
+                        AppManager.getInstance().getM_GameView().getFullWidth(),
+                        200));
+        GraphicManager.getInstance().setEnemy(Flower.class,
+                AppManager.getInstance().reSizing(
+                        AppManager.getInstance().getBitMap(R.drawable.flower),
+                        AppManager.getInstance().getM_GameView().getFullWidth(),
+                        200));
+        GraphicManager.getInstance().setEnemy(OhBoss.class,
+                AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.ohh),
+                        500,200)
+        );
     }
     @Override
     public void Update() {

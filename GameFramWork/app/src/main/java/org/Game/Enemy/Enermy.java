@@ -34,7 +34,7 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
     }
 
     public Enermy(Bitmap _bitmap) {
-        super(AppManager.getInstance().reSizing(_bitmap,AppManager.getInstance().getM_GameView().getFullWidth(),200));
+        super(_bitmap);
         this.initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
         this.m_state = Enermy.STATE_NORMAL;
     }
@@ -84,12 +84,12 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
         }
         if(getM_y() >= AppManager.getInstance().getM_GameView().getFullHeight() && m_state != Enermy.STATE_OUT)
         {
-            setPosition(m_x,-100);
+            setPosition(m_x,-200);
             return true;
         }
-        if(m_y <= -200)
+        if(m_y <= -250)
         {
-           setPosition(m_x,-100);
+           setPosition(m_x,-200);
            return true;
         }
         return false;

@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
 import org.FrameWork.CollisionManager;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.SoundManager;
 
 import org.Controller.I_Controller;
@@ -81,6 +82,7 @@ public class GameState implements IStat {
         controller =null;
         enermys = null;
         moneys = null;
+        GraphicManager.getInstance().destroy();
     }
     @Override
     public void Update() {
@@ -127,7 +129,7 @@ public class GameState implements IStat {
         {
             for(int i = 0 ; i <4;i++)
             {
-                Money money = new StarMoney();
+                Money money = new StarMoney(GraphicManager.getInstance().getMoney(StarMoney.class));
                 money.set_State(MovePatternFactory.createRandomMovePattern());
                 money.setPosition(enemy.getM_x()+i*20,enemy.getM_y()+enemy.getM_bitmap().getHeight());
                 moneys.add(money);
@@ -135,7 +137,7 @@ public class GameState implements IStat {
         }
         else
         {
-            Money money = new BronzeMoney();
+            Money money = new BronzeMoney(GraphicManager.getInstance().getMoney(BronzeMoney.class));
             money.set_State(MovePatternFactory.createMovePattern(DownMovePattern.class));
             money.setPosition(enemy.getM_x(),enemy.getM_y());
             moneys.add(money);
@@ -170,18 +172,19 @@ public class GameState implements IStat {
         {
             m_player.getMissails().get(i).Draw(canvas);
         }
+        controller.drawController(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return AppManager.getInstance().getM_controller().onTouchEvent(event);
+        return controller.onTouchEvent(event);
     }
     public void makeEnermy(){
         if(System.currentTimeMillis()-LastRegenEnemy >= m_StageRegenTime && !m_BossFlag && m_EnemyLimit > 0 ) {
             LastRegenEnemy = System.currentTimeMillis();
             Enermy enermy;
             enermy = EnemyFactory.createEnemy(this.enemys_name.get(rand.nextInt(contain_enemy)),50,AppManager.getInstance().getM_GameView().getHeight()/150);
-            enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -60);
+            enermy.setPosition(rand.nextInt(AppManager.getInstance().getM_GameView().getFullWidth()), -200);
             enermy.set_State(MovePatternFactory.createMovePattern(SinMovePattern.class));
             this.enermys.add(enermy);
             m_EnemyLimit -= 1;

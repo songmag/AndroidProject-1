@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
+import org.FrameWork.GraphicManager;
 
 public class Goomba extends Enermy {
     @Override
@@ -20,7 +21,7 @@ public class Goomba extends Enermy {
         m_DestroyBitmap= bitmap;
     }
     public Goomba() {
-        super(AppManager.getInstance().getBitMap(R.drawable.goomba));
+        super(GraphicManager.getInstance().getEnemy(Goomba.class));
         initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }

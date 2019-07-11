@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
 
+import org.FrameWork.GraphicManager;
 import org.Game.Enemy.Goomba;
 import org.Game.Enemy.Turtle;
 import org.Game.Enemy.WingBoss;
@@ -26,6 +27,19 @@ public class GameStage_2 extends GameState {
         this.enemys_name.put(1, Turtle.class);
         this.contain_enemy = 2;
         this.boss_class = WingBoss.class;
+        GraphicManager.getInstance().setEnemy(Goomba.class,AppManager.getInstance().reSizing(
+                AppManager.getInstance().getBitMap(R.drawable.goomba),
+                AppManager.getInstance().getM_GameView().getFullWidth(),
+                200));
+        GraphicManager.getInstance().setEnemy(Turtle.class,
+                AppManager.getInstance().reSizing(
+                AppManager.getInstance().getBitMap(R.drawable.yellow),
+                AppManager.getInstance().getM_GameView().getFullWidth(),
+                200));
+        GraphicManager.getInstance().setEnemy(WingBoss.class,
+                AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.wing),
+                        500,200)
+        );
     }
 
     @Override

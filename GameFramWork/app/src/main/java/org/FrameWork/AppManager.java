@@ -11,6 +11,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import com.example.gameframework.R;
 
 import org.Controller.I_Controller;
+import org.Controller.MoveKeyPad;
 import org.Controller.MoveTouch;
 import org.Game.Player;
 import org.Game.GameStateCollect.GameStageState;
@@ -54,7 +55,7 @@ public class AppManager {
         if(m_controller == null)
         {
             GameView gameView = (GameView)m_view;
-            m_controller = new MoveTouch(getM_GameView().getM_state());
+            m_controller = new MoveKeyPad(getM_GameView().getM_state());
         }
         return m_controller;
     }

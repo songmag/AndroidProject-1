@@ -1,5 +1,6 @@
 package org.Controller;
 
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
@@ -9,6 +10,7 @@ import org.Game.GameState;
 
 public class MoveTouch implements I_Controller {
     private GameState state;//state 를 매번 가져오는 것의 소요를 줄이기 위한 레퍼런스 객체
+
     public MoveTouch(GameState state) {
         this.state = state;
     }
@@ -57,6 +59,10 @@ public class MoveTouch implements I_Controller {
             state.getM_player().setMove_flag(false);
         }//움직이는 상태가 아닌데 플레이어가 드레그하면 미사일 자동발사, 이유는 난이도가 높기 때문에 미리 드레그로 공격해야함
         return false;
+    }
+    @Override
+    public void drawController(Canvas canvas) {
+
     }
 }
 

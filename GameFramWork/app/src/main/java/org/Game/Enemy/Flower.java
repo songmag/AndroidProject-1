@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
+import org.FrameWork.GraphicManager;
 
 public class Flower extends Enermy {
     public Flower() {
-        super(AppManager.getInstance().getBitMap(R.drawable.flower));
+        super(GraphicManager.getInstance().getEnemy(Flower.class));
         initSpriteData(m_bitmap.getWidth()/5,m_bitmap.getHeight(),20,5);
         setM_DestroyBitmap(AppManager.getInstance().getBitMap(R.drawable.destroy_boom_1));
     }

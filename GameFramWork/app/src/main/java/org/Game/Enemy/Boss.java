@@ -20,8 +20,7 @@ public class Boss extends Enermy {
     private LinkedList<Missail> missails;
     //미사일 발사를 하므로, 충돌처리를 위해서 미사일 객체를 리스트로 가지고 있는다.
     public Boss(Bitmap m_bitmap) {
-        super( AppManager.getInstance().reSizing(m_bitmap,AppManager.getInstance().getM_GameView().getFullWidth()*3,
-                AppManager.getInstance().getM_GameView().getFullHeight()/5));
+        super(m_bitmap);
         big_missail = BossMissail.class;
         missails = new LinkedList<Missail>();
         m_time = System.currentTimeMillis() + missail_term;

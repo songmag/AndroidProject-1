@@ -14,6 +14,6 @@ public class DownMovePattern implements I_MovePattern {
     }
     @Override
     public void move(ThrowObject object) {
-        object.set_xy(10,object.getSpeed());
+        object.set_xy(2,object.getSpeed());
     }
 }

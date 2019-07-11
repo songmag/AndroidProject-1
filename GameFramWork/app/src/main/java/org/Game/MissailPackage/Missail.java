@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 
 import org.FrameWork.AppManager;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.GraphicObject;
 
 import org.Game.MovePackage.I_MovePattern;
@@ -31,6 +32,9 @@ public abstract class Missail extends GraphicObject implements ThrowObject {
     }
     public Missail(Bitmap m_bitmap) {
         super(m_bitmap);
+        m_state = STATE_NORMAL;
+    }
+    public Missail(){
         m_state = STATE_NORMAL;
     }
     public void Update(){
@@ -61,6 +65,14 @@ public abstract class Missail extends GraphicObject implements ThrowObject {
         this.missail_speed = missail_speed;
     }
 
+    public void setChargingImage()
+    {
+        if(GraphicManager.getInstance().getChargingMissail() == null)
+        {
+            GraphicManager.getInstance().setChargingMissail(AppManager.getInstance().reSizing(m_bitmap,getM_bitmap().getWidth()*2,100));
+        }
+        m_bitmap = GraphicManager.getInstance().getChargingMissail();
+    }
     @Override
     public void set_State(I_MovePattern move) {
         this.pattern = move;

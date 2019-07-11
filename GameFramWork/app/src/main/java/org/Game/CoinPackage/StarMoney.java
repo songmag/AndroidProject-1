@@ -9,16 +9,13 @@ public class StarMoney extends Money {
 
     public StarMoney()
     {
-        super(AppManager.getInstance().reSizing(
-                AppManager.getInstance().getBitMap(R.drawable.star),
-                AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight()/10
-        ));
+        super();
         initSpriteData(m_bitmap.getWidth()/5,m_bitmap.getHeight(),20,5);
         setM_Money(100);
     }
     public StarMoney(Bitmap m_bitmap) {
         super(m_bitmap);
-        initSpriteData(m_bitmap.getWidth()/6,m_bitmap.getHeight(),20,6);
+        initSpriteData(this.m_bitmap.getWidth()/5,this.m_bitmap.getHeight(),20,5);
+        setM_Money(100);
     }
 }

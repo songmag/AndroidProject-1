@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.view.View;
 
 import org.FrameWork.AppManager;
 import org.FrameWork.GraphicObject;
@@ -24,9 +25,8 @@ public class GameExitButton extends GraphicObject implements I_Button {
 
     @Override
     public void method() {
-
+        System.exit(0);
     }
-
     @Override
     public boolean check_contain_point(int x, int y) {
         Rect rect = new Rect((int)this.getM_x(),(int)this.getM_y(),(int)this.getM_x()+ this.getM_bitmap().getWidth(),(int)this.getM_y()+ this.getM_bitmap().getHeight());
