@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class GraphicManager {
     public static GraphicManager instance= null;
-
+    private Bitmap keypad = null;
     private HashMap<Class,Bitmap> m_enemyBitmap;
     private HashMap<Class,Bitmap> m_money;
     //2개만 있으므로 다른 동작이 있을 이유가 없이 비슷해도 상관없다.
@@ -33,6 +33,16 @@ public class GraphicManager {
                 AppManager.getInstance().getM_GameView().getFullWidth(),
                 AppManager.getInstance().getM_GameView().getFullHeight()/10
         ));
+    }
+    public Bitmap getKeyPad()
+    {
+        if(keypad == null)
+        {
+            keypad = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.pad)
+                    ,AppManager.getInstance().getM_GameView().getFullWidth()/4,
+                    AppManager.getInstance().getM_GameView().getFullHeight()/5);
+        }
+        return keypad;
     }
     public Bitmap getMoney(Class name){
         return m_money.get(name);

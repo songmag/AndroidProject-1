@@ -8,14 +8,21 @@ import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 
+import org.Controller.PadPackage.I_TouchPad;
+import org.Controller.PadPackage.MoveDownKeyPad;
+import org.Controller.PadPackage.MoveLeftDownKeyPad;
+import org.Controller.PadPackage.MoveLeftKeyPad;
+import org.Controller.PadPackage.MoveLeftUpKeyPad;
+import org.Controller.PadPackage.MoveRightDownKeyPad;
+import org.Controller.PadPackage.MoveRightKeyPad;
+import org.Controller.PadPackage.MoveRightUpKeyPad;
+import org.Controller.PadPackage.MoveUpKeyPad;
 import org.FrameWork.AppManager;
 import org.Game.GameState;
 
 public class MoveKeyPad implements I_Controller {
     private GameState state;
-    private Bitmap pad;
-    private Paint paint;
-    private Rect src,dest;
+    I_TouchPad[] pad;
     public GameState getState() {
         return state;
     }
@@ -26,25 +33,31 @@ public class MoveKeyPad implements I_Controller {
 
     public MoveKeyPad(GameState state) {
         this.state = state;
-        pad = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.pad)
-                ,AppManager.getInstance().getM_GameView().getFullWidth()/4,
-                AppManager.getInstance().getM_GameView().getFullHeight()/5);
-        src = new Rect(0,0,pad.getWidth(),pad.getHeight());
-        int width = pad.getWidth();
-        int height = pad.getHeight();
-        paint = new Paint();
-        paint.setAlpha(75);
-        dest = new Rect(10,AppManager.getInstance().getM_GameView().getFullHeight()-height-30,
-                width,
-                AppManager.getInstance().getM_GameView().getFullHeight()-30);
+        pad = new I_TouchPad[8];
+        pad[0] =new MoveDownKeyPad();
+        pad[1] =new MoveUpKeyPad();
+        pad[2] =new MoveLeftKeyPad();
+        pad[3] =new MoveLeftDownKeyPad();
+        pad[4] =new MoveLeftUpKeyPad();
+        pad[5] =new MoveRightKeyPad();
+        pad[6] =new MoveRightDownKeyPad();
+        pad[7] =new MoveRightUpKeyPad();
+        for(int i = 0 ; i<8;i++)
+        {
+            pad[i].setLocationFiled();
+        }
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent e) {
+    public boolean onTouchEvent(MotionEvent e)
+    {
         return false;
     }
     @Override
     public void drawController(Canvas canvas) {
-        canvas.drawBitmap(pad,src,dest,paint);
+        for(int i = 0 ; i <8;i++)
+        {
+            pad[i].draw(canvas);
+        }
     }
 }//키패드로 만들어졌을때 하려고 했던 컨트롤러 클래스
