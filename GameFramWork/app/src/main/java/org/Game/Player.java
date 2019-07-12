@@ -22,6 +22,7 @@ public class Player extends SpriteAnimation {
     private Money m_Money;
     private int m_stage;
     private long chargingTime;
+    private boolean charging_flag=false;
 
     public int getM_stage() {
         return m_stage;
@@ -144,4 +145,12 @@ public class Player extends SpriteAnimation {
         return System.currentTimeMillis() - chargingTime >= 0;
     }
     //현재 시간이 차징이 되었는지 판단.
+
+    public boolean isCharging_flag() {
+        return charging_flag;
+    }
+
+    public void setCharging_flag(boolean charging_flag) {
+        this.charging_flag = charging_flag;
+    }
 }

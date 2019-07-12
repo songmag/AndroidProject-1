@@ -1,6 +1,11 @@
 package org.FrameWork;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 
 import com.example.gameframework.R;
 
@@ -17,6 +22,8 @@ public class GraphicManager {
     //2개만 있으므로 다른 동작이 있을 이유가 없이 비슷해도 상관없다.
     private HashMap<Class,Bitmap> m_missail;
     private Bitmap m_chargingMissail = null;
+    private ColorFilter colorFilter = null;
+    private Bitmap m_attackPad = null;
     private GraphicManager()
     {
         m_enemyBitmap = new HashMap<>();
@@ -87,4 +94,29 @@ public class GraphicManager {
     {
         m_chargingMissail = bitmap;
     }
+    public ColorFilter getColorFilter(){
+        if(colorFilter == null)
+        {
+            colorFilter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+        }
+        return colorFilter;
+    }
+    public Bitmap getAttackPad()
+    {
+        if(m_attackPad == null)
+        {
+            m_attackPad = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.attack_game),
+                    AppManager.getInstance().getM_GameView().getFullWidth()/5,
+                    AppManager.getInstance().getM_GameView().getFullHeight()/6);
+        }
+        return m_attackPad;
+    }
+    public Rect defaultAttack(){
+        return new Rect(0,0,getAttackPad().getWidth()/2,getAttackPad().getHeight());
+    }
+    public Rect onClickAttack()
+    {
+        return new Rect(getAttackPad().getWidth()/2,0,getAttackPad().getWidth(),getAttackPad().getHeight());
+    }
+
 }

@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 
 import com.example.gameframework.R;
 
+import org.Controller.PadPackage.ChargingAttackPad;
+import org.Controller.PadPackage.DefaultAttackPad;
 import org.Controller.PadPackage.I_TouchPad;
 import org.Controller.PadPackage.MoveDownKeyPad;
 import org.Controller.PadPackage.MoveLeftDownKeyPad;
@@ -33,7 +35,7 @@ public class MoveKeyPad implements I_Controller {
 
     public MoveKeyPad(GameState state) {
         this.state = state;
-        pad = new I_TouchPad[8];
+        pad = new I_TouchPad[10];
         pad[0] =new MoveDownKeyPad();
         pad[1] =new MoveUpKeyPad();
         pad[2] =new MoveLeftKeyPad();
@@ -42,7 +44,9 @@ public class MoveKeyPad implements I_Controller {
         pad[5] =new MoveRightKeyPad();
         pad[6] =new MoveRightDownKeyPad();
         pad[7] =new MoveRightUpKeyPad();
-        for(int i = 0 ; i<8;i++)
+        pad[8] = new DefaultAttackPad();
+        pad[9] = new ChargingAttackPad();
+        for(int i = 0 ; i<10;i++)
         {
             pad[i].setLocationFiled();
         }
@@ -51,11 +55,15 @@ public class MoveKeyPad implements I_Controller {
     @Override
     public boolean onTouchEvent(MotionEvent e)
     {
+        for(int i=0;i<10;i++)
+        {
+            pad[i].touchEvent(e);
+        }
         return false;
     }
     @Override
     public void drawController(Canvas canvas) {
-        for(int i = 0 ; i <8;i++)
+        for(int i = 0 ; i <10;i++)
         {
             pad[i].draw(canvas);
         }

@@ -7,8 +7,8 @@ public class MoveLeftDownKeyPad extends PadClass implements I_TouchPad {
     @Override
     public void setLocationFiled() {
         src = new Rect(0,src_height/3*2,src_width/3,src_height);
-        dest = new Rect(dest_width/3,dest_height/3,
-                dest_width/3*2,dest_height);
+        dest = new Rect(0,y_turm*6,
+                x_turm,y_turm*7);
         x = -2;
         y = 2;
     }

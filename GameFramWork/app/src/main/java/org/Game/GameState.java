@@ -177,6 +177,7 @@ public class GameState implements IStat {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(controller == null) return false;
         return controller.onTouchEvent(event);
     }
     public void makeEnermy(){
