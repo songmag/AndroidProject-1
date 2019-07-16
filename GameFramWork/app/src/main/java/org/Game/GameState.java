@@ -46,13 +46,16 @@ public class GameState implements IStat {
     protected HashMap<Integer,Class> enemys_name;
     protected int contain_enemy;
     protected Class boss_class;
+    private boolean destroy_flag=false;
     /*
     stage 생성시 변경할 수 있는 변수
     m_background, m_BossTime, m_BossContain, m_enemylimit
     */
     @Override
     public void init(int background) {
+        destroy_flag =false;
         controller = AppManager.getInstance().getM_controller();
+        controller.setState(this);
         LastRegenEnemy = System.currentTimeMillis();
         m_BossTime = 30000;
         waitTime = 2000;
@@ -86,7 +89,7 @@ public class GameState implements IStat {
     }
     @Override
     public void Update() {
-        if(m_player == null) return;
+        if(destroy_flag) return;
         long gameTime = System.currentTimeMillis();
         m_player.Update(gameTime);
         m_background.Update(gameTime);
@@ -157,7 +160,7 @@ public class GameState implements IStat {
 
     @Override
     public void Render(Canvas canvas) {
-        if(m_background == null) return;
+        if(destroy_flag) return;
         m_background.Draw(canvas);
         m_player.Draw(canvas);
         for(int i = 0 ; i <moneys.size();i++)
@@ -177,7 +180,7 @@ public class GameState implements IStat {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(controller == null) return false;
+        if(destroy_flag) return false;
         return controller.onTouchEvent(event);
     }
     public void makeEnermy(){
@@ -269,11 +272,15 @@ public class GameState implements IStat {
             }
         }
     }//모든 요소들에 대한 충돌처리
-
     public Player getM_player() {
         return m_player;
     }
     public void setM_player(Player m_player) {
         this.m_player = m_player;
+    }
+
+    @Override
+    public void set_DestroyFlag(boolean flag) {
+        this.destroy_flag = flag;
     }
 }

@@ -8,15 +8,18 @@ import org.Game.GameStage.GameStage_4;
 import org.Game.GameStateCollect.GameClear.GameClear;
 import org.Game.GameStateCollect.GameDeath.GameDeath;
 import org.Game.GameStateCollect.GameMenu.GameMenu;
+import org.Game.GameStateCollect.GameOption.GameOption;
+import org.Game.GameView.IStat;
 import org.Game.ShopPackage.ShopIntro;
 
 public class GameStageState {
     public GameState[] gameStates;
-    public GameState clearStage;
-    public GameState deathStage;
-    public GameState introState;
-    public GameState menuState;
-    public GameState shopIntro;
+    public IStat clearStage;
+    public IStat deathStage;
+    public IStat introState;
+    public IStat menuState;
+    public IStat gameOption;
+    public IStat shopIntro;
     public GameStageState()
     {
         shopIntro = new ShopIntro();
@@ -24,6 +27,7 @@ public class GameStageState {
         introState = new GameIntroState();
         deathStage = new GameDeath();
         clearStage = new GameClear();
+        gameOption = new GameOption();
         gameStates = new GameState[10];
         gameStates[0] = new GameStage_1();
         gameStates[1] = new GameStage_2();

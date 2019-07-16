@@ -15,12 +15,12 @@ public class DefaultAttackPad extends AttackPadClass {
     }
     @Override
     public boolean touchEvent(MotionEvent event) {
-        if(AppManager.getInstance().getM_GameView().getM_state().getM_player() != null)
-            if(!AppManager.getInstance().getM_GameView().getM_state().getM_player().isM_death())
+        if(AppManager.getInstance().getM_GameView().getM_GameState().getM_player() != null)
+            if(!AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isM_death())
                 if(event.getAction() == MotionEvent.ACTION_DOWN|| event.getAction() == MotionEvent.ACTION_MOVE) {
             if(dest.contains((int)event.getX(),(int)event.getY())) {
                 src = GraphicManager.getInstance().onClickAttack();
-                AppManager.getInstance().getM_GameView().getM_state().getM_player().attack();
+                AppManager.getInstance().getM_GameView().getM_GameState().getM_player().attack();
             }
             else
             {

@@ -15,7 +15,6 @@ public class ShopExitButton extends GraphicObject implements I_Button {
         super(m_bitmap);
         setPosition(_x,_y);
     }
-
     @Override
     public void Draw(Canvas canvas) {
         super.Draw(canvas);
@@ -23,10 +22,9 @@ public class ShopExitButton extends GraphicObject implements I_Button {
         paint.setTextSize(70);
         canvas.drawText("Exit",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
     }
-
     @Override
     public void method() {
-
+            AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
     }
 
     @Override

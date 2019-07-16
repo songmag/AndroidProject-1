@@ -15,15 +15,15 @@ public class ChargingAttackPad extends AttackPadClass {
     }
     @Override
     public boolean touchEvent(MotionEvent event) {
-        if(AppManager.getInstance().getM_GameView().getM_state().getM_player() != null)
-        if(!AppManager.getInstance().getM_GameView().getM_state().getM_player().isM_death())
+        if(AppManager.getInstance().getM_GameView().getM_GameState().getM_player() != null)
+        if(!AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isM_death())
         if(event.getAction() == MotionEvent.ACTION_DOWN|| event.getAction() == MotionEvent.ACTION_MOVE) {
             if(dest.contains((int)event.getX(),(int)event.getY())) {
                 src = GraphicManager.getInstance().onClickAttack();
-                if(!AppManager.getInstance().getM_GameView().getM_state().getM_player().isCharging_flag())
+                if(!AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isCharging_flag())
                 {
-                    AppManager.getInstance().getM_GameView().getM_state().getM_player().startCharging();
-                    AppManager.getInstance().getM_GameView().getM_state().getM_player().setCharging_flag(true);
+                    AppManager.getInstance().getM_GameView().getM_GameState().getM_player().startCharging();
+                    AppManager.getInstance().getM_GameView().getM_GameState().getM_player().setCharging_flag(true);
                 }
             }
             else
@@ -35,11 +35,11 @@ public class ChargingAttackPad extends AttackPadClass {
         {
             src = GraphicManager.getInstance().defaultAttack();
         }
-        if(AppManager.getInstance().getM_GameView().getM_state().getM_player().checkCharging() &&
-            AppManager.getInstance().getM_GameView().getM_state().getM_player().isCharging_flag())
+        if(AppManager.getInstance().getM_GameView().getM_GameState().getM_player().checkCharging() &&
+            AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isCharging_flag())
         {
-        AppManager.getInstance().getM_GameView().getM_state().getM_player().chargingattack();
-        AppManager.getInstance().getM_GameView().getM_state().getM_player().setCharging_flag(false);
+        AppManager.getInstance().getM_GameView().getM_GameState().getM_player().chargingattack();
+        AppManager.getInstance().getM_GameView().getM_GameState().getM_player().setCharging_flag(false);
         }
         return false;
     }

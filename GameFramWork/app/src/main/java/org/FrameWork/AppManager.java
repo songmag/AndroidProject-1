@@ -55,7 +55,7 @@ public class AppManager {
         if(m_controller == null)
         {
             GameView gameView = (GameView)m_view;
-            m_controller = new MoveKeyPad(getM_GameView().getM_state());
+            m_controller = new MoveKeyPad();
         }
         return m_controller;
     }

@@ -32,7 +32,23 @@ public class MoveKeyPad implements I_Controller {
     public void setState(GameState state) {
         this.state = state;
     }
-
+    public MoveKeyPad(){
+        pad = new I_TouchPad[10];
+        pad[0] =new MoveDownKeyPad();
+        pad[1] =new MoveUpKeyPad();
+        pad[2] =new MoveLeftKeyPad();
+        pad[3] =new MoveLeftDownKeyPad();
+        pad[4] =new MoveLeftUpKeyPad();
+        pad[5] =new MoveRightKeyPad();
+        pad[6] =new MoveRightDownKeyPad();
+        pad[7] =new MoveRightUpKeyPad();
+        pad[8] = new DefaultAttackPad();
+        pad[9] = new ChargingAttackPad();
+        for(int i = 0 ; i<10;i++)
+        {
+            pad[i].setLocationFiled();
+        }
+    }
     public MoveKeyPad(GameState state) {
         this.state = state;
         pad = new I_TouchPad[10];

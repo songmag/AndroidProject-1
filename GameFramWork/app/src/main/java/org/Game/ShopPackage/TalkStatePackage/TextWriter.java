@@ -46,6 +46,7 @@ public abstract class TextWriter implements I_DrawText {
                 can_touch = true;
         }
         else{
+            if(now_index != 0)
             now_index--;
             canvas.drawText(value.substring(0, now_index), x,y, paint);
         }

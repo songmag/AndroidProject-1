@@ -10,7 +10,8 @@ import org.Game.GameState;
 
 public class MoveTouch implements I_Controller {
     private GameState state;//state 를 매번 가져오는 것의 소요를 줄이기 위한 레퍼런스 객체
-
+    public MoveTouch(){
+    }
     public MoveTouch(GameState state) {
         this.state = state;
     }
@@ -21,10 +22,10 @@ public class MoveTouch implements I_Controller {
     }//스테이트가 교체될때 이것도 교체된다.
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-         if (AppManager.getInstance().getM_GameView().getM_state().getM_player() == null)
+         if (AppManager.getInstance().getM_GameView().getM_GameState().getM_player() == null)
                 return false;
         //SurfaceView의 state를 변경시 init 함수가 호출되기전 TouchEvent 시행 되는경우 방지.
-        if (AppManager.getInstance().getM_GameView().getM_state().getM_player().isM_death())
+        if (AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isM_death())
                 return false;
         //죽었을때, 바로 터치를 하는 경우 방지
         if (event.getAction() == MotionEvent.ACTION_UP) {

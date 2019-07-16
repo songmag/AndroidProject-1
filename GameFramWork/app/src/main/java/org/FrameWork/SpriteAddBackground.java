@@ -23,6 +23,7 @@ public class SpriteAddBackground extends BackGround {
     public SpriteAddBackground(int type) {
         super(type);
     }
+
     @Override
     public void Update(long GameTime) {
         super.Update(GameTime);

@@ -33,22 +33,22 @@ public abstract class PadClass implements I_TouchPad {
     @Override
     public boolean touchEvent(MotionEvent event)
     {
-        if(AppManager.getInstance().getM_GameView().getM_state().getM_player() != null)
-            if(!AppManager.getInstance().getM_GameView().getM_state().getM_player().isM_death())
+        if(AppManager.getInstance().getM_GameView().getM_GameState().getM_player() != null)
+            if(!AppManager.getInstance().getM_GameView().getM_GameState().getM_player().isM_death())
                 if(event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
             if (dest.contains((int) event.getX(), (int) event.getY())) {
                 paint.setColorFilter(GraphicManager.getInstance().getColorFilter());
-                if (AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_x() + x * 4
+                if (AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_x() + x * 4
                         >= AppManager.getInstance().getM_GameView().getFullWidth() ||
-                        AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_x()
+                        AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_x()
                                 + x * 4 < 0 ||
-                        AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_y() + y * 4 > AppManager.getInstance().getM_GameView().getFullHeight() ||
-                        AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_y() + y * 4 < 0) {
+                        AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_y() + y * 4 > AppManager.getInstance().getM_GameView().getFullHeight() ||
+                        AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_y() + y * 4 < 0) {
 
                 } else {
-                    AppManager.getInstance().getM_GameView().getM_state().getM_player().setPosition(
-                            AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_x() + x * 4,
-                            AppManager.getInstance().getM_GameView().getM_state().getM_player().getM_y() + y * 4
+                    AppManager.getInstance().getM_GameView().getM_GameState().getM_player().setPosition(
+                            AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_x() + x * 4,
+                            AppManager.getInstance().getM_GameView().getM_GameState().getM_player().getM_y() + y * 4
                     );
                 }
             } else {
@@ -57,8 +57,8 @@ public abstract class PadClass implements I_TouchPad {
         }
         else
         {
-            paint.setColorFilter(null);
-        }
+        paint.setColorFilter(null);
+    }
         return false;
     }
 }

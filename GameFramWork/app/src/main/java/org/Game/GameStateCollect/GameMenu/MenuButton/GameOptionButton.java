@@ -15,7 +15,7 @@ public class GameOptionButton extends GraphicObject implements I_Button {
     }
     @Override
     public void method() {
-
+        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.gameOption);
     }
 
     @Override

@@ -54,8 +54,8 @@ public class GameStage_3 extends GameState {
     public void Update() {
         super.Update();
         if (this.m_StageClear) {
-
-            AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.clearStage);     }
+            AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.clearStage);
+        }
     }
 
     @Override

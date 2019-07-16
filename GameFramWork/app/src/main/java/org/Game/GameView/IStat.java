@@ -9,4 +9,5 @@ public interface IStat {
     void Update();
     void Render(Canvas canvas);
     boolean onTouchEvent(MotionEvent event);
+    void set_DestroyFlag(boolean flag);
 }

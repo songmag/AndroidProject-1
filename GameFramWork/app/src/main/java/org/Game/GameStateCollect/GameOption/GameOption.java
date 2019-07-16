@@ -8,6 +8,7 @@ import com.example.gameframework.R;
 
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.SoundManager;
 import org.Game.GameState;
 import org.Game.GameStateCollect.GameMenu.MenuButton.GameExitButton;
@@ -15,18 +16,21 @@ import org.Game.GameStateCollect.GameMenu.MenuButton.GameOptionButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.GameShopButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.GameStartButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.I_Button;
+import org.Game.GameStateCollect.GameOption.OptionButton.ControllerButton;
+import org.Game.GameStateCollect.GameOption.OptionButton.OptionExitButton;
+import org.Game.GameView.IStat;
 
-public class GameOption extends GameState {
+public class GameOption implements IStat {
+    private BackGround m_background;
     private I_Button[] button;
-    public GameOption() {
-
-    }
+    private boolean destroy_flag= false;
     @Override
     public void init(int background) {
+        destroy_flag = false;
         m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),
                 AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
         m_background.setPosition(0,0);
-        button = new I_Button[4];
+        button = new I_Button[2];
         int x_margin,y_margin,width,height;
         x_margin = AppManager.getInstance().getM_GameView().getFullWidth()/6;
         y_margin = AppManager.getInstance().getM_GameView().getFullHeight()/9;
@@ -34,20 +38,18 @@ public class GameOption extends GameState {
         height = AppManager.getInstance().getM_GameView().getFullHeight()-y_margin*8;
         Bitmap bitmap = AppManager.getInstance().reSizing(
                 AppManager.getInstance().getBitMap(R.drawable.menubutton),width,height);
-        button[0] = new GameStartButton(bitmap,x_margin,y_margin);
-        button[1] = new GameShopButton(bitmap,x_margin,y_margin*3);
-        button[2] = new GameOptionButton(bitmap,x_margin,y_margin*5);
-        button[3] = new GameExitButton(bitmap,x_margin,y_margin*7);
+        button[0] = new ControllerButton(GraphicManager.getInstance().getM_OptionSwitch(width,height),x_margin,y_margin*3);
+        button[1] = new OptionExitButton(bitmap,x_margin,y_margin*5);
     }
     @Override
     public void Render(Canvas canvas) {
-        if(m_background != null) {
+        if(destroy_flag) return;
             m_background.Draw(canvas);
             for(int i = 0 ; i < button.length;i++) {
                 if(button[i] == null) break;
                 button[i].Draw(canvas);
             }
-        }
+
     }
     @Override
     public void Destroy() {
@@ -56,11 +58,17 @@ public class GameOption extends GameState {
             for (int i = 0; i < button.length; i++)
                 button[i] = null;
         }
+        GraphicManager.getInstance().deleteOptionSwitch();
+    }
+    @Override
+    public void Update() {
+        if(destroy_flag) return;
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(destroy_flag) return false;
         if(event.getAction() == MotionEvent.ACTION_UP)
-        for(int i = 0 ; i< 4;i++)
+        for(int i = 0 ; i< button.length;i++)
         {
             if(button[i].check_contain_point((int)event.getX(),(int)event.getY()))
             {
@@ -70,5 +78,10 @@ public class GameOption extends GameState {
             }
         }
         return false;
+    }
+
+    @Override
+    public void set_DestroyFlag(boolean flag) {
+        this.destroy_flag = flag;
     }
 }

@@ -52,7 +52,7 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
         }
         else if(m_state == Enermy.STATE_OUT){
             if(this.hp <= 0)
-               AppManager.getInstance().getM_GameView().getM_state().makeMoney(this);
+               AppManager.getInstance().getM_GameView().getM_GameState().makeMoney(this);
             destroy();
             this.destroy_count+=1;
         }

@@ -16,7 +16,7 @@ public abstract class AttackPadClass implements I_TouchPad {
     public abstract void setLocationFiled();
     @Override
     public void draw(Canvas canvas) {
-        paint.setAlpha(50);
+        paint.setAlpha(30);
         canvas.drawBitmap(GraphicManager.getInstance().getAttackPad(),src,dest,paint);
     }
     @Override

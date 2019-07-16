@@ -1,4 +1,4 @@
-package org.Game.ShopPackage.ShopButton;
+package org.Game.GameStateCollect.GameOption.OptionButton;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -7,15 +7,15 @@ import android.graphics.Rect;
 
 import org.FrameWork.AppManager;
 import org.FrameWork.GraphicObject;
-
 import org.Game.GameStateCollect.GameMenu.MenuButton.I_Button;
 
-public class BuyButton extends GraphicObject implements I_Button {
-    public BuyButton(Bitmap m_bitmap, int _x, int _y) {
+public class OptionExitButton extends GraphicObject implements I_Button {
+    Rect dest = null;
+    public OptionExitButton(Bitmap m_bitmap, int _x, int _y) {
         super(m_bitmap);
         setPosition(_x,_y);
+        dest = new Rect((int)this.getM_x(),(int)this.getM_y(),(int)this.getM_x()+ this.getM_bitmap().getWidth(),(int)this.getM_y()+ this.getM_bitmap().getHeight());
     }
-
     @Override
     public void Draw(Canvas canvas) {
         super.Draw(canvas);
@@ -23,15 +23,12 @@ public class BuyButton extends GraphicObject implements I_Button {
         paint.setTextSize(70);
         canvas.drawText("Exit",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
     }
-
     @Override
     public void method() {
-
+        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
     }
-
     @Override
     public boolean check_contain_point(int x, int y) {
-        Rect rect = new Rect((int)this.getM_x(),(int)this.getM_y(),(int)this.getM_x()+ this.getM_bitmap().getWidth(),(int)this.getM_y()+ this.getM_bitmap().getHeight());
-        return rect.contains(x, y);
+        return dest.contains(x,y);
     }
 }

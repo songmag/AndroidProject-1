@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import org.FrameWork.AppManager;
 import org.FrameWork.SoundManager;
 
 public class IntroActivity extends AppCompatActivity {
@@ -21,5 +22,10 @@ public class IntroActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         SoundManager.getInstance().stopBackground();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
     }
 }//처음 실행시 GameView를 보여주는 역할.

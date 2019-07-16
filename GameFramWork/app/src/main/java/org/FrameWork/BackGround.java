@@ -24,7 +24,7 @@ public class BackGround extends GraphicObject {
     public BackGround(Bitmap add_bitmap)
     {
         super(add_bitmap);
-       this.setPosition(0, (int) m_scroll);
+       this.setPosition(0, 0);
     }//background 생성자.
    public BackGround(int type)
    {
@@ -65,9 +65,10 @@ public class BackGround extends GraphicObject {
     //height의 경우 스크롤링 방식을 위해 늘린다.
     @Override
     public void Draw(Canvas canvas) {
-        canvas.drawBitmap(m_bitmap,m_x,m_y,null);
+        if(m_bitmap != null)
+            canvas.drawBitmap(m_bitmap,m_x,m_y,null);
         if(m_layer2 != null)
-        canvas.drawBitmap(m_layer2,m_x,m_y,null);
+            canvas.drawBitmap(m_layer2,m_x,m_y,null);
     }
     //해당 비트맵 뷰에 그린다.
 }

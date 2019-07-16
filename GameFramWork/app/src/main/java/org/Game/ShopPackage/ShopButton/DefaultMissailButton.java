@@ -10,8 +10,8 @@ import org.FrameWork.GraphicObject;
 
 import org.Game.GameStateCollect.GameMenu.MenuButton.I_Button;
 
-public class ComunicationButton extends GraphicObject implements I_Button {
-    public ComunicationButton(Bitmap m_bitmap, int _x, int _y) {
+public class DefaultMissailButton extends GraphicObject implements I_Button {
+    public DefaultMissailButton(Bitmap m_bitmap, int _x, int _y) {
         super(m_bitmap);
         setPosition(_x,_y);
     }
@@ -21,7 +21,7 @@ public class ComunicationButton extends GraphicObject implements I_Button {
         super.Draw(canvas);
         Paint paint = AppManager.getInstance().getPaint();
         paint.setTextSize(70);
-        canvas.drawText("Exit",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
+        canvas.drawText("Default Missile",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
     }
 
     @Override

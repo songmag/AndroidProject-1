@@ -15,14 +15,25 @@ import org.Game.GameStateCollect.GameMenu.MenuButton.GameShopButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.GameStartButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.I_Button;
 import org.Game.GameState;
+import org.Game.GameView.IStat;
 
-public class GameMenu extends GameState {
+public class GameMenu implements IStat {
     private I_Button[] button;
+    private BackGround m_background;
+
+    private boolean destroy_flag=false;
     public GameMenu() {
 
     }
+
+    @Override
+    public void set_DestroyFlag(boolean flag) {
+        this.destroy_flag = flag;
+    }
+
     @Override
     public void init(int background) {
+        destroy_flag = false;
         m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),
                 AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
         m_background.setPosition(0,0);
@@ -41,13 +52,12 @@ public class GameMenu extends GameState {
     }
     @Override
     public void Render(Canvas canvas) {
-        if(m_background != null) {
+        if(destroy_flag) return;
             m_background.Draw(canvas);
             for(int i = 0 ; i < button.length;i++) {
                 if(button[i] == null) break;
                 button[i].Draw(canvas);
             }
-        }
     }
     @Override
     public void Destroy() {
@@ -58,7 +68,12 @@ public class GameMenu extends GameState {
         }
     }
     @Override
+    public void Update() {
+        if(destroy_flag) return;
+    }
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(destroy_flag) return false;
         if(event.getAction() == MotionEvent.ACTION_UP)
         for(int i = 0 ; i< 4;i++)
         {

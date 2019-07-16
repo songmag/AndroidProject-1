@@ -2,6 +2,7 @@ package org.Game.GameView;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.os.HandlerThread;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -18,10 +19,9 @@ import org.Game.Player;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private GameViewThread m_thread;
-    private GameState m_state;
+    private IStat m_state;
     private Vibrator vi;
     private int fullWidth,fullHeight;
-
     public GameView(Context context) {
         super(context);
         setSize();
@@ -73,18 +73,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         m_state.Update();
     }
 
-    public void changeGameState(GameState _state)
+    public void changeGameState(IStat _state)
     {
         if(m_state != null)
         {
-            m_thread.pause(true);
-            m_state.Destroy();
+            m_state.set_DestroyFlag(true);
+            Thread destroy = new Thread(){
+                @Override
+                public void run() {
+                    m_state.Destroy();
+                }
+            };
+            destroy.start();
         }
         _state.init(0);
-        AppManager.getInstance().getM_controller().setState(_state);
-    m_state = _state;
-    if(m_thread != null)
-    m_thread.pause(false);
+        m_state = _state;
     }// 스테이트를 바꾼다 그동안 SurfaceView가 Update를 수행하지 않도록 Pause 시킨다.
     @Override
     protected void onDraw(Canvas canvas) {
@@ -120,10 +123,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         vi.cancel();
     }
     //Vibrator 같은 경우는 한개만 필요하므로, 동작과 스탑을 View에서 실행한다.
-    public GameState getM_state() {
+    public IStat getM_state() {
         return m_state;
     }
-    public void setM_state(GameState m_state) {
+    public void setM_state(IStat m_state) {
         this.m_state = m_state;
+    }
+    public GameState getM_GameState()
+    {
+        return (GameState)m_state;
     }
 }

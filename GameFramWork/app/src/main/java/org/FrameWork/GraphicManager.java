@@ -24,6 +24,7 @@ public class GraphicManager {
     private Bitmap m_chargingMissail = null;
     private ColorFilter colorFilter = null;
     private Bitmap m_attackPad = null;
+    private Bitmap m_OptionSwitch = null;
     private GraphicManager()
     {
         m_enemyBitmap = new HashMap<>();
@@ -119,4 +120,16 @@ public class GraphicManager {
         return new Rect(getAttackPad().getWidth()/2,0,getAttackPad().getWidth(),getAttackPad().getHeight());
     }
 
+    public Bitmap getM_OptionSwitch(int width,int height) {
+        if(m_OptionSwitch == null)
+        {
+            m_OptionSwitch = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.option_switch),
+                width*2,height);
+        }
+        return m_OptionSwitch;
+    }
+    public void deleteOptionSwitch()
+    {
+        m_OptionSwitch = null;
+    }
 }
