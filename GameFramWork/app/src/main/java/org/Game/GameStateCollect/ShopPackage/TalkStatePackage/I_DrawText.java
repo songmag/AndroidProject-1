@@ -1,9 +1,9 @@
-package org.Game.ShopPackage.TalkStatePackage;
+package org.Game.GameStateCollect.ShopPackage.TalkStatePackage;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 
-import org.Game.ShopPackage.ShopIntro;
+import org.Game.GameStateCollect.ShopPackage.ShopIntro;
 
 public interface I_DrawText {
     void Update(ShopIntro state);

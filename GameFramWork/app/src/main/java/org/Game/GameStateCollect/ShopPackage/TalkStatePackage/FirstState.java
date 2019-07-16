@@ -1,6 +1,6 @@
-package org.Game.ShopPackage.TalkStatePackage;
+package org.Game.GameStateCollect.ShopPackage.TalkStatePackage;
 
-import org.Game.ShopPackage.ShopIntro;
+import org.Game.GameStateCollect.ShopPackage.ShopIntro;
 
 public class FirstState extends TextWriter implements I_DrawText {
     private final String text = "어서오세요, 상점에 오신걸 환영합니다.";

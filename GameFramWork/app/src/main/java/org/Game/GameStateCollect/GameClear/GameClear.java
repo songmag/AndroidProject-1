@@ -28,6 +28,12 @@ public class GameClear implements IStat {
         stay_time = System.currentTimeMillis()+ 2000;
         SoundManager.getInstance().play_by_name("clearmusic");
     }
+
+    @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
     @Override
     public void Destroy() {
         m_background = null;

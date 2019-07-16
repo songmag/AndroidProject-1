@@ -9,8 +9,10 @@ import android.graphics.Rect;
 
 import com.example.gameframework.R;
 
+import org.Controller.MoveKeyPad;
 import org.Game.CoinPackage.BronzeMoney;
 import org.Game.CoinPackage.StarMoney;
+import org.Game.GameState;
 
 import java.util.HashMap;
 
@@ -19,12 +21,15 @@ public class GraphicManager {
     private Bitmap keypad = null;
     private HashMap<Class,Bitmap> m_enemyBitmap;
     private HashMap<Class,Bitmap> m_money;
+
     //2개만 있으므로 다른 동작이 있을 이유가 없이 비슷해도 상관없다.
+
     private HashMap<Class,Bitmap> m_missail;
     private Bitmap m_chargingMissail = null;
     private ColorFilter colorFilter = null;
     private Bitmap m_attackPad = null;
     private Bitmap m_OptionSwitch = null;
+    private Bitmap m_Background_Default = null;
     private GraphicManager()
     {
         m_enemyBitmap = new HashMap<>();
@@ -132,4 +137,31 @@ public class GraphicManager {
     {
         m_OptionSwitch = null;
     }
+
+    public Bitmap getM_Background_Default() {
+        if(m_Background_Default == null)
+        {
+            m_Background_Default = AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),
+                    AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight());
+        }
+        return m_Background_Default;
+    }
+    public void setDestroy()
+    {
+        if(m_attackPad != null && AppManager.getInstance().getM_controller() instanceof MoveKeyPad) {
+            m_attackPad = null;
+            keypad = null;
+        }
+        if(AppManager.getInstance().getM_GameView().getM_state() instanceof GameState)
+        {
+            if(m_Background_Default != null)
+                m_Background_Default = null;
+        }
+        else
+        {
+            m_enemyBitmap.clear();
+        }
+        System.gc();
+    }
+
 }

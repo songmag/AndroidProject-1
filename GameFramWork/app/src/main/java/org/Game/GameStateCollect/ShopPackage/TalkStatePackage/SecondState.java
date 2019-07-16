@@ -1,8 +1,8 @@
-package org.Game.ShopPackage.TalkStatePackage;
+package org.Game.GameStateCollect.ShopPackage.TalkStatePackage;
 
 import org.FrameWork.AppManager;
 
-import org.Game.ShopPackage.ShopIntro;
+import org.Game.GameStateCollect.ShopPackage.ShopIntro;
 
 public class SecondState extends TextWriter implements I_DrawText {
     private final String text = "어떤것이던 판매할 준비가 되어있습니다.";
@@ -16,7 +16,7 @@ public class SecondState extends TextWriter implements I_DrawText {
         if(value == null) return;
         if(value.length() == now_index)
         {
-            AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.menuState);
+            AppManager.getInstance().getM_GameView().changeGameState(AppManager.getInstance().m_stage.shopClass);
         }
         super.Update(state);
     }

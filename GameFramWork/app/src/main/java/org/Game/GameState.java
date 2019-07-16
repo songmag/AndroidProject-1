@@ -280,6 +280,11 @@ public class GameState implements IStat {
     }
 
     @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
+    @Override
     public void set_DestroyFlag(boolean flag) {
         this.destroy_flag = flag;
     }

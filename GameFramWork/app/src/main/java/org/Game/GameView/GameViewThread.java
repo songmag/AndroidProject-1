@@ -3,6 +3,8 @@ package org.Game.GameView;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
+import org.FrameWork.AppManager;
+
 public class GameViewThread extends Thread {
     private GameView m_view;
     private SurfaceHolder m_holder;
@@ -20,9 +22,12 @@ public class GameViewThread extends Thread {
     }
     @Override
     public void run() {
+
         Canvas _canvas;
         while(m_run)
         {
+            if(AppManager.getInstance().getM_GameView().getM_state().get_DestroyFlag())
+                continue;
             _canvas = null;
             try {
                  m_view.Update();
@@ -30,6 +35,9 @@ public class GameViewThread extends Thread {
                 synchronized (m_holder) {
                     m_view.onDraw(_canvas);
                 }
+            }catch(NullPointerException e)
+            {
+                e.printStackTrace();
             }
             finally
             {

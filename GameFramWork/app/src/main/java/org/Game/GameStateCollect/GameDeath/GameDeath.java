@@ -29,6 +29,11 @@ public class GameDeath implements IStat {
     }
 
     @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
+    @Override
     public void Destroy() {
         m_background = null;
     }

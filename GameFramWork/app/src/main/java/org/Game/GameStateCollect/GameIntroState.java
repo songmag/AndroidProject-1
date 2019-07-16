@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.SpriteAddBackground;
 import org.FrameWork.SpriteAnimation;
 
@@ -22,19 +23,20 @@ public class GameIntroState implements IStat {
     public void Destroy() {
         m_background = null;
     }
+
+    @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
     @Override
     public void init(int background) {
         destroy_flag = false;
-        SpriteAnimation animation = new SpriteAnimation(
-                AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.first_logo),
+        SpriteAnimation animation = new SpriteAnimation(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.first_logo),
                         AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()/5));
         animation.initSpriteData(animation.getM_bitmap().getWidth()/3,animation.getM_bitmap().getHeight(),10,3);
         animation.setPosition(AppManager.getInstance().getM_GameView().getFullWidth()/2 - animation.getM_bitmap().getWidth()/3/2,AppManager.getInstance().getM_GameView().getFullHeight()/5);
-        m_background = new SpriteAddBackground(AppManager.getInstance().reSizing(
-                AppManager.getInstance().getBitMap(R.drawable.background_block),
-                AppManager.getInstance().getM_GameView().getFullWidth(),
-                AppManager.getInstance().getM_GameView().getFullHeight())
-        ,animation);
+        m_background = new SpriteAddBackground(GraphicManager.getInstance().getM_Background_Default(),animation);
         m_background.setPosition(0,0);
         m_ChangeState = System.currentTimeMillis()+3000;
     }

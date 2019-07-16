@@ -21,7 +21,6 @@ public class GameExitButton extends GraphicObject implements I_Button {
         paint.setTextSize(70);
         canvas.drawText("Exit",this.getM_x()+this.getM_bitmap().getWidth()/4,this.getM_y()+this.getM_bitmap().getHeight()-paint.getTextSize()/2,paint);
     }
-
     @Override
     public void method() {
         System.exit(0);

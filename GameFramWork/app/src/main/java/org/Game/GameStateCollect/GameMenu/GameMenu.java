@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.SoundManager;
 
 import org.Game.GameStateCollect.GameMenu.MenuButton.GameExitButton;
@@ -20,10 +21,15 @@ import org.Game.GameView.IStat;
 public class GameMenu implements IStat {
     private I_Button[] button;
     private BackGround m_background;
-
+    private long onTouchTime;
     private boolean destroy_flag=false;
     public GameMenu() {
 
+    }
+
+    @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
     }
 
     @Override
@@ -34,8 +40,8 @@ public class GameMenu implements IStat {
     @Override
     public void init(int background) {
         destroy_flag = false;
-        m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),
-                AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
+        onTouchTime = System.currentTimeMillis()+800;
+        m_background = new BackGround(GraphicManager.getInstance().getM_Background_Default());
         m_background.setPosition(0,0);
         button = new I_Button[4];
         int x_margin,y_margin,width,height;
@@ -74,6 +80,7 @@ public class GameMenu implements IStat {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(destroy_flag) return false;
+        if(System.currentTimeMillis() - onTouchTime <= 0) return false;
         if(event.getAction() == MotionEvent.ACTION_UP)
         for(int i = 0 ; i< 4;i++)
         {

@@ -1,19 +1,17 @@
 package org.Game.GameView;
-
 import android.content.Context;
 import android.graphics.Canvas;
-import android.os.HandlerThread;
+
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.SoundManager;
-
 import org.Game.GameState;
 import org.Game.Player;
 
@@ -25,6 +23,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public GameView(Context context) {
         super(context);
         setSize();
+
         SoundManager.getInstance().init(context);
         SoundManager.getInstance().addSound("clearmusic",0,R.raw.clearmusic);
         SoundManager.getInstance().addSound("coinmusic",1,R.raw.coinmusic);
@@ -44,7 +43,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         m_thread = new GameViewThread(getHolder(),this);
     }
     //유일한 View , 생성시 필요한 자원들을 초기화하고 Appmanager에 등록한다.
-
     public void setFocus()
     {
         setFocusable(true);
@@ -82,6 +80,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 @Override
                 public void run() {
                     m_state.Destroy();
+                    GraphicManager.getInstance().destroy();
                 }
             };
             destroy.start();
@@ -95,7 +94,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        m_thread.setRunning(true);
+       m_thread.setRunning(true);
         m_thread.start();
     }
     @Override

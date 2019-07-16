@@ -1,4 +1,4 @@
-package org.Game.ShopPackage;
+package org.Game.GameStateCollect.ShopPackage;
 
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -6,31 +6,36 @@ import android.view.MotionEvent;
 import com.example.gameframework.R;
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.GraphicObject;
 
-import org.Game.GameState;
 import org.Game.GameView.IStat;
-import org.Game.ShopPackage.TalkStatePackage.FirstState;
-import org.Game.ShopPackage.TalkStatePackage.I_DrawText;
+import org.Game.GameStateCollect.ShopPackage.TalkStatePackage.FirstState;
+import org.Game.GameStateCollect.ShopPackage.TalkStatePackage.I_DrawText;
 
 public class ShopIntro implements IStat {
     private GraphicObject merchant;
     private GraphicObject text_box;
     private I_DrawText text;
     private BackGround m_background;
-    private boolean destory_flag = false;
+    private boolean destroy_flag = false;
     public ShopIntro() {
     }
 
     @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
+    @Override
     public void set_DestroyFlag(boolean flag) {
-        this.destory_flag = flag;
+        this.destroy_flag = flag;
     }
 
     @Override
     public void init(int background) {
-        destory_flag = false;
-        m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
+        destroy_flag = false;
+        m_background = new BackGround(GraphicManager.getInstance().getM_Background_Default());
         m_background.setPosition(0,0);
         int x_margin = AppManager.getInstance().getM_GameView().getFullWidth()/8;
         int y_margin = AppManager.getInstance().getM_GameView().getFullHeight()/4;
@@ -46,12 +51,12 @@ public class ShopIntro implements IStat {
     }
     @Override
     public void Update() {
-        if(destory_flag) return;
+        if(destroy_flag) return;
         text.Update(this);
     }
     @Override
     public void Render(Canvas canvas) {
-        if(destory_flag) return;
+        if(destroy_flag) return;
             m_background.Draw(canvas);
             merchant.Draw(canvas);
             text_box.Draw(canvas);
@@ -64,7 +69,6 @@ public class ShopIntro implements IStat {
             text = null;
             text_box = null;
             m_background = null;
-
     }
     public void set_TextState(I_DrawText text)
     {

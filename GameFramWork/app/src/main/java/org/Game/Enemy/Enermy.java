@@ -69,7 +69,6 @@ public abstract class Enermy extends SpriteAnimation implements ThrowObject {
     public void set_State(I_MovePattern move) {
         pattern = move;
     }
-
     @Override
     public boolean checkUpdate() {
         if(getM_x()+getM_rect().width()*2 > AppManager.getInstance().getM_GameView().getFullWidth() && m_state != Enermy.STATE_OUT)

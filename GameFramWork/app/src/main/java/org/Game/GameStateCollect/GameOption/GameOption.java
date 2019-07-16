@@ -24,11 +24,16 @@ public class GameOption implements IStat {
     private BackGround m_background;
     private I_Button[] button;
     private boolean destroy_flag= false;
+
+    @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
+
     @Override
     public void init(int background) {
         destroy_flag = false;
-        m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),
-                AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
+        m_background = new BackGround(GraphicManager.getInstance().getM_Background_Default());
         m_background.setPosition(0,0);
         button = new I_Button[2];
         int x_margin,y_margin,width,height;

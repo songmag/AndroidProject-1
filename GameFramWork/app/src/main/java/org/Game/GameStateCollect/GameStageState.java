@@ -10,7 +10,8 @@ import org.Game.GameStateCollect.GameDeath.GameDeath;
 import org.Game.GameStateCollect.GameMenu.GameMenu;
 import org.Game.GameStateCollect.GameOption.GameOption;
 import org.Game.GameView.IStat;
-import org.Game.ShopPackage.ShopIntro;
+import org.Game.GameStateCollect.ShopPackage.ShopClass;
+import org.Game.GameStateCollect.ShopPackage.ShopIntro;
 
 public class GameStageState {
     public GameState[] gameStates;
@@ -20,8 +21,10 @@ public class GameStageState {
     public IStat menuState;
     public IStat gameOption;
     public IStat shopIntro;
+    public IStat shopClass;
     public GameStageState()
     {
+        shopClass = new ShopClass();
         shopIntro = new ShopIntro();
         menuState = new GameMenu();
         introState = new GameIntroState();

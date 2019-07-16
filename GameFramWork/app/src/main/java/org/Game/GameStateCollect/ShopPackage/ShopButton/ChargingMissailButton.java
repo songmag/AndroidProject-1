@@ -1,4 +1,4 @@
-package org.Game.ShopPackage.ShopButton;
+package org.Game.GameStateCollect.ShopPackage.ShopButton;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

@@ -1,4 +1,4 @@
-package org.Game.ShopPackage.TalkStatePackage;
+package org.Game.GameStateCollect.ShopPackage.TalkStatePackage;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import org.FrameWork.AppManager;
 import org.FrameWork.SoundManager;
 
-import org.Game.ShopPackage.ShopIntro;
+import org.Game.GameStateCollect.ShopPackage.ShopIntro;
 
 public abstract class TextWriter implements I_DrawText {
     protected String value;

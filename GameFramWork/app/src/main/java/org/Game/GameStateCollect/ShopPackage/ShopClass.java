@@ -1,4 +1,4 @@
-package org.Game.ShopPackage;
+package org.Game.GameStateCollect.ShopPackage;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -8,34 +8,36 @@ import com.example.gameframework.R;
 
 import org.FrameWork.AppManager;
 import org.FrameWork.BackGround;
+import org.FrameWork.GraphicManager;
 import org.FrameWork.GraphicObject;
-import org.Game.GameStateCollect.GameMenu.MenuButton.GameStartButton;
 import org.Game.GameStateCollect.GameMenu.MenuButton.I_Button;
 import org.Game.GameView.IStat;
-import org.Game.ShopPackage.ShopButton.ChargingMissailButton;
-import org.Game.ShopPackage.ShopButton.DefaultMissailButton;
-import org.Game.ShopPackage.ShopButton.ShopExitButton;
-import org.Game.ShopPackage.TalkStatePackage.FirstState;
-import org.Game.ShopPackage.TalkStatePackage.I_DrawText;
+import org.Game.GameStateCollect.ShopPackage.ShopButton.ChargingMissailButton;
+import org.Game.GameStateCollect.ShopPackage.ShopButton.DefaultMissailButton;
+import org.Game.GameStateCollect.ShopPackage.ShopButton.ShopExitButton;
 
 public class ShopClass implements IStat {
     private GraphicObject merchant;
     private BackGround m_background;
-    private boolean destory_flag = false;
+    private boolean destroy_flag = false;
     private I_Button[] button;
     public ShopClass() {
 
     }
+    @Override
+    public boolean get_DestroyFlag() {
+        return destroy_flag;
+    }
 
     @Override
     public void set_DestroyFlag(boolean flag) {
-        this.destory_flag = flag;
+        this.destroy_flag = flag;
     }
 
     @Override
     public void init(int background) {
-        destory_flag = false;
-        m_background = new BackGround(AppManager.getInstance().reSizing(AppManager.getInstance().getBitMap(R.drawable.background_block),AppManager.getInstance().getM_GameView().getFullWidth(),AppManager.getInstance().getM_GameView().getFullHeight()));
+        destroy_flag = false;
+        m_background = new BackGround(GraphicManager.getInstance().getM_Background_Default());
         m_background.setPosition(0,0);
         int x_margin = AppManager.getInstance().getM_GameView().getFullWidth()/8;
         int y_margin = AppManager.getInstance().getM_GameView().getFullHeight()/4;
@@ -60,7 +62,7 @@ public class ShopClass implements IStat {
     }
     @Override
     public void Render(Canvas canvas) {
-        if(destory_flag) return;
+        if(destroy_flag) return;
         m_background.Draw(canvas);
         merchant.Draw(canvas);
         for(int i = 0 ; i<button.length;i++)
@@ -68,11 +70,17 @@ public class ShopClass implements IStat {
             button[i].Draw(canvas);
         }
     }
-
     @Override
     public void Destroy() {
-            merchant = null;
-            m_background = null;
+        m_background =null;
+        merchant = null;
+        synchronized (button)
+        {
+            for(int i = 0 ; i<button.length;i++)
+            {
+                button[i] = null;
+            }
+        }
     }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
